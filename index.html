@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - CV</title> <!-- Change 'Your Name' -->
+    <link rel="stylesheet" href="style.css"> <!-- We'll create style.css later -->
+</head>
+<body>
+    <header>
+        <h1>Your Full Name</h1>
+        <p>Your Job Title / Tagline</p>
+    </header>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Write a brief summary about yourself, your goals, and your experience.</p>
+    </section>
+
+    <section id="experience">
+        <h2>Experience</h2>
+        <!-- Use articles for individual jobs -->
+        <article>
+            <h3>Job Title at Company Name</h3>
+            <p>Date Range (e.g., 2020 - Present)</p>
+            <ul>
+                <li>Responsibility or achievement 1</li>
+                <li>Responsibility or achievement 2</li>
+                <!-- Add more list items for bullet points -->
+            </ul>
+        </article>
+        <!-- Add more <article> blocks for other jobs -->
+    </section>
+
+    <section id="education">
+        <h2>Education</h2>
+        <article>
+            <h3>Degree/Certificate Name</h3>
+            <p>Institution Name, Location</p>
+            <p>Date of Graduation</p>
+            <!-- Optional: <p>Relevant coursework, honors, etc.</p> -->
+        </article>
+        <!-- Add more <article> blocks for other degrees -->
+    </section>
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <p>
+            <!-- You can list skills in categories or just list them -->
+            <strong>Programming Languages:</strong> Python, JavaScript, C++<br>
+            <strong>Technologies:</strong> Linux, Docker, Git, AWS<br>
+            <strong>Soft Skills:</strong> Communication, Teamwork, Problem-Solving
+        </p>
+        <!-- Or use a list:
+        <ul>
+            <li>Skill 1</li>
+            <li>Skill 2</li>
+        </ul>
+        -->
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a></p>
+        <p>GitHub: <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></p>
+        <!-- Add other links like portfolio, website etc. -->
+    </section>
+
+    <footer>
+        <p>© <span id="current-year"></span> Your Full Name</p>
+    </footer>
+
+    <script>
+        // Optional: JavaScript to automatically set the current year in the footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
