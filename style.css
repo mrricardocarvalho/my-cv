@@ -1,7 +1,17 @@
-/* Import Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+/* --- Global Styles & Variables --- */
+:root {
+    --background-dark: #1a1d24; /* Dark background */
+    --background-medium: #252a34; /* Slightly lighter dark */
+    --background-light: #313742; /* Even lighter dark for cards */
+    --text-primary: #e0e0e0;   /* Light grey text */
+    --text-secondary: #a0a0a0; /* Dimmer text */
+    --accent-color: #00aeff;   /* Vibrant blue accent */
+    --border-color: #444a5b;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --sidebar-width: 320px;
+    --main-padding: 2.5rem;
+}
 
-/* Basic Reset & Defaults */
 *,
 *::before,
 *::after {
@@ -10,278 +20,310 @@
     padding: 0;
 }
 
-:root {
-    --primary-color: #0056b3; /* A professional blue */
-    --secondary-color: #007bff; /* A slightly lighter blue for accents */
-    --light-gray: #f8f9fa;
-    --medium-gray: #e9ecef;
-    --dark-gray: #6c757d;
-    --text-color: #343a40;
-    --card-bg: #ffffff;
-    --shadow-color: rgba(0, 0, 0, 0.1);
-    --border-color: #dee2e6;
-}
-
 html {
-    scroll-behavior: smooth; /* Smooth scroll for anchor links if added */
+    scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Lato', sans-serif;
-    line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--light-gray); /* Light background for the whole page */
-    font-size: 16px; /* Base font size */
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-dark);
+    color: var(--text-primary);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-.container {
-    max-width: 960px; /* Max width of content */
-    margin: 2rem auto; /* Top/bottom margin, centered horizontally */
-    background-color: var(--card-bg); /* White background for the main content area */
-    box-shadow: 0 4px 12px var(--shadow-color);
-    border-radius: 8px;
-    overflow: hidden; /* Ensures rounded corners contain children */
-}
-
-/* --- Header --- */
-.main-header {
-    background-color: var(--primary-color);
-    color: #ffffff;
-    padding: 2rem 2rem;
-    text-align: center;
-}
-
-.main-header h1 {
-    font-size: 2.5rem; /* Larger name */
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    letter-spacing: 1px;
-}
-
-.main-header h2 {
-    font-size: 1.5rem;
-    font-weight: 300; /* Lighter weight for title */
-    margin-bottom: 1.5rem;
-    color: #dbe9ff; /* Slightly lighter color for subtitle */
-}
-
-.contact-info {
-    list-style: none; /* Remove bullet points */
-    padding: 0;
-    display: flex; /* Arrange items side-by-side */
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    justify-content: center; /* Center items */
-    gap: 1rem 1.5rem; /* Row gap, Column gap */
-    font-size: 0.95rem;
-}
-
-.contact-info li {
-    display: inline-flex; /* Align icon and text */
-    align-items: center;
-}
-
-.contact-info i {
-    margin-right: 0.5em; /* Space between icon and text */
-    color: var(--secondary-color); /* Use accent blue for icons */
-    font-size: 1.1em;
-    width: 20px; /* Ensure icons have consistent width */
-    text-align: center;
-}
-
-.contact-info a {
-    color: #ffffff;
+a {
+    color: var(--accent-color);
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: color 0.3s ease;
 }
 
-.contact-info a:hover {
-    color: #dbe9ff; /* Lighter color on hover */
-    text-decoration: underline;
+a:hover {
+    color: var(--text-primary);
 }
 
-/* --- Main Content Area --- */
-main {
-    padding: 2rem;
+ul {
+    list-style: none;
 }
 
-/* --- Section Styling --- */
-.cv-section {
+/* --- Main Layout Container --- */
+.cv-container {
+    display: flex;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: var(--background-medium);
+    box-shadow: 0 10px 30px var(--shadow-color);
+    min-height: 100vh;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--background-medium);
+    border-right: 1px solid var(--border-color);
+    position: sticky; /* Make sidebar sticky */
+    top: 0;
+    height: 100vh; /* Full viewport height */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+.sidebar-content {
+    padding: var(--main-padding);
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure content tries to fill height */
+}
+
+.profile-section {
+    text-align: center;
     margin-bottom: 2.5rem;
 }
 
-.cv-section h2 {
-    font-size: 1.8rem;
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid var(--accent-color);
+    margin-bottom: 1rem;
+    object-fit: cover;
+    background-color: var(--background-light); /* Placeholder bg */
+}
+
+.name {
+    font-size: 1.6rem;
     font-weight: 700;
-    color: var(--primary-color);
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--secondary-color);
-    display: inline-flex; /* Make border only as wide as text+icon */
-    align-items: center;
-}
-
-.cv-section h2 i {
-    margin-right: 0.75rem; /* Space between icon and section title */
-    font-size: 0.9em; /* Slightly smaller icon */
-}
-
-/* --- Job/Education Entry Styling --- */
-.job-entry,
-.education-entry {
-    background-color: var(--light-gray); /* Subtle background for entries */
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    transition: box-shadow 0.3s ease;
-}
-
-.job-entry:hover,
-.education-entry:hover {
-     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-
-.job-entry h3,
-.education-entry h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text-color);
+    color: #ffffff;
     margin-bottom: 0.25rem;
 }
 
-.company-date,
-.institution-date {
-    font-size: 1rem;
-    color: var(--dark-gray);
+.title {
+    font-size: 1.1rem;
     font-weight: 400;
-    margin-bottom: 1rem;
-    font-style: italic;
-}
-
-.job-entry ul {
-    list-style: disc; /* Use standard bullets */
-    padding-left: 1.5rem; /* Indent bullets */
-    margin: 0;
-}
-
-.job-entry li {
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
-    color: #555; /* Slightly lighter text for details */
-}
-
-/* --- Skills Section Styling --- */
-.skills-category {
+    color: var(--accent-color);
     margin-bottom: 1.5rem;
 }
 
-.skills-category h3 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--primary-color);
+.sidebar-heading {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Contact List */
+.contact-list li {
     margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.contact-list i {
+    color: var(--accent-color);
+    margin-right: 0.75rem;
+    width: 20px; /* Consistent icon width */
+    text-align: center;
+}
+
+.contact-list a {
+     color: var(--text-primary);
+}
+.contact-list a:hover {
+     color: var(--accent-color);
+}
+
+/* Skills List */
+.skills-section, .languages-section {
+    margin-top: 1.5rem;
 }
 
 .skills-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem; /* Spacing between tags */
+    gap: 0.5rem;
 }
 
 .skill-tag {
-    background-color: var(--medium-gray);
-    color: var(--text-color);
+    background-color: var(--background-light);
+    color: var(--text-primary);
     padding: 0.3rem 0.8rem;
     border-radius: 4px;
-    font-size: 0.9rem;
-    font-weight: 400;
-    white-space: nowrap; /* Prevent tags from breaking line */
+    font-size: 0.85rem;
+    font-weight: 500;
     border: 1px solid var(--border-color);
+    transition: background-color 0.3s ease;
+}
+.skill-tag:hover {
+    background-color: var(--accent-color);
+    color: var(--background-dark);
+    border-color: var(--accent-color);
 }
 
-.skills-category p {
-     margin-bottom: 0.5rem;
-     font-size: 0.95rem;
+
+/* Languages List */
+.languages-list li {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+.languages-list strong {
+     color: #ffffff;
 }
 
-.skills-category p strong {
+/* --- Main Content Area --- */
+.main-content {
+    flex: 1; /* Take remaining space */
+    padding: var(--main-padding);
+    background-color: var(--background-dark); /* Main content slightly darker */
+    overflow-y: auto; /* Ensure main content can scroll independently */
+}
+
+.main-section {
+    margin-bottom: 3rem;
+}
+
+.main-heading {
+    font-size: 1.8rem;
     font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.main-heading i {
+    margin-right: 0.75rem;
+    font-size: 0.9em;
+}
+
+/* Summary Section */
+.summary-section p {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+}
+
+/* Experience & Education Entries */
+.job-entry, .education-entry {
+    background-color: var(--background-medium);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.job-entry:hover, .education-entry:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+.job-title, .degree {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff; /* White for titles */
+    margin-bottom: 0.25rem;
+}
+
+.job-company-date, .institution-date {
+    font-size: 1rem;
+    color: var(--accent-color); /* Accent color for meta info */
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.job-entry ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+    color: var(--text-secondary);
+}
+
+.job-entry li {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+/* Competencies Section */
+.competencies-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+.competency-tag {
+    background-color: var(--background-light);
+    color: var(--text-primary);
+    padding: 0.4rem 1rem;
+    border-radius: 15px; /* Pill shape */
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid var(--border-color);
 }
 
 
 /* --- Footer --- */
 footer {
     text-align: center;
-    padding: 1.5rem;
-    background-color: var(--medium-gray); /* Footer background */
-    color: var(--dark-gray);
-    font-size: 0.9em;
+    padding: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    background-color: var(--background-medium);
     border-top: 1px solid var(--border-color);
+    /* Remove footer from main flex flow if needed */
+    width: 100%;
+    margin-top: auto; /* Push footer to bottom if content is short */
 }
 
 /* --- Responsive Design --- */
-@media (max-width: 768px) {
-    .container {
-        margin: 1rem;
-        padding: 0; /* Remove padding, main content will have it */
-        border-radius: 0;
-        box-shadow: none;
+@media (max-width: 1200px) {
+    :root {
+        --sidebar-width: 280px;
+        --main-padding: 2rem;
     }
-
-    main {
-        padding: 1.5rem;
-    }
-
-    .main-header {
-        padding: 1.5rem;
-        border-radius: 0;
-    }
-
-    .main-header h1 {
-        font-size: 2rem;
-    }
-
-    .main-header h2 {
-        font-size: 1.2rem;
-    }
-
-    .contact-info {
-        flex-direction: column; /* Stack contact info vertically */
-        align-items: flex-start; /* Align items to the left */
-        gap: 0.5rem;
-        text-align: left;
-        padding-left: 10%; /* Add some indent */
-    }
-
-    .cv-section h2 {
-        font-size: 1.5rem;
-    }
-
-    .job-entry,
-    .education-entry {
-        padding: 1rem;
-    }
+    .name { font-size: 1.4rem; }
+    .title { font-size: 1rem; }
+    .main-heading { font-size: 1.6rem; }
 }
 
-@media (max-width: 480px) {
-     html {
-        font-size: 15px; /* Slightly smaller base font on small screens */
+@media (max-width: 992px) {
+    .cv-container {
+        flex-direction: column;
     }
+    .sidebar {
+        width: 100%;
+        position: static; /* Remove sticky positioning */
+        height: auto; /* Allow height to adjust */
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        overflow-y: visible;
+    }
+     .sidebar-content {
+        padding: var(--main-padding) var(--main-padding) 1rem; /* Less bottom padding */
+    }
+    .profile-picture { width: 120px; height: 120px;}
+    .main-content {
+         /* No independent scroll needed */
+         padding: 1.5rem; /* Slightly less padding */
+    }
+    .main-section { margin-bottom: 2rem; }
+}
 
-    .main-header h1 {
-        font-size: 1.8rem;
+@media (max-width: 576px) {
+     :root {
+        --main-padding: 1.5rem;
     }
-
-    .main-header h2 {
-        font-size: 1.1rem;
-    }
-
-    main {
-        padding: 1rem;
-    }
-
-     .contact-info {
-        padding-left: 0; /* Remove indent on very small screens */
-    }
+    body { font-size: 15px; }
+    .profile-picture { width: 100px; height: 100px;}
+    .name { font-size: 1.3rem; }
+    .title { font-size: 0.9rem; }
+    .sidebar-heading { font-size: 1.1rem; }
+    .main-heading { font-size: 1.4rem; }
+     .job-entry, .education-entry { padding: 1rem; }
+     .job-title, .degree { font-size: 1.1rem; }
+     .job-company-date, .institution-date { font-size: 0.9rem; }
+     .job-entry li { font-size: 0.9rem; }
+     .main-content { padding: 1rem; } /* Less padding on mobile */
+     footer { padding: 0.8rem; font-size: 0.8rem; }
 }
