@@ -3,77 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - CV</title> <!-- Change 'Your Name' -->
+    <title>Ricardo Carvalho - CV</title> <!-- Change 'Your Name' -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css"> <!-- We'll create style.css later -->
 </head>
 <body>
-    <header>
-        <h1>Your Full Name</h1>
-        <p>Your Job Title / Tagline</p>
-    </header>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Write a brief summary about yourself, your goals, and your experience.</p>
-    </section>
+    <div class="container">
 
-    <section id="experience">
-        <h2>Experience</h2>
-        <!-- Use articles for individual jobs -->
-        <article>
-            <h3>Job Title at Company Name</h3>
-            <p>Date Range (e.g., 2020 - Present)</p>
-            <ul>
-                <li>Responsibility or achievement 1</li>
-                <li>Responsibility or achievement 2</li>
-                <!-- Add more list items for bullet points -->
-            </ul>
-        </article>
-        <!-- Add more <article> blocks for other jobs -->
-    </section>
+        <header class="main-header">
+            <div class="header-content">
+                <h1>Ricardo Filipe Dias Sampaio de Carvalho</h1>
+                <h2>Dynamics Business Central Support Engineer EMEA</h2> <!-- Or your most relevant/current title -->
 
-    <section id="education">
-        <h2>Education</h2>
-        <article>
-            <h3>Degree/Certificate Name</h3>
-            <p>Institution Name, Location</p>
-            <p>Date of Graduation</p>
-            <!-- Optional: <p>Relevant coursework, honors, etc.</p> -->
-        </article>
-        <!-- Add more <article> blocks for other degrees -->
-    </section>
+                <ul class="contact-info">
+                    <li><i class="fas fa-phone fa-fw"></i> (+351) 938522179</li>
+                    <li><i class="fas fa-envelope fa-fw"></i> <a href="mailto:ricardo.sampaio@gmail.com">ricardo.sampaio@gmail.com</a></li>
+                    <li><i class="fab fa-linkedin fa-fw"></i> <a href="https://www.linkedin.com/in/ricardo-carvalho-05741519/" target="_blank" rel="noopener noreferrer">linkedin.com/in/ricardo-carvalho-05741519</a></li>
+                    <li><i class="fas fa-map-marker-alt fa-fw"></i> Sacavém, Portugal</li>
+                    <li><i class="fas fa-flag fa-fw"></i> Nacionalidade: Portuguesa</li>
+                    <li><i class="fas fa-calendar-alt fa-fw"></i> Data de nascimento: 17/10/1981</li>
+                </ul>
+            </div>
+        </header>
 
-    <section id="skills">
-        <h2>Skills</h2>
-        <p>
-            <!-- You can list skills in categories or just list them -->
-            <strong>Programming Languages:</strong> Python, JavaScript, C++<br>
-            <strong>Technologies:</strong> Linux, Docker, Git, AWS<br>
-            <strong>Soft Skills:</strong> Communication, Teamwork, Problem-Solving
-        </p>
-        <!-- Or use a list:
-        <ul>
-            <li>Skill 1</li>
-            <li>Skill 2</li>
-        </ul>
-        -->
-    </section>
+        <main>
+            <section id="experience" class="cv-section">
+                <h2><i class="fas fa-briefcase fa-fw"></i> Experiência Profissional</h2>
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a></p>
-        <p>GitHub: <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></p>
-        <!-- Add other links like portfolio, website etc. -->
-    </section>
+                <article class="job-entry">
+                    <h3>Dynamics Business Central Support Engineer EMEA</h3>
+                    <p class="company-date">Sysmatch | 24/02/2020 – Atual | Lisboa, Portugal</p>
+                    <ul>
+                        <li>Obsessão pelo cliente e compromisso com o sucesso do cliente em todas as inter-acções...</li>
+                        <li>Ser um embaixador da Microsoft e dar o exemplo.</li>
+                        <li>Gerir relacionamentos com clientes e fornecer documentação técnica...</li>
+                        <li>Identificar bugs de software e ser um defensor da melhoria do produto...</li>
+                        <li>Uso de ferramentas para depuração e análise de causa raiz</li>
+                        <li>Fornecer suporte técnico aprofundado para entrega de serviço ao cliente...</li>
+                        <li>Envolver e colaborar com outros grupos da Microsoft...</li>
+                        <li>Criação de conteúdo técnico online avançado...</li>
+                        <!-- Add all bullet points -->
+                    </ul>
+                </article>
 
-    <footer>
-        <p>© <span id="current-year"></span> Your Full Name</p>
-    </footer>
+                <article class="job-entry">
+                    <h3>Senior Dynamics NAV Developer</h3>
+                    <p class="company-date">Sysmatch | 12/11/2018 – 21/02/2020 | Lisboa, Portugal</p>
+                    <ul>
+                        <li>Gestão de unidade de manutenção e suporte (ERP Dynamics NAV);</li>
+                        <li>Redefinição e melhoria de processos;</li>
+                        <li>Responsável pela implementação, gestão e funcionamento diário do software...</li>
+                        <li>Design, Especificações Técnicas e Funcionais de desenvolvimentos à medida...</li>
+                        <li>Suporte aos utilizadores;</li>
+                        <li>Implementação de interfaces com outras aplicações via ficheiros XML;</li>
+                    </ul>
+                </article>
+
+                <article class="job-entry">
+                    <h3>Consultor Informático</h3>
+                    <p class="company-date">Novabase | 12/03/2018 – 09/11/2018 | Lisboa, Portugal</p>
+                    <ul>
+                        <li>Levantamento de especificações, desenho e participação no processo de avaliação...</li>
+                        <li>Responsável por analise de informação com base em telemetria Microsoft...</li>
+                        <li>Suporte a clientes</li>
+                    </ul>
+                </article>
+
+                <article class="job-entry">
+                    <h3>Senior Dynamics NAV Developer</h3>
+                    <p class="company-date">ABOUTNAV | 14/11/2016 – 09/02/2018 | Lisboa, Portugal</p>
+                    <!-- Add Activity/Sector if desired -->
+                    <ul>
+                        <li>Gestão de projectos de implementação de software (ERP Dynamics NAV);</li>
+                        <li>Gestão de unidade de manutenção e suporte (ERP Dynamics NAV);</li>
+                        <!-- Add all bullet points -->
+                    </ul>
+                </article>
+
+                <article class="job-entry">
+                    <h3>Sage X3 Developer</h3>
+                    <p class="company-date">Sage Portugal | 10/03/2014 – 14/11/2016 | Lisboa, Portugal</p>
+                     <ul>
+                        <li>Gestão de unidade de manutenção (Sage X3);</li>
+                        <li>Localização dos desenvolvimentos especificos de Portugal : IES, Caixa IVA, Requerimentos legais.</li>
+                        <li>Formação em desenvolvimento SAGE ERP X3 : 4GL Integrated Development Environment, JavaScript</li>
+                    </ul>
+                </article>
+
+                <article class="job-entry">
+                    <h3>Programador Dynamics Nav</h3>
+                    <p class="company-date">Aptra - Consultoria em Sistemas de Informação | 15/10/2012 – 09/03/2014 | Bobadela, Portugal</p>
+                     <ul>
+                        <li>Gestão de unidade de manutenção e suporte (ERP NAV);</li>
+                        <li>Redefinição e melhoria de processos;</li>
+                        <li>Responsável pela implementação, gestão e funcionamento diário...</li>
+                        <li>Design, Especificações Técnicas e Funcionais...</li>
+                        <li>Desenvolvimento dos seguintes Addons para as Câmaras Municipais: Workflow, Archive Link, Urbanismo, Obras Municipais, Cemitérios</li>
+                        <!-- Add clients like AMAT, EGEAC if desired -->
+                    </ul>
+                </article>
+
+                 <article class="job-entry">
+                    <h3>Consultor Informático Microsoft Dynamics NAV</h3>
+                    <p class="company-date">Conhecer Mais TI | 01/01/2007 – 30/09/2012 | Lisboa, Portugal</p>
+                     <ul>
+                        <li>Gestão de unidade de manutenção e suporte (ERP NAV);</li>
+                        <li>Redefinição e melhoria de processos;</li>
+                        <li>Responsável pela implementação, gestão e funcionamento diário...</li>
+                        <li>Coordenação de Pré-Venda e elaboração de propostas;</li>
+                        <li>Gestão de projectos de implementação de software (ERP NAV);</li>
+                        <li>Design, Especificações Técnicas e Funcionais...</li>
+                        <li>Formação em Desenvolvimento C Side;</li>
+                        <li>Desenvolvimento de um Addon de Contabilidade Pública;</li>
+                        <!-- Add clients like Obriverca, Lencas, etc. if desired -->
+                    </ul>
+                </article>
+
+                <article class="job-entry">
+                    <h3>Consultor Informático Microsoft Dynamics NAV</h3>
+                    <p class="company-date">JD Solutions - Link | 01/12/2004 – 01/12/2006 | Algés, Portugal</p>
+                    <ul>
+                        <li>Desenho, implementação e teste do ERP NAV;</li>
+                        <li>Upgrade de versões, desenvolvimento de Addons para o ERP NAV;</li>
+                        <li>Implementação de interfaces com outras aplicações via ficheiros XML;</li>
+                        <li>Formação em Desenvolvimento C Side;</li>
+                        <!-- Add clients if desired -->
+                    </ul>
+                </article>
+
+                 <article class="job-entry">
+                    <h3>Estagiário (PLSQL)</h3>
+                    <p class="company-date">Dimensoft - AXA Seguros | 01/05/2004 – 01/11/2004 | Lisboa, Portugal</p>
+                    <ul>
+                        <li>No sector do ramo automóvel, desenvolvimento, implementação e o suporte interfaces batch (queries em PL/SQL...)</li>
+                    </ul>
+                </article>
+
+            </section>
+
+            <section id="education" class="cv-section">
+                 <h2><i class="fas fa-graduation-cap fa-fw"></i> Educação e Formação</h2>
+
+                <article class="education-entry">
+                    <h3>Licenciatura em Informática de Gestão</h3>
+                    <p class="institution-date">Instituto Superior de Gestão (ISG) | 01/09/1998 – 01/05/2004 | Lisboa, Portugal</p>
+                    <!-- Optionally list key subjects/skills learned if desired -->
+                     <!-- <p>Key Subjects: C/C++, Visual Basic, JAVA, SQL, PL/SQL, HTML, XML, UML, ASP, Databases, Data Mining...</p> -->
+                </article>
+
+                 <article class="education-entry">
+                    <h3>Certificado de Competências Pedagógicas de Formador (CCP)</h3>
+                    <p class="institution-date">Conhecer Mais RH e IEFP (Centro de Formação) | 01/04/2008 – 10/04/2008 | Lisboa, Portugal</p>
+                </article>
+
+                 <article class="education-entry">
+                    <h3>Certificação MB7-838 (NAV 2009 Instalation and Configuration)</h3>
+                    <p class="institution-date">Galileu (Centro de Formação GALILEU de Lisboa) | 30/09/2011 – 30/09/2011 | Lisboa, Portugal</p>
+                </article>
+
+                <article class="education-entry">
+                    <h3>Formação Microsoft Visual Studio 2010 ASP.NET</h3>
+                    <p class="institution-date">Galileu (Centro de Formação GALILEU de Lisboa) | 02/12/2009 – 07/12/2012 | Lisboa, Portugal</p>
+                </article>
+
+                 <article class="education-entry">
+                    <h3>Formação de Developing ASP.NET MVC 4 Web Applications</h3>
+                    <p class="institution-date">Rumos | 15/06/2015 – 19/06/2015 | Lisboa, Portugal</p>
+                </article>
+
+                <article class="education-entry">
+                    <h3>Formação Javascript</h3>
+                    <p class="institution-date">Formabase | 01/09/2015 – 01/10/2015 | Lisboa, Portugal</p>
+                </article>
+
+            </section>
+
+            <section id="skills" class="cv-section">
+                 <h2><i class="fas fa-cogs fa-fw"></i> Competências</h2>
+
+                <div class="skills-category">
+                    <h3>Técnicas (Principais)</h3>
+                    <div class="skills-list">
+                        <span class="skill-tag">MS Dynamics NAV</span>
+                        <span class="skill-tag">MS Dynamics Business Central</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">PL/SQL</span>
+                        <span class="skill-tag">C/AL (Dynamics NAV Dev)</span>
+                        <span class="skill-tag">AL (Business Central Dev)</span>
+                        <span class="skill-tag">XML</span>
+                        <span class="skill-tag">ASP.NET (MVC)</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">HTML</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">Sage X3 Dev (4GL)</span>
+                         <span class="skill-tag">Support Engineering</span>
+                         <span class="skill-tag">Troubleshooting</span>
+                         <span class="skill-tag">Debugging</span>
+                         <span class="skill-tag">Requirements Analysis</span>
+                         <span class="skill-tag">Technical Documentation</span>
+                        <!-- Add others derived from degree/experience -->
+                    </div>
+                </div>
+
+                 <div class="skills-category">
+                    <h3>Linguísticas</h3>
+                     <p><strong>Português:</strong> Nativo</p>
+                     <p><strong>Inglês:</strong> C1 (Compreensão Oral: C1, Leitura: C1, Produção Oral: C1, Interação Oral: C1)</p>
+                     <p><strong>Francês:</strong> A2/B1 (Compreensão Oral: A2, Leitura: A2, Produção Oral: A2, Interação Oral: A2) - *Note: Compreender A1 seems lower than others, double check if A2 is more accurate across board?*</p>
+                </div>
+
+                 <div class="skills-category">
+                    <h3>Organização e Sociais</h3>
+                    <div class="skills-list">
+                        <span class="skill-tag">Gestão de Projetos</span>
+                        <span class="skill-tag">Liderança de Equipa</span>
+                        <span class="skill-tag">Trabalho de Equipa</span>
+                        <span class="skill-tag">Sentido de Organização</span>
+                        <span class="skill-tag">Adaptação Multicultural</span>
+                        <span class="skill-tag">Comunicação</span>
+                        <span class="skill-tag">Autodidata</span>
+                        <span class="skill-tag">Análise Técnica e Funcional</span>
+                        <span class="skill-tag">Foco no Cliente</span>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer>
+            <p>© <span id="current-year"></span> Ricardo Filipe Dias Sampaio de Carvalho</p>
+        </footer>
+
+    </div> <!-- /container -->
 
     <script>
         // Optional: JavaScript to automatically set the current year in the footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
+
 </body>
 </html>

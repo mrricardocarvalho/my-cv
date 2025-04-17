@@ -1,103 +1,287 @@
-/* Basic Reset or Normalize (Optional but Recommended) */
-body {
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+/* Basic Reset & Defaults */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
     margin: 0;
-    font-family: sans-serif; /* Choose a professional font */
+    padding: 0;
+}
+
+:root {
+    --primary-color: #0056b3; /* A professional blue */
+    --secondary-color: #007bff; /* A slightly lighter blue for accents */
+    --light-gray: #f8f9fa;
+    --medium-gray: #e9ecef;
+    --dark-gray: #6c757d;
+    --text-color: #343a40;
+    --card-bg: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --border-color: #dee2e6;
+}
+
+html {
+    scroll-behavior: smooth; /* Smooth scroll for anchor links if added */
+}
+
+body {
+    font-family: 'Lato', sans-serif;
     line-height: 1.6;
-    color: #333; /* Dark grey text */
-    background-color: #f4f4f4; /* Light grey background */
+    color: var(--text-color);
+    background-color: var(--light-gray); /* Light background for the whole page */
+    font-size: 16px; /* Base font size */
 }
 
 .container {
-    max-width: 800px; /* Limit width for readability */
-    margin: 20px auto; /* Center the container */
-    padding: 20px;
-    background-color: #fff; /* White background for content area */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 960px; /* Max width of content */
+    margin: 2rem auto; /* Top/bottom margin, centered horizontally */
+    background-color: var(--card-bg); /* White background for the main content area */
+    box-shadow: 0 4px 12px var(--shadow-color);
+    border-radius: 8px;
+    overflow: hidden; /* Ensures rounded corners contain children */
 }
 
-header {
+/* --- Header --- */
+.main-header {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    padding: 2rem 2rem;
     text-align: center;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #eee; /* Light line below header */
-    margin-bottom: 20px;
 }
 
-header h1 {
+.main-header h1 {
+    font-size: 2.5rem; /* Larger name */
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.main-header h2 {
+    font-size: 1.5rem;
+    font-weight: 300; /* Lighter weight for title */
+    margin-bottom: 1.5rem;
+    color: #dbe9ff; /* Slightly lighter color for subtitle */
+}
+
+.contact-info {
+    list-style: none; /* Remove bullet points */
+    padding: 0;
+    display: flex; /* Arrange items side-by-side */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: center; /* Center items */
+    gap: 1rem 1.5rem; /* Row gap, Column gap */
+    font-size: 0.95rem;
+}
+
+.contact-info li {
+    display: inline-flex; /* Align icon and text */
+    align-items: center;
+}
+
+.contact-info i {
+    margin-right: 0.5em; /* Space between icon and text */
+    color: var(--secondary-color); /* Use accent blue for icons */
+    font-size: 1.1em;
+    width: 20px; /* Ensure icons have consistent width */
+    text-align: center;
+}
+
+.contact-info a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.contact-info a:hover {
+    color: #dbe9ff; /* Lighter color on hover */
+    text-decoration: underline;
+}
+
+/* --- Main Content Area --- */
+main {
+    padding: 2rem;
+}
+
+/* --- Section Styling --- */
+.cv-section {
+    margin-bottom: 2.5rem;
+}
+
+.cv-section h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary-color);
+    display: inline-flex; /* Make border only as wide as text+icon */
+    align-items: center;
+}
+
+.cv-section h2 i {
+    margin-right: 0.75rem; /* Space between icon and section title */
+    font-size: 0.9em; /* Slightly smaller icon */
+}
+
+/* --- Job/Education Entry Styling --- */
+.job-entry,
+.education-entry {
+    background-color: var(--light-gray); /* Subtle background for entries */
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: box-shadow 0.3s ease;
+}
+
+.job-entry:hover,
+.education-entry:hover {
+     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+
+.job-entry h3,
+.education-entry h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+}
+
+.company-date,
+.institution-date {
+    font-size: 1rem;
+    color: var(--dark-gray);
+    font-weight: 400;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.job-entry ul {
+    list-style: disc; /* Use standard bullets */
+    padding-left: 1.5rem; /* Indent bullets */
     margin: 0;
-    color: #0056b3; /* A shade of blue */
 }
 
-header p {
-    color: #555;
-    font-size: 1.2em;
+.job-entry li {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    color: #555; /* Slightly lighter text for details */
 }
 
-section {
-    margin-bottom: 30px; /* Space between sections */
-    padding-bottom: 20px;
-    border-bottom: 1px solid #eee; /* Light line between sections */
+/* --- Skills Section Styling --- */
+.skills-category {
+    margin-bottom: 1.5rem;
 }
 
-section:last-child {
-    border-bottom: none; /* No line after the last section */
+.skills-category h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
 }
 
-h2 {
-    color: #0056b3;
-    margin-top: 0;
-    border-bottom: 2px solid #0056b3; /* Underline headings */
-    display: inline-block; /* Make underline only as wide as text */
-    padding-bottom: 5px;
-    margin-bottom: 15px;
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem; /* Spacing between tags */
 }
 
-article {
-    margin-bottom: 20px;
+.skill-tag {
+    background-color: var(--medium-gray);
+    color: var(--text-color);
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 400;
+    white-space: nowrap; /* Prevent tags from breaking line */
+    border: 1px solid var(--border-color);
 }
 
-article h3 {
-    margin-bottom: 5px;
-    color: #555;
+.skills-category p {
+     margin-bottom: 0.5rem;
+     font-size: 0.95rem;
 }
 
-ul {
-    padding-left: 20px; /* Indent list items */
+.skills-category p strong {
+    font-weight: 700;
 }
 
-li {
-    margin-bottom: 5px;
-}
 
-a {
-    color: #007bff; /* Blue for links */
-    text-decoration: none; /* Remove underline */
-}
-
-a:hover {
-    text-decoration: underline; /* Add underline on hover */
-}
-
+/* --- Footer --- */
 footer {
     text-align: center;
-    margin-top: 30px;
-    padding-top: 15px;
-    border-top: 1px solid #eee;
-    color: #777;
+    padding: 1.5rem;
+    background-color: var(--medium-gray); /* Footer background */
+    color: var(--dark-gray);
     font-size: 0.9em;
+    border-top: 1px solid var(--border-color);
 }
 
-/* Responsive adjustments (Basic example) */
-@media (max-width: 600px) {
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
     .container {
-        padding: 10px;
-        margin: 10px;
+        margin: 1rem;
+        padding: 0; /* Remove padding, main content will have it */
+        border-radius: 0;
+        box-shadow: none;
     }
 
-    header h1 {
-        font-size: 1.8em;
+    main {
+        padding: 1.5rem;
     }
 
-    h2 {
-        font-size: 1.5em;
+    .main-header {
+        padding: 1.5rem;
+        border-radius: 0;
+    }
+
+    .main-header h1 {
+        font-size: 2rem;
+    }
+
+    .main-header h2 {
+        font-size: 1.2rem;
+    }
+
+    .contact-info {
+        flex-direction: column; /* Stack contact info vertically */
+        align-items: flex-start; /* Align items to the left */
+        gap: 0.5rem;
+        text-align: left;
+        padding-left: 10%; /* Add some indent */
+    }
+
+    .cv-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .job-entry,
+    .education-entry {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+     html {
+        font-size: 15px; /* Slightly smaller base font on small screens */
+    }
+
+    .main-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .main-header h2 {
+        font-size: 1.1rem;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+     .contact-info {
+        padding-left: 0; /* Remove indent on very small screens */
     }
 }
