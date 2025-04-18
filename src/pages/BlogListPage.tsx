@@ -1,5 +1,4 @@
 // src/pages/BlogListPage.tsx
-import React from 'react';
 import BlogSection from '../components/BlogSection'; // Renders the list of posts
 
 interface BlogListPageProps {

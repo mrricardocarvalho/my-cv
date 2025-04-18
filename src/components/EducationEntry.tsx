@@ -1,5 +1,3 @@
-// src/components/EducationEntry.tsx
-import React from 'react';
 // Import the full EducationItem type definition
 import { EducationItem as EducationItemType } from '../cv-data';
 

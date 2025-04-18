@@ -1,5 +1,3 @@
-// src/components/ProjectEntry.tsx
-import React from 'react';
 // Import the Project type definition
 import { Project as ProjectType } from '../cv-data';
 

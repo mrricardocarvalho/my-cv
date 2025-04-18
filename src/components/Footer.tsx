@@ -1,5 +1,3 @@
-// src/components/Footer.tsx
-import React from 'react';
 // Import labels if needed for translation (optional for copyright)
 // import { labels } from '../cv-data';
 

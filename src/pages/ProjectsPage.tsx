@@ -1,5 +1,4 @@
 // src/pages/ProjectsPage.tsx
-import React from 'react';
 import ProjectsSection from '../components/ProjectsSection';
 
 interface ProjectsPageProps {

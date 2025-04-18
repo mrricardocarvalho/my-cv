@@ -1,5 +1,5 @@
 // src/components/MainContent.tsx
-import React, { useState } from 'react'; // Import useState
+import { useState } from 'react'; // Import useState
 // We keep section imports here for now, but they won't be conditionally rendered by this component anymore after routing is added
 import SummarySection from './SummarySection';
 import ExperienceSection from './ExperienceSection';
@@ -8,7 +8,7 @@ import CompetenciesSection from './CompetenciesSection';
 import ProjectsSection from './ProjectsSection'; // Assume created
 import BlogSection from './BlogSection';       // Assume created
 // Import nav data and labels
-import { mainNavItems, labels } from '../cv-data'; // Adjust import if data is defined locally
+import { mainNavItems } from '../cv-data'; // Adjust import if data is defined locally
 
 interface MainContentProps {
     currentLanguage: 'en' | 'pt';

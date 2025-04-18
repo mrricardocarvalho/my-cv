@@ -1,5 +1,3 @@
-// src/components/ProjectsSection.tsx
-import React from 'react';
 // Import the entry component and data/labels
 import ProjectEntry from './ProjectEntry';
 import { projectsData, labels } from '../cv-data';

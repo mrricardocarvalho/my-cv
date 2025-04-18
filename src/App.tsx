@@ -1,5 +1,5 @@
 // src/App.tsx - Revised Layout with Nav inside Main Area Card
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation, Link } from 'react-router-dom'; // Import Link here too
 import Sidebar from './components/Sidebar';
 import ResumePage from './pages/ResumePage';

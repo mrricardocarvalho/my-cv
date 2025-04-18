@@ -1,5 +1,3 @@
-// src/components/CompetenciesSection.tsx
-import React from 'react';
 // Import necessary data and labels
 import { professionalCompetenciesData, labels } from '../cv-data';
 

@@ -1,5 +1,5 @@
 // src/pages/BlogPostPage.tsx
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown'; // Make sure this is installed: npm install react-markdown
 import { blogPostsData, labels } from '../cv-data'; // Import blog data

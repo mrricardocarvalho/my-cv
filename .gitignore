@@ -124,5 +124,5 @@ public/build/
 .pnp.*
 
 # Vite build output
-dist/ # <<< IMPORTANT FOR VITE
+# dist/ # <<< IMPORTANT FOR VITE
 dist-ssr/

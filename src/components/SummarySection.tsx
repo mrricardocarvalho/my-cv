@@ -1,5 +1,3 @@
-// src/components/SummarySection.tsx
-import React from 'react';
 // Import the specific data needed and the labels
 import { summaryText, labels } from '../cv-data';
 

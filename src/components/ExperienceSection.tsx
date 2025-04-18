@@ -1,5 +1,3 @@
-// src/components/ExperienceSection.tsx
-import React from 'react';
 // Import the JobEntry component (now styled with Tailwind)
 import JobEntry from './JobEntry';
 // Import the data and labels

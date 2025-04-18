@@ -1,5 +1,4 @@
 // src/pages/ResumePage.tsx
-import React from 'react';
 import ExperienceSection from '../components/ExperienceSection';
 import EducationSection from '../components/EducationSection';
 import CompetenciesSection from '../components/CompetenciesSection';

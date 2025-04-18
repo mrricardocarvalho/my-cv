@@ -1,5 +1,3 @@
-// src/components/EducationSection.tsx
-import React from 'react';
 // Import the refactored EducationEntry component
 import EducationEntry from './EducationEntry';
 // Import the data and labels

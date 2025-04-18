@@ -1,6 +1,3 @@
-// src/components/BlogPostEntry.tsx - CHECK THIS CODE CAREFULLY
-
-import React from 'react';
 import { BlogPost as BlogPostType, labels } from '../cv-data';
 import { Link } from 'react-router-dom'; // Ensure Link is imported
 

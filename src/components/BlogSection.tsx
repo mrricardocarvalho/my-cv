@@ -1,5 +1,3 @@
-// src/components/BlogSection.tsx
-import React from 'react';
 // Import the entry component and data/labels
 import BlogPostEntry from './BlogPostEntry';
 import { blogPostsData, labels } from '../cv-data';

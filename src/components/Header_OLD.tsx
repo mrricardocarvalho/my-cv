@@ -1,5 +1,3 @@
-// src/components/Header.tsx
-import React from 'react';
 // Import contact data and potentially labels
 import { contactInfo, labels } from '../cv-data'; // Labels might not be needed if only icons
 
@@ -14,7 +12,7 @@ interface HeaderProps {
 }
 
 function Header(props: HeaderProps) {
-  const { currentLanguage, onToggleLanguage } = props;
+  const { currentLanguage } = props;
 
   return (
     <header className="p-6 md:p-8 bg-primary text-primary-content relative pb-4">

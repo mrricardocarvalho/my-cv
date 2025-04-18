@@ -1,13 +1,10 @@
 // src/components/Sidebar.tsx
-import React from 'react';
 // Import necessary data, types, and labels
 import {
     contactInfo,
     labels,
     summaryText,
     keyTechnicalSkills,
-    languages,
-    Language as LanguageType
 } from '../cv-data';
 
 // Define props for language and toggle handler
@@ -24,7 +21,7 @@ const titles = {
 };
 
 function Sidebar(props: SidebarProps) {
-    const { currentLanguage, onToggleLanguage, activePath } = props;
+    const { currentLanguage, onToggleLanguage } = props;
 
     return (
         // Main Sidebar container: Rounded corners, shadow, white background

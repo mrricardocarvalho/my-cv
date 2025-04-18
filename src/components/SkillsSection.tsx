@@ -1,7 +1,4 @@
-// src/components/SkillsSection.tsx
 // This component is now designed to render *within* the Sidebar
-
-import React from 'react';
 // Import necessary data and types
 import {
     technicalSkills,
