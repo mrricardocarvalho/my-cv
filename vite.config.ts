@@ -6,4 +6,7 @@ export default defineConfig({
   // Configure the base path for deployment
   base: '/my-cv/',
   plugins: [react()],
+  build: {
+    outDir: 'docs' // <<< CHANGE output directory to 'docs'
+  }  
 })

@@ -84,7 +84,7 @@ out
 
 # Nuxt.js build output
 .nuxt
-# dist
+dist
 
 # Remix build output
 .cache/
@@ -124,5 +124,5 @@ public/build/
 .pnp.*
 
 # Vite build output
-# dist/ # <<< IMPORTANT FOR VITE
+dist/ # <<< IMPORTANT FOR VITE
 dist-ssr/
