@@ -7,12 +7,15 @@ interface EducationEntryProps {
     currentLanguage: 'en' | 'pt';
 }
 
+// Access the base path Vite is configured with
+const BASE_URL = import.meta.env.BASE_URL;
+
 function EducationEntry(props: EducationEntryProps) {
   const { item, currentLanguage } = props;
   const { degree, institution, location, date, logo } = item; // Destructure item
 
   // Construct logo path
-  const logoPath = logo ? `/images/logos/${logo}` : null;
+  const logoPath = logo ? `${BASE_URL}/images/logos/${logo}` : null;
 
   return (
     // Main container for the education entry, using flexbox

@@ -7,12 +7,15 @@ interface ProjectEntryProps {
     currentLanguage: 'en' | 'pt';
 }
 
+// Access the base path Vite is configured with
+const BASE_URL = import.meta.env.BASE_URL;
+
 function ProjectEntry(props: ProjectEntryProps) {
   const { project, currentLanguage } = props;
   const { name, type, role, date, summary, logo, url } = project; // Destructure project
 
   // Construct logo path
-  const logoPath = logo ? `/images/logos/${logo}` : null;
+  const logoPath = logo ? `${BASE_URL}/images/logos/${logo}` : null;
 
   return (
     // Main container using flexbox, consistent styling

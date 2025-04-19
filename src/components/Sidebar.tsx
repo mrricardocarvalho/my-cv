@@ -1,5 +1,3 @@
-// src/components/Sidebar.tsx
-// Import necessary data, types, and labels
 import {
     contactInfo,
     labels,
@@ -20,6 +18,9 @@ const titles = {
     pt: "Developer Sénior D365 BC"
 };
 
+// Access the base path Vite is configured with
+const BASE_URL = import.meta.env.BASE_URL;
+
 function Sidebar(props: SidebarProps) {
     const { currentLanguage, onToggleLanguage } = props;
 
@@ -32,7 +33,7 @@ function Sidebar(props: SidebarProps) {
             <div className="relative"> {/* Removed mb-6, spacing handled by padding below */}
                 {/* Background Image */}
                 <img
-                    src="/background.jpg"
+                    src={`${BASE_URL}background.jpg`}
                     alt="Header background"
                     className="w-full h-32 object-cover" // Height of the banner
                 />
@@ -40,7 +41,7 @@ function Sidebar(props: SidebarProps) {
                 <div className="absolute bottom-0 left-4 transform translate-y-1/2">
                      {/* Simple white border directly on image */}
                     <img
-                        src="/profile.jpg"
+                        src={`${BASE_URL}profile.jpg`}
                         alt="Ricardo Carvalho"
                         // Adjusted size slightly, added explicit white border matching demo
                         className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-md"

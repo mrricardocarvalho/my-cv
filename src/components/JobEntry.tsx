@@ -8,6 +8,9 @@ interface JobEntryProps extends Omit<JobType, 'id'> {
     currentLanguage: 'en' | 'pt';
 }
 
+// Access the base path Vite is configured with
+const BASE_URL = import.meta.env.BASE_URL;
+
 function JobEntry(props: JobEntryProps) {
   const {
       currentLanguage,
@@ -21,7 +24,7 @@ function JobEntry(props: JobEntryProps) {
     } = props;
 
   // Construct logo path (relative to public folder)
-  const logoPath = logo ? `/images/logos/${logo}` : null; // Handle missing logo
+  const logoPath = logo ? `${BASE_URL}/images/logos/${logo}` : null; // Handle missing logo
 
   // Helper function for rendering responsibilities remains the same
   const renderResponsibility = (textObj: { en: string; pt: string }) => {

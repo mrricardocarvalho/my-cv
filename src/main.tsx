@@ -6,10 +6,13 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
 import './index.css';
 
+// Get the base path from Vite's env variables
+const baseName = import.meta.env.BASE_URL;
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    {/* Wrap App component with BrowserRouter */}
-    <BrowserRouter>
+    {/* Pass basename prop */}
+    <BrowserRouter basename={baseName}>
       <App />
     </BrowserRouter>
   </React.StrictMode>,
