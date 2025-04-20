@@ -102,39 +102,29 @@ export const professionalExperience: Job[] = [
     },
     company: "Sysmatch (Contractor at Microsoft)",
     location: "Lisbon",
-    date: "Feb 2020 – Present",
+    date: "Feb 2020 - 2021",
     logo: 'microsoft-logo.png',
     employmentType: { en: 'Full-time', pt: 'Tempo Inteiro' },
     responsibilities: [
-      // Option 1 (Focus on Resolution & Scope)
       {
-        en: "**Spearheaded resolution** of complex Dynamics 365 Business Central (BC) technical escalations for Tier 1/2 partners and direct customers across EMEA, consistently exceeding SLA targets (>95% resolution rate).",
-        pt: "**Liderei a resolução** de escalações técnicas complexas do Dynamics 365 Business Central (BC) para parceiros Tier 1/2 e clientes diretos na região EMEA, excedendo consistentemente as metas de SLA (>95% taxa de resolução)."
+        en: "Led the resolution of complex Dynamics 365 BC escalations for partners and customers across EMEA, consistently exceeding SLA targets.",
+        pt: "Liderei a resolução de escalações complexas do Dynamics 365 BC para parceiros e clientes em toda a região EMEA, superando consistentemente as metas de SLA."
       },
-      // Option 2 (Focus on Technical Depth)
       {
-        en: "**Performed deep-dive technical analysis** and debugging of intricate BC issues involving AL application logic, SQL database performance bottlenecks, API integrations, and Azure service dependencies.",
-        pt: "**Realizei análise técnica aprofundada** e depuração de problemas intrincados do BC envolvendo lógica aplicacional AL, gargalos de desempenho da base de dados SQL, integrações API e dependências de serviços Azure."
+        en: "Executed in-depth technical analysis and troubleshooting across AL code, SQL performance, API integrations, and Azure dependencies.",
+        pt: "Executei análises técnicas aprofundadas e resolução de problemas em código AL, desempenho SQL, integrações API e dependências do Azure."
       },
-      // Option 3 (Focus on Collaboration & Impact)
       {
-        en: "**Functioned as a key liaison** between customers/partners and Microsoft internal teams (Escalation, Product Group), facilitating rapid bug fixes and driving solutions for critical, business-impacting issues.",
-        pt: "**Funcionei como elo de ligação chave** entre clientes/parceiros e equipas internas da Microsoft (Escalation, Product Group), facilitando correções rápidas de bugs e impulsionando soluções para problemas críticos com impacto no negócio."
+        en: "Acted as a trusted liaison between Microsoft teams and clients, accelerating resolution of business-critical issues.",
+        pt: "Atuei como elo de confiança entre equipas da Microsoft e clientes, acelerando a resolução de problemas críticos para o negócio."
       },
-      // Option 4 (Focus on Knowledge Sharing - Quantify!)
-      // {
-      //   en: "**Authored and maintained ~25+ technical documents**, including official Knowledge Base articles, troubleshooting guides, and internal training materials, demonstrably reducing recurring support requests.", // Be realistic with the number!
-      //   pt: "**Criei e mantive ~25+ documentos técnicos**, incluindo artigos oficiais da Knowledge Base, guias de troubleshooting e materiais de formação interna, reduzindo demonstravelmente pedidos de suporte recorrentes." // Seja realista com o número!
-      // },
-      // Option 5 (Focus on Expertise & Guidance)
       {
-        en: "**Provided expert guidance** on BC configuration, customization best practices, and upgrade strategies, empowering partners and customers to optimize their system usage and avoid common pitfalls.",
-        pt: "**Forneci orientação especializada** sobre configuração do BC, melhores práticas de personalização e estratégias de atualização, capacitando parceiros e clientes a otimizar o uso do sistema e evitar erros comuns."
+        en: "Advised partners and customers on best practices for configuration, customization, and upgrade planning in BC.",
+        pt: "Aconselhei parceiros e clientes sobre melhores práticas de configuração, personalização e planeamento de atualizações no BC."
       },
-      // Option 6 (Focus on Product Improvement)
       {
-        en: "**Systematically identified, reproduced, and documented** software defects and usability gaps, providing actionable feedback that directly contributed to prioritized fixes and enhancements in subsequent BC releases.",
-        pt: "**Identifiquei, reproduzi e documentei sistematicamente** defeitos de software e lacunas de usabilidade, fornecendo feedback acionável que contribuiu diretamente para correções priorizadas e melhorias em lançamentos subsequentes do BC."
+        en: "Documented software issues with precision, influencing product improvements in future Business Central releases.",
+        pt: "Documentei problemas de software com precisão, influenciando melhorias no produto em futuras versões do Business Central."
       }
     ]
   },
@@ -150,31 +140,22 @@ export const professionalExperience: Job[] = [
     logo: 'sysmatchpt.png', // Example
     employmentType: { en: 'Full-time', pt: 'Tempo Inteiro' },    
     responsibilities: [
-      // Option 1 (Focus on Solution Architecture & Scope)
       {
-        en: "**Architected and developed** bespoke Dynamics NAV (C/AL) solutions for key accounts, including specialized modules for multi-country Healthcare operations (Portugal, Angola, Mozambique).",
-        pt: "**Arquitetei e desenvolvi** soluções Dynamics NAV (C/AL) personalizadas para contas-chave, incluindo módulos especializados para operações de Saúde multinacionais (Portugal, Angola, Moçambique)."
+        en: "Designed and implemented tailored Dynamics NAV (C/AL) solutions for strategic healthcare clients across Portugal, Angola, and Mozambique.",
+        pt: "Desenhei e implementei soluções Dynamics NAV (C/AL) personalizadas para clientes estratégicos do setor da saúde em Portugal, Angola e Moçambique."
       },
-      // Option 2 (Focus on Integration Complexity)
       {
-        en: "**Engineered complex XML-based integrations** connecting Dynamics NAV with external systems (LIMS, Billing Portals, Logistics), ensuring reliable bi-directional data flow.",
-        pt: "**Desenvolvi integrações complexas baseadas em XML** conectando o Dynamics NAV com sistemas externos (LIMS, Portais de Faturação, Logística), garantindo fluxo de dados bidirecional confiável."
+        en: "Engineered robust XML-based integrations between NAV and external platforms (LIMS, billing, logistics), ensuring secure and reliable data exchange.",
+        pt: "Desenvolvi integrações robustas baseadas em XML entre o NAV e plataformas externas (LIMS, faturação, logística), garantindo trocas de dados seguras e fiáveis."
       },
-      // Option 3 (Focus on Technical Ownership & Maintenance)
       {
-        en: "**Provided end-to-end technical ownership** for assigned client NAV environments, managing maintenance cycles, performance tuning (SQL/C/AL), and critical support resolution.",
-        pt: "**Forneci responsabilidade técnica ponta-a-ponta** para ambientes NAV de clientes atribuídos, gerindo ciclos de manutenção, otimização de desempenho (SQL/C/AL) e resolução de suporte crítico."
+        en: "Assumed full technical ownership of NAV environments, managing system maintenance, performance tuning (SQL/C/AL), and critical support resolution.",
+        pt: "Assumi total responsabilidade técnica dos ambientes NAV, gerindo manutenção do sistema, otimização de desempenho (SQL/C/AL) e resolução de suportes críticos."
       },
-      // Option 4 (Focus on Process Improvement & Best Practices)
       {
-        en: "**Identified bottlenecks and optimized NAV deployment methodologies**, contributing to the standardization of team best practices and reducing implementation lead times.",
-        pt: "**Identifiquei gargalos e otimizei metodologias de implementação do NAV**, contribuindo para a padronização das melhores práticas da equipa e reduzindo os tempos de implementação."
-      },
-      // Option 5 (Focus on User Enablement)
-      // {
-      //   en: "**Delivered targeted technical training sessions** and created user documentation for custom NAV modules, resulting in improved end-user adoption and reduced support overhead.",
-      //   pt: "**Ministrei sessões de formação técnica direcionadas** e criei documentação de utilizador para módulos NAV personalizados, resultando numa melhor adoção pelo utilizador final e redução da sobrecarga de suporte."
-      // }
+        en: "Optimized NAV deployment methodologies and established internal best practices, reducing implementation lead times and enhancing team efficiency.",
+        pt: "Otimizei metodologias de implementação do NAV e estabeleci boas práticas internas, reduzindo os prazos de implementação e aumentando a eficiência da equipa."
+      }
     ]
   },
   {
@@ -189,19 +170,18 @@ export const professionalExperience: Job[] = [
     logo: 'sysmatchpt.png', // Example
     employmentType: { en: 'Full-time', pt: 'Tempo Inteiro' },    
     responsibilities: [
-      // Choose ONE or TWO of these that best fit, or combine:
       {
-        en: "**Analyzed client requirements** and participated in solution design & UAT for Dynamics AX implementations.",
-        pt: "**Analisei requisitos de clientes** e participei no design de soluções e UAT para implementações Dynamics AX."
+        en: "Provided functional and technical support for Dynamics AX, resolving user issues and improving overall system efficiency.",
+        pt: "Prestei suporte funcional e técnico ao Dynamics AX, resolvendo problemas de utilizadores e melhorando a eficiência do sistema."
       },
       {
-        en: "**Utilized Microsoft telemetry data** to analyze system usage/performance and inform client support strategies.",
-        pt: "**Utilizei dados de telemetria da Microsoft** para analisar uso/desempenho do sistema e informar estratégias de suporte ao cliente."
+        en: "Contributed to solution design, requirement analysis, and user acceptance testing for Dynamics AX implementations.",
+        pt: "Contribuí para o design de soluções, análise de requisitos e testes de aceitação de utilizador em implementações Dynamics AX."
       },
-        {
-        en: "**Provided application support** for Dynamics AX, resolving functional and technical user queries.",
-        pt: "**Prestei suporte aplicacional** para Dynamics AX, resolvendo questões funcionais e técnicas de utilizadores."
-        }
+      {
+        en: "Leveraged Microsoft telemetry data to monitor performance and guide client-focused support strategies.",
+        pt: "Utilizei dados de telemetria da Microsoft para monitorizar o desempenho e orientar estratégias de suporte centradas no cliente."
+      }
     ]
   },
   {
@@ -216,26 +196,18 @@ export const professionalExperience: Job[] = [
     logo: 'aboutnav.png',
     employmentType: { en: 'Full-time', pt: 'Tempo Inteiro' },
     responsibilities: [
-      // Option 1 (Focus on Implementation & Industry Exposure)
       {
-        en: "**Led full-cycle Dynamics NAV implementation projects**, including analysis, C/AL development, data migration, and go-live support for clients in diverse technical sectors.",
-        pt: "**Liderei projetos de implementação Dynamics NAV de ciclo completo**, incluindo análise, desenvolvimento C/AL, migração de dados e suporte go-live para clientes em diversos setores técnicos."
+        en: "Led full-cycle Dynamics NAV implementations, covering requirement analysis, C/AL development, data migration, and go-live support across multiple technical sectors.",
+        pt: "Liderei implementações completas do Dynamics NAV, abrangendo análise de requisitos, desenvolvimento em C/AL, migração de dados e suporte ao go-live em vários setores técnicos."
       },
-      // Option 2 (Focus on Custom Development Impact)
       {
-        en: "**Developed significant C/AL customizations and extensions** for NAV, enhancing core modules and delivering tailored functionality to meet specific client business processes.",
-        pt: "**Desenvolvi personalizações e extensões C/AL significativas** para o NAV, melhorando módulos centrais e entregando funcionalidades à medida para processos de negócio específicos do cliente."
+        en: "Developed advanced C/AL customizations and XML integrations, delivering tailored solutions aligned with specific client workflows.",
+        pt: "Desenvolvi personalizações avançadas em C/AL e integrações XML, fornecendo soluções à medida alinhadas com os fluxos de trabalho específicos dos clientes."
       },
-      // Option 3 (Focus on Integration & Support within Outsourcing)
       {
-        en: "**Designed and implemented XML integrations** and provided ongoing high-level NAV technical support and administration within an outsourced services context.",
-        pt: "**Projetei e implementei integrações XML** e forneci suporte técnico NAV de alto nível contínuo e administração num contexto de serviços de outsourcing."
+        en: "Provided ongoing NAV technical administration and support in an outsourced services environment, ensuring system stability and performance.",
+        pt: "Assegurei administração técnica contínua e suporte ao NAV num contexto de serviços de outsourcing, garantindo a estabilidade e o desempenho do sistema."
       }
-      // Option 4 (Alternative focus - Combine points if needed)
-      // {
-      //   en: "**Managed end-to-end NAV projects (Analysis, C/AL Dev, Migration, Support)** for technical sector clients, delivering bespoke extensions and integrations.",
-      //   pt: "**Geri projetos NAV ponta-a-ponta (Análise, Dev C/AL, Migração, Suporte)** para clientes do setor técnico, entregando extensões e integrações personalizadas."
-      // }
     ]
   },
   {
@@ -250,17 +222,14 @@ export const professionalExperience: Job[] = [
     logo: 'sagept.png', // Example
     employmentType: { en: 'Full-time', pt: 'Tempo Inteiro' },    
     responsibilities: [
-      // Option 1 (Focus on Localization - highly valuable skill)
       {
-          en: "**Developed and maintained compliant Portugal-specific localizations** (IES, SAF-T/PT [Caixa IVA]) within the Sage X3 ERP system.", // Added SAF-T for more keyword relevance
-          pt: "**Desenvolvi e mantive localizações específicas para Portugal em conformidade** (IES, SAF-T/PT [Caixa IVA]) dentro do sistema ERP Sage X3." // Adicionado SAF-T
+        en: "Developed and maintained Portugal-specific localizations in Sage X3 ERP (IES, SAF-T/PT [Caixa IVA]), ensuring legal compliance and audit readiness.",
+        pt: "Desenvolvi e mantive localizações específicas para Portugal no ERP Sage X3 (IES, SAF-T/PT [Caixa IVA]), assegurando conformidade legal e prontidão para auditorias."
       },
-      // Option 2 (Focus on Tech Exposure - Combine points)
       {
-          en: "**Gained proficiency in Sage X3 ERP development** using its native 4GL environment and JavaScript for specific customizations and maintenance tasks.",
-          pt: "**Adquiri proficiência no desenvolvimento do ERP Sage X3** usando o seu ambiente 4GL nativo e JavaScript para personalizações específicas e tarefas de manutenção."
+        en: "Built custom features using Sage X3's native 4GL environment and JavaScript, supporting tailored functionality and system maintenance.",
+        pt: "Desenvolvi funcionalidades personalizadas utilizando o ambiente 4GL nativo do Sage X3 e JavaScript, apoiando personalizações específicas e manutenção do sistema."
       }
-      // Choose EITHER Option 1 & 2, OR just Option 1 if you want it very brief.
     ]
   },
   {
@@ -275,18 +244,10 @@ export const professionalExperience: Job[] = [
     logo: '',
     employmentType: { en: 'Full-time', pt: 'Tempo Inteiro' },    
     responsibilities: [
-      // Option 1 (Focus on Add-on Development - Preferred)
       {
-          en: "**Designed, developed, and implemented custom Dynamics NAV Add-ons** tailored for Portuguese Municipal Councils, including modules for Workflow, Document Management (ArchiveLink), Urbanism, and Public Works.",
-          pt: "**Projetei, desenvolvi e implementei Add-ons NAV personalizados** à medida para Câmaras Municipais Portuguesas, incluindo módulos para Workflow, Gestão Documental (ArchiveLink), Urbanismo e Obras Públicas."
-      },
-      // Option 2 (Add context about clients/support if needed, combine with above if desired)
-      {
-          en: "**Provided implementation support** for these custom modules to key public sector clients (e.g., AMAT, EGEAC) and managed the internal NAV system.",
-          pt: "**Prestei suporte de implementação** para estes módulos personalizados a clientes chave do setor público (ex: AMAT, EGEAC) e geri o sistema NAV interno."
+        en: "Designed, developed, and implemented custom Dynamics NAV Add-ons for Portuguese Municipalities, including Workflow, Document Management (ArchiveLink), Urbanism, and Public Works modules. Supported key public sector clients like AMAT and EGEAC during rollout.",
+        pt: "Projetei, desenvolvi e implementei Add-ons personalizados do Dynamics NAV para Câmaras Municipais Portuguesas, incluindo módulos de Workflow, Gestão Documental (ArchiveLink), Urbanismo e Obras Públicas. Apoiei clientes-chave do setor público como a AMAT e a EGEAC durante a implementação."
       }
-      // Choose primarily Option 1. Option 2 adds context but might make it too long.
-      // Consider merging slightly if needed: "... Public Works, supporting key clients like AMAT & EGEAC during rollout."
     ]
   },
   {
@@ -301,22 +262,10 @@ export const professionalExperience: Job[] = [
     logo: 'conhecermaisti.png',
     employmentType: { en: 'Full-time', pt: 'Tempo Inteiro' },    
     responsibilities: [
-      // Option 1 (Focus on Project Lead & Client Diversity - Combine points)
       {
-          en: "**Led end-to-end Dynamics NAV implementation projects** across diverse sectors (Education, Non-Profit, Services), managing analysis, C/Side development, deployment, and support.",
-          pt: "**Liderei projetos de implementação Dynamics NAV ponta-a-ponta** em diversos setores (Educação, Terceiro Setor, Serviços), gerindo análise, desenvolvimento C/Side, implementação e suporte."
-      },
-      // Option 2 (Focus on Specialized Development)
-      {
-          en: "**Developed and deployed specialized NAV Add-ons**, notably creating solutions for Private School management and enhancements for Public Sector Accounting standards.",
-          pt: "**Desenvolvi e implementei Add-ons NAV especializados**, destacando-se a criação de soluções para gestão de Colégios Privados e melhorias para normas de Contabilidade Pública."
-      },
-      // Option 3 (Focus on Business Acumen & Training - Combine points)
-      {
-          en: "**Contributed significantly to pre-sales efforts** through technical demonstrations and solution proposals, and delivered C/Side development training to clients.",
-          pt: "**Contribuí significativamente para esforços de pré-venda** através de demonstrações técnicas e propostas de solução, e ministrei formação de desenvolvimento C/Side a clientes."
+        en: "Led full-cycle Dynamics NAV implementations across Education, Non-Profit, and Services sectors. Developed specialized Add-ons, including private school management tools and enhancements for Public Sector Accounting. Supported pre-sales activities and delivered C/Side training to clients.",
+        pt: "Liderei implementações completas do Dynamics NAV nos setores da Educação, Terceiro Setor e Serviços. Desenvolvi Add-ons especializados, incluindo soluções para gestão de colégios privados e melhorias para normas de Contabilidade Pública. Apoiei atividades de pré-venda e ministrei formação em C/Side a clientes."
       }
-      // Choose 2 or 3 of these options. All three provide a good overview.
     ]
   },
   {
@@ -332,8 +281,8 @@ export const professionalExperience: Job[] = [
     employmentType: { en: 'Full-time', pt: 'Tempo Inteiro' },    
     responsibilities: [
       {
-          en: "**Implemented, customized, and supported Dynamics NAV solutions** for diverse corporate clients (e.g., Wyeth, Mundicenter, GFK); performed version upgrades.",
-          pt: "**Implementei, personalizei e suportei soluções Dynamics NAV** para diversos clientes corporativos (ex: Wyeth, Mundicenter, GFK); realizei atualizações de versão."
+        en: "Delivered customized Dynamics NAV solutions and version upgrades for corporate clients including Wyeth, Mundicenter, and GFK, ensuring operational continuity and system optimization.",
+        pt: "Implementei soluções Dynamics NAV personalizadas e atualizações de versão para clientes corporativos como Wyeth, Mundicenter e GFK, garantindo continuidade operacional e otimização do sistema."
       }
     ]
   },
@@ -502,8 +451,8 @@ export const labels = {
 
 // Add the full summary text in both languages
 export const summaryText: TranslatableString = {
-    en: "Dynamics 365 Business Central Developer with 15+ years' experience delivering high-impact ERP solutions across EMEA. Specializes in custom development, complex integrations (API/XML/JSON), performance tuning, and advanced technical support. Proven ability to lead development efforts, solve challenging technical problems, and ensure successful project delivery and client satisfaction.",
-    pt: "Developer Dynamics 365 Business Central com mais de 15 anos de experiência na entrega de soluções ERP de alto impacto na região EMEA. Especializado em desenvolvimento personalizado, integrações complexas (API/XML/JSON), otimização de desempenho e suporte técnico avançado. Capacidade comprovada para liderar esforços de desenvolvimento, resolver problemas técnicos desafiadores e garantir a entrega bem-sucedida de projetos e a satisfação do cliente."
+    en: "Experienced Dynamics 365 Business Central Developer with over 15 years of success delivering high-impact ERP solutions across the EMEA region. Expert in custom development, complex integrations (API/XML/JSON), performance optimization, and advanced technical support. Known for leading development initiatives, resolving complex technical challenges, and driving successful project outcomes that exceed client expectations",
+    pt: "Desenvolvedor experiente de Dynamics 365 Business Central, com mais de 15 anos de sucesso na entrega de soluções ERP de elevado impacto na região EMEA. Especialista em desenvolvimento personalizado, integrações complexas (API/XML/JSON), otimização de desempenho e suporte técnico avançado. Reconhecido por liderar iniciativas de desenvolvimento, resolver desafios técnicos complexos e impulsionar resultados de projeto que superam as expectativas dos clientes."
 };
 
 export const mainNavItems = [
@@ -550,7 +499,7 @@ export const blogPostsData: BlogPost[] = [
   // --- START: NEW BLOG POST 1 ---
   {
     id: 'getting-started-al-dev',
-    date: "April 18, 2025",
+    date: "April 1, 2025",
     title: {
         en: "Getting Started with AL Development for Business Central",
         pt: "Introdução ao Desenvolvimento AL para Business Central"
@@ -566,7 +515,7 @@ export const blogPostsData: BlogPost[] = [
   // --- START: NEW BLOG POST 2 ---
   {
     id: 'bc-events-subscribers',
-    date: "April 25, 2025",
+    date: "April 1, 2025",
     title: {
         en: "Decoupling Code in Business Central: Events & Subscribers",
         pt: "Desacoplando Código no Business Central: Eventos e Subscritores"
@@ -578,4 +527,109 @@ export const blogPostsData: BlogPost[] = [
     url: '/blog/bc-events-subscribers',
   },
   // --- END: NEW BLOG POST 2 ---
+  // --- START: NEW BLOG POST 3 - BC Performance Killers ---
+  {
+    id: 'bc-al-performance-killers', // Unique ID for the performance topic
+    date: "April 2 , 2025", // A new date for this post
+    title: {
+      en: "Beyond the FIND('-'): Unmasking Hidden Performance Killers in Your AL Queries",
+      pt: "Para Lá do FIND('-'): A Desmascarar Assassinos de Desempenho Ocultos nas Suas Queries AL"
+    },
+    excerpt: {
+      en: "Dive into the non-obvious ways your AL code interacts with the database to find hidden performance bottlenecks – from implicit joins to locking woes and mastering the Profiler.",
+      pt: "Mergulhe nas formas não óbvias como o seu código AL interage com a base de dados para encontrar estrangulamentos de desempenho ocultos – de junções implícitas a problemas de bloqueio e dominar o Profiler."
+    },
+    url: '/blog/bc-al-performance-killers',
+  },
+  // --- END: NEW BLOG POST 3 - BC Performance Killers ---
+  // --- START: NEW BLOG POST 4 - BC AL Interfaces ---
+  {
+    id: 'bc-al-interfaces', // Unique ID for the Interfaces topic
+    date: "April 3, 2025", // A new date for this post
+    title: {
+      en: "Interface Thinking in AL: Designing for the Future of Your BC Extensions",
+      pt: "Pensamento de Interface em AL: Desenhar para o Futuro das Suas Extensões BC"
+    },
+    excerpt: {
+      en: "Explore how adopting an interface-first mindset in AL leads to more modular, testable, and maintainable Business Central extensions that are resilient to change.",
+      pt: "Explore como adotar uma mentalidade de 'interface-first' em AL leva a extensões do Business Central mais modulares, testáveis e fáceis de manter, resilientes à mudança."
+    },
+    url: '/blog/bc-al-interfaces',
+  },
+  // --- END: NEW BLOG POST 4 - BC AL Interfaces ---
+  // --- START: NEW BLOG POST 5 - BC AL Upgrade Gauntlet ---
+  {
+    id: 'bc-al-upgrade-gauntlet', // Unique ID for the Upgrade topic
+    date: "April 4, 2025", // As requested
+    title: {
+      en: "Navigating the Upgrade Gauntlet: Building Extensions That Survive and Thrive Across BC Versions",
+      pt: "Navegar a Pista de Obstáculos das Atualizações: Construir Extensões Que Sobrevivem e Prosperam em Várias Versões BC"
+    },
+    excerpt: {
+      en: "Learn the strategies for designing and testing your Business Central extensions to ensure smooth, predictable upgrades through BC's continuous update cycle.",
+      pt: "Aprenda as estratégias para conceber e testar as suas extensões do Business Central para garantir atualizações suaves e previsíveis ao longo do ciclo de atualizações contínuas do BC."
+    },
+    url: '/blog/bc-al-upgrade-gauntlet',
+  },
+  // --- END: NEW BLOG POST 5 - BC AL Upgrade Gauntlet ---
+  // --- START: NEW BLOG POST 5 - BC AL Advanced Debugging ---
+  {
+    id: 'bc-al-advanced-debugging', // Unique ID for the Debugging topic
+    date: "April 5, 2025", // As requested
+    title: {
+      en: "AL Debugging: Escaping the F9 Comfort Zone – Advanced Techniques for Elusive Bugs",
+      pt: "Debugging em AL: Escapar da Zona de Conforto do F9 – Técnicas Avançadas para Bugs Elusivos"
+    },
+    excerpt: {
+      en: "Breakpoints are just the start. Learn advanced AL debugging techniques like conditional breakpoints, logpoints, and deep call stack analysis to diagnose and fix complex issues faster.",
+      pt: "Breakpoints são apenas o começo. Aprenda técnicas avançadas de debugging em AL como breakpoints condicionais, logpoints e análise profunda da call stack para diagnosticar e corrigir problemas complexos mais rapidamente."
+    },
+    url: '/blog/bc-al-advanced-debugging',
+  },
+  // --- END: NEW BLOG POST 5 - BC AL Advanced Debugging ---
+  // --- START: NEW BLOG POST 6 - BC AL Advanced Debugging ---
+  {
+    id: 'bc-al-advanced-debugging', // Unique ID for the Debugging topic
+    date: "April 5, 2025", // As requested
+    title: {
+      en: "AL Debugging: Escaping the F9 Comfort Zone – Advanced Techniques for Elusive Bugs",
+      pt: "Debugging em AL: Escapar da Zona de Conforto do F9 – Técnicas Avançadas para Bugs Elusivos"
+    },
+    excerpt: {
+      en: "Breakpoints are just the start. Learn advanced AL debugging techniques like conditional breakpoints, logpoints, and deep call stack analysis to diagnose and fix complex issues faster.",
+      pt: "Breakpoints são apenas o começo. Aprenda técnicas avançadas de debugging em AL como breakpoints condicionais, logpoints e análise profunda da call stack para diagnosticar e corrigir problemas complexos mais rapidamente."
+    },
+    url: '/blog/bc-al-advanced-debugging',
+  },
+  // --- END: NEW BLOG POST 6 - BC AL Advanced Debugging ---
+  // --- START: NEW BLOG POST 7 - BC AL Data & Transactions ---
+  {
+    id: 'bc-al-data-transactions', // Unique ID for the Data/Transactions topic
+    date: "April 6, 2025", // As requested
+    title: {
+      en: "Taming Transactions and Data Operations in AL: Ensuring Integrity and Performance",
+      pt: "Dominar Transações e Operações de Dados em AL: Garantir Integridade e Desempenho"
+    },
+    excerpt: {
+      en: "Navigate the complexities of AL transactions, understand the implications of COMMIT, and learn patterns for handling large data volumes and ensuring data consistency in Business Central.",
+      pt: "Navegue pelas complexidades das transações AL, compreenda as implicações do COMMIT e aprenda padrões para lidar com grandes volumes de dados e garantir consistência de dados no Business Central."
+    },
+    url: '/blog/bc-al-data-transactions',
+  },
+  // --- END: NEW BLOG POST 7 - BC AL Data & Transactions ---
+  // --- START: NEW BLOG POST 8 - BC AL Advanced Integrations ---
+  {
+    id: 'bc-al-advanced-integrations', // Unique ID for the Integrations topic
+    date: "April 7, 2025", // As requested
+    title: {
+      en: "AL Integrations: Beyond the Basics - Building Robust External Connections",
+      pt: "Integrações AL: Para Lá do Básico - Construir Conexões Externas Robustas"
+    },
+    excerpt: {
+      en: "Master advanced AL integration patterns: handle errors, manage large payloads, navigate authentication (OAuth), and ensure resilience when connecting BC to external APIs.",
+      pt: "Domine padrões avançados de integração AL: trate erros, gire grandes payloads, navegue autenticação (OAuth) e garanta resiliência ao conectar BC a APIs externas.",
+    },
+    url: '/blog/bc-al-advanced-integrations',
+  },
+  // --- END: NEW BLOG POST 8 - BC AL Advanced Integrations ---
 ];
