@@ -1,5 +1,5 @@
-// Import the Project type definition
 import { Project as ProjectType } from '../cv-data';
+import OptimizedImage from './OptimizedImage';
 
 // Define props interface extending ProjectType, adding language
 interface ProjectEntryProps {
@@ -24,10 +24,11 @@ function ProjectEntry(props: ProjectEntryProps) {
         {/* Left Column: Logo */}
         <div className="flex-shrink-0 w-12 h-12">
           {logoPath ? (
-            <img
+            <OptimizedImage
               src={logoPath}
               alt={`${name[currentLanguage]} logo`}
-              className="w-full h-full object-contain rounded-md border border-gray-200 p-0.5" // Allow non-circular logos, rounded-md
+              className="w-full h-full object-contain rounded-md border border-gray-200 p-0.5"
+              fallback={name[currentLanguage].substring(0, 1)}
             />
           ) : (
             // Fallback placeholder using first letter of project name

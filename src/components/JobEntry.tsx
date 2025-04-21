@@ -1,7 +1,7 @@
 // src/components/JobEntry.tsx
 import React from 'react';
-// Import the full Job type definition
 import { Job as JobType } from '../cv-data';
+import OptimizedImage from './OptimizedImage';
 
 // Define props interface extending JobType, adding language
 interface JobEntryProps extends Omit<JobType, 'id'> {
@@ -45,10 +45,11 @@ function JobEntry(props: JobEntryProps) {
         {/* Left Column: Logo */}
         <div className="flex-shrink-0 w-12 h-12"> {/* Fixed size for logo area */}
           {logoPath ? (
-            <img
+            <OptimizedImage
               src={logoPath}
               alt={`${company} logo`}
-              className="w-full h-full object-contain rounded-full border border-gray-200 p-0.5" // contain, rounded, slight border/padding
+              className="w-full h-full object-contain rounded-full border border-gray-200 p-0.5"
+              fallback={company.substring(0, 1)}
             />
           ) : (
             // Fallback placeholder if no logo

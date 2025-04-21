@@ -1,147 +1,142 @@
-// src/pages/BlogPostPage.tsx
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown'; // Make sure this is installed: npm install react-markdown
-import { blogPostsData, labels } from '../cv-data'; // Import blog data
+import ReactMarkdown from 'react-markdown';
+import { blogPostsData, labels } from '../cv-data';
+import { getCachedPost, cachePost } from '../utils/cache';
+import { AppError } from '../utils/errorHandlers';
+import { useErrorHandler } from '../utils/useErrorHandler';
+import ErrorBoundary from '../components/ErrorBoundary';
+import { NetworkErrorState, NotFoundErrorState, GenericErrorState } from '../components/ErrorStates';
 
-// --- START: Vite Glob Import ---
-// Import all .md files as raw strings within the posts directory using '?raw'
-// Use 'eager: true' to load the content immediately when the app starts.
-// This is simpler for a small number of posts.
-const allMarkdownPosts = import.meta.glob('/src/blog/posts/*.md', { query: '?raw', eager: true });
-// console.log('Glob found posts:', allMarkdownPosts); // Uncomment for debugging if needed
-// The result 'allMarkdownPosts' will be an object like:
-// { '/src/blog/posts/post-name.en.md': 'Raw markdown content...', '/src/blog/posts/post-name.pt.md': '...' }
-// --- END: Vite Glob Import ---
+// Lazy load markdown files
+const allMarkdownPosts = import.meta.glob('/src/blog/posts/*.md', { 
+    query: '?raw',
+    eager: false
+});
+
+// Loading state component
+const LoadingState = () => (
+    <div className="animate-pulse space-y-4">
+        <div className="h-8 bg-gray-200 rounded w-3/4"></div>
+        <div className="h-4 bg-gray-200 rounded w-1/4"></div>
+        <div className="space-y-3">
+            <div className="h-4 bg-gray-200 rounded"></div>
+            <div className="h-4 bg-gray-200 rounded"></div>
+            <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+        </div>
+    </div>
+);
 
 interface BlogPostPageProps {
     currentLanguage: 'en' | 'pt';
 }
 
-function BlogPostPage(props: BlogPostPageProps) {
-    const { currentLanguage } = props;
-    // Get postId from URL parameter (e.g., 'getting-started-al-dev')
+function BlogPostPage({ currentLanguage }: BlogPostPageProps) {
+    return (
+        <ErrorBoundary
+            fallback={
+                <div className="max-w-3xl mx-auto">
+                    <NetworkErrorState onRetry={() => window.location.reload()} />
+                </div>
+            }
+        >
+            <BlogPostContent currentLanguage={currentLanguage} />
+        </ErrorBoundary>
+    );
+}
+
+function BlogPostContent({ currentLanguage }: BlogPostPageProps) {
     const { postId } = useParams<{ postId: string }>();
     const postMetadata = blogPostsData.find(p => p.id === postId);
 
-    // State variables
     const [postContent, setPostContent] = useState<string | null>(null);
     const [postTitle, setPostTitle] = useState<string | null>(null);
     const [postDate, setPostDate] = useState<string | null>(null);
-    const [loading, setLoading] = useState(true); // Start in loading state
-    const [error, setError] = useState(false);
-
-    // Find the metadata based on the postId from the URL 
-     useEffect(() => {
-        // Reset states when postId or language changes
-        setLoading(true);
-        setError(false);
-        setPostContent(null);
-        setPostTitle(null);
-        setPostDate(null);
-
-        console.log(`EFFECT: Looking for postId: ${postId}, Lang: ${currentLanguage}`);
-        console.log("EFFECT: Found metadata:", postMetadata);
-
-        if (!postMetadata) {
-            setError(true);
-            setLoading(false);
-            return; // Exit if no metadata found
+    
+    const { error, isLoading, executeWithErrorHandling } = useErrorHandler({
+        onError: (err) => {
+            console.error('Error loading blog post:', err);
+        },
+        retryAttempts: 3,
+        componentName: 'BlogPostContent',
+        context: {
+            postId,
+            language: currentLanguage
         }
+    });
 
-        // Set title and date from metadata
-        setPostTitle(postMetadata.title[currentLanguage as keyof typeof postMetadata.title]);
-        setPostDate(postMetadata.date);
+    useEffect(() => {
+        const loadPost = async () => {
+            await executeWithErrorHandling(async () => {
+                if (!postId || !postMetadata) {
+                    throw new AppError('NOT_FOUND', 'Post not found');
+                }
 
-        // --- START: Get Content from Glob Import ---
-        // Construct the key needed to access the content in the 'allMarkdownPosts' object
-        const globPathKey = `/src/blog/posts/${postId}.${currentLanguage}.md`;
+                const cacheKey = `${postId}-${currentLanguage}`;
+                const cachedContent = getCachedPost(cacheKey);
+                
+                if (cachedContent) {
+                    setPostContent(cachedContent);
+                    setPostTitle(postMetadata.title[currentLanguage]);
+                    setPostDate(postMetadata.date);
+                    return;
+                }
 
-        // Check if the key exists in the eager-loaded glob result
-        if (allMarkdownPosts[globPathKey]) {
-            // Access the default export of the module, which contains the raw string
-            const module = allMarkdownPosts[globPathKey] as { default: string }; // Assert type
-            const content = module.default; // <<< ---- ACCESS .default HERE
+                const fileName = `/src/blog/posts/${postId}.${currentLanguage}.md`;
+                const importFn = allMarkdownPosts[fileName];
 
-            setPostContent(content);
-            setError(false);
-        } else {
-            setError(true);
-        }
-        // --- END: Get Content from Glob Import ---
+                if (!importFn) {
+                    throw new AppError('NOT_FOUND', 'Blog post file not found');
+                }
 
-        setLoading(false); // Finished attempting to load
+                const content = await importFn() as string;
+                cachePost(cacheKey, content);
+                setPostContent(content);
+                setPostTitle(postMetadata.title[currentLanguage]);
+                setPostDate(postMetadata.date);
+            });
+        };
 
-     }, [postId, currentLanguage, postMetadata]); // Dependencies for the effect
+        loadPost();
+    }, [postId, currentLanguage, postMetadata, executeWithErrorHandling]);
 
-    // --- Render Logic ---
-    if (loading) {
-        return <div className="p-6 text-center text-gray-500">Loading post...</div>;
-    }
+    if (isLoading) return <LoadingState />;
+    if (error?.type === 'NETWORK_ERROR') return <NetworkErrorState onRetry={() => window.location.reload()} />;
+    if (error?.type === 'NOT_FOUND') return <NotFoundErrorState />;
+    if (error) return <GenericErrorState error={error} onRetry={() => window.location.reload()} />;
 
-    // Show error message if error flag is set OR if metadata wasn't found
-    if (error || !postMetadata) {
-        // Use optional chaining on labels in case it hasn't loaded? Unlikely here.
-        const blogLabel = labels.blog?.[currentLanguage] ?? 'Blog';
-        return (
-             <div className="p-6 text-center text-red-500"> {/* Adjusted error color */}
-                 <p className="font-semibold">Blog Post Not Found</p>
-                 <p className="text-sm text-gray-600 mt-1">Could not load the requested content.</p>
-                 <Link to="/blog" className="text-blue-600 hover:underline mt-4 inline-block">← Back to {blogLabel}</Link>
-             </div>
-        );
-    }
-
-    // Render the actual post if no error and not loading
     return (
-         <div className="p-6">
-             {/* Back link */}
-             <Link to="/blog" className="text-sm text-blue-600 hover:underline mb-4 inline-block">← {labels.blog[currentLanguage]}</Link>
+        <div className="max-w-3xl mx-auto">
+            <article>
+                <Link to="/blog" className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-6">
+                    <i className="fas fa-arrow-left mr-2"></i>
+                    {labels.blog[currentLanguage]}
+                </Link>
 
-             {/* Post Title and Date */}
-             <h1 className="text-3xl font-bold text-gray-800 mb-2">{postTitle}</h1>
-             <p className="text-sm text-gray-500 mb-6">{postDate}</p>
-
-            <article className="
-                prose        // Base prose styles
-                lg:prose-lg  // Keep larger text on large screens
-                max-w-none   // Keep full width
-
-                // --- START: Refined Color Overrides ---
-                prose-headings:text-gray-800 // Darker Headings (H2, H3...) for contrast on white BG
-                prose-p:text-gray-600        // Target paragraphs specifically (try mid-gray) - applied via ReactMarkdown props below is better
-                prose-strong:text-gray-700   // Bold text slightly darker
-                prose-a:text-blue-600        // Standard blue links
-                hover:prose-a:text-blue-800  // Darker blue on hover
-                prose-code:text-pink-600     // Example code color
-                prose-pre:bg-gray-100        // Example code block background (light)
-                prose-pre:text-gray-800      // Example code block text (dark)
-                prose-li:marker:text-gray-500 // Color for list bullets/numbers
-                text-gray-600                // Base text color fallback (applied below via components)
-
-                // --- END: Refined Color Overrides ---
-
-                mt-6         // Keep margin-top
-            ">
-                {postContent ? (
-                    // Pass components to ReactMarkdown for finer control
-                    <ReactMarkdown
-                        components={{
-                            h2: ({node, ...props}) => <h2 className="text-gray-800" {...props} />, // Example H2 override
-                            h3: ({node, ...props}) => <h3 className="text-gray-800" {...props} />, // Example H3 override
-                            p: ({node, ...props}) => <p className="text-gray-600 leading-relaxed" {...props} />, // Override P color
-                            strong: ({node, ...props}) => <strong className="text-gray-700 font-semibold" {...props} />, // Override strong
-                            a: ({node, ...props}) => <a className="text-blue-600 hover:text-blue-800 transition-colors" {...props} />, // Override links if prose-a doesn't work well
-                            // Add overrides for ul, ol, li, code, pre etc. if needed
-                        }}
-                    >
-                      {postContent}
-                    </ReactMarkdown>
-                ) : (
-                    <p className="italic text-gray-500">Loading content...</p>
+                {postTitle && (
+                    <header className="mb-8">
+                        <h1 className="text-3xl font-bold text-gray-900 mb-2">{postTitle}</h1>
+                        {postDate && <time className="text-gray-600">{postDate}</time>}
+                    </header>
                 )}
+
+                <div className="prose prose-lg max-w-none">
+                    {postContent && (
+                        <ReactMarkdown components={{
+                            h1: ({node, ...props}) => <h1 className="text-gray-800" {...props} />,
+                            h2: ({node, ...props}) => <h2 className="text-gray-800" {...props} />,
+                            p: ({node, ...props}) => <p className="text-gray-600" {...props} />,
+                            a: ({node, ...props}) => <a className="text-blue-600 hover:text-blue-800" {...props} />,
+                            code: ({node, ...props}) => <code className="text-pink-600" {...props} />,
+                            pre: ({node, ...props}) => <pre className="bg-gray-100 text-gray-800" {...props} />
+                        }}>
+                            {postContent}
+                        </ReactMarkdown>
+                    )}
+                </div>
             </article>
-         </div>
+        </div>
     );
 }
+
 export default BlogPostPage;

@@ -4,6 +4,7 @@ import {
     summaryText,
     keyTechnicalSkills,
 } from '../cv-data';
+import OptimizedImage from './OptimizedImage';
 
 // Define props for language and toggle handler
 interface SidebarProps {
@@ -32,19 +33,20 @@ function Sidebar(props: SidebarProps) {
             {/* Container for background image */}
             <div className="relative"> {/* Removed mb-6, spacing handled by padding below */}
                 {/* Background Image */}
-                <img
+                <OptimizedImage
                     src={`${BASE_URL}background.jpg`}
                     alt="Header background"
-                    className="w-full h-32 object-cover" // Height of the banner
+                    className="w-full h-32 object-cover"
+                    fallback="Background"
                 />
                 {/* Profile Image Overlay */}
                 <div className="absolute bottom-0 left-4 transform translate-y-1/2">
                      {/* Simple white border directly on image */}
-                    <img
+                    <OptimizedImage
                         src={`${BASE_URL}profile.png`}
                         alt="Ricardo Carvalho"
-                        // Adjusted size slightly, added explicit white border matching demo
                         className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-md"
+                        fallback="RC"
                     />
                 </div>
             </div>
