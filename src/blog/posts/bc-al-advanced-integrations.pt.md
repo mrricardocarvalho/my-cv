@@ -118,7 +118,7 @@ codeunit 50300 "External Service Connector"
     end;
 }
 
-Como discutido no nosso post sobre [Pensamento de Interface em AL](/blog/bc-al-interfaces), usar um **mecanismo de fila** é frequentemente o melhor padrão aqui. O evento ou trigger enfileira o pedido, e um processo separado (como uma Job Queue) tenta a chamada externa, tratando retries e registando falhas sem impactar o utilizador ou a transação original.
+Como discutido no nosso post sobre [Eventos e Subscritores](/my-cv/blog/bc-events-subscribers), usar um **mecanismo de fila** é frequentemente o melhor padrão aqui. O evento ou trigger enfileira o pedido, e um processo separado (como uma Job Queue) tenta a chamada externa, tratando retries e registando falhas sem impactar o utilizador ou a transação original.
 
 ## Gerir Grandes Payloads de Dados
 
@@ -128,7 +128,7 @@ Técnicas para grandes payloads:
 * **Paginação:** Se a API externa suportar, recuperar dados em pedaços menores usando parâmetros de paginação.
 * **Streaming:** Para enviar corpos de pedido grandes, considerar se a API ou `HttpClient` suporta streaming dos dados em vez de carregar o payload inteiro para a memória de uma vez.
 * **Compressão:** Usar compressão (como GZIP) se suportado por ambas as partes para reduzir a quantidade de dados transferidos pela rede.
-* **Processamento em Segundo Plano:** Tal como com outras operações de grandes volumes de dados ([---INTERNAL_LINK_TO_DATA_POST---](#)), descarregar o processamento de grandes respostas ou o envio de grandes pedidos para uma sessão em segundo plano ou Job Queue.
+* **Processamento em Segundo Plano:** Tal como com outras operações de grandes volumes de dados ([Operações de Dados e Transações](/my-cv/blog/bc-al-data-transactions)), descarregar o processamento de grandes respostas ou o envio de grandes pedidos para uma sessão em segundo plano ou Job Queue.
 * **Processar Dados Iterativamente:** Ao receber grandes respostas, processar os dados dentro do corpo da resposta iterativamente, em vez de carregar o JSON ou XML inteiro para variáveis AL, se possível. Usem `JsonToken` ou leitores de stream XML.
 
 ## Navegar Complexidades de Autenticação (OAuth 2.0)
@@ -295,7 +295,7 @@ APIs externas evoluem. Novas versões são lançadas, endpoints mudam, ou estrut
 
 * **Especificar a Versão da API:** Sempre especifiquem a versão da API que estão a atingir nos vossos pedidos (frequentemente no URL ou cabeçalhos). Isto previne quebras inesperadas quando o serviço externo lança uma nova versão para a qual não estão preparados.
 * **Tratamento Defensivo de Dados:** Ao processar respostas JSON ou XML, lidem graciosamente com potenciais campos em falta ou tipos de dados inesperados. Verifiquem se os elementos existem antes de tentar aceder aos seus valores. Usem `JsonToken.ReadValue()` com verificação de tipo ou `JsonValue.IsType()` para validar dados.
-* **Codeunits Wrapper:** Tal como discutido com interações da base app ([---INTERNAL_LINK_TO_INTERFACES_POST---](#)), envolvam as chamadas de API externas nas vossas próprias codeunits ou interfaces de serviço. Se a API externa mudar, atualizam apenas a vossa codeunit wrapper, não todos os locais que chamaram a API.
+* **Codeunits Wrapper:** Tal como discutido com interações da base app ([Pensamento de Interface em AL](/my-cv/blog/bc-al-interfaces)), envolvam as chamadas de API externas nas vossas próprias codeunits ou interfaces de serviço. Se a API externa mudar, atualizam apenas a vossa codeunit wrapper, não todos os locais que chamaram a API.
 
 **O Segredo:** Tratem APIs externas como contratos externos. Ancorar a versões específicas, validar dados recebidos e usar codeunits wrapper para isolar a vossa lógica central de mudanças externas.
 

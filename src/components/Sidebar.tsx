@@ -41,7 +41,7 @@ function Sidebar(props: SidebarProps) {
                 <div className="absolute bottom-0 left-4 transform translate-y-1/2">
                      {/* Simple white border directly on image */}
                     <img
-                        src={`${BASE_URL}profile.jpg`}
+                        src={`${BASE_URL}profile.png`}
                         alt="Ricardo Carvalho"
                         // Adjusted size slightly, added explicit white border matching demo
                         className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-md"

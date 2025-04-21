@@ -17,7 +17,7 @@ function Footer(/* props: FooterProps */) {
       {/* Ensure container wraps content if needed, or use w-full on footer */}
       {/* Centered paragraph for the copyright text */}
       <p>
-          Copyright © {currentYear} - Ricardo Filipe Dias Sampaio de Carvalho - All right reserved
+          Copyright © {currentYear} - All rights reserved
           {/* Example if translation needed: */}
           {/* {currentLanguage === 'en' ? `Copyright © ${currentYear} - ...` : `Direitos de Autor © ${currentYear} - ...`} */}
       </p>

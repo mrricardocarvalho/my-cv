@@ -14,8 +14,8 @@ function ProjectEntry(props: ProjectEntryProps) {
   const { project, currentLanguage } = props;
   const { name, type, role, date, summary, logo, url } = project; // Destructure project
 
-  // Construct logo path
-  const logoPath = logo ? `${BASE_URL}/images/logos/${logo}` : null;
+  // Construct logo path from public/images/logos directory
+  const logoPath = logo ? `${BASE_URL}images/logos/${logo}` : null;
 
   return (
     // Main container using flexbox, consistent styling

@@ -118,7 +118,7 @@ codeunit 50300 "External Service Connector"
     end;
 }
 
-As discussed in our post on [---INTERNAL_LINK_TO_EVENTS_POST---](#), using a **queuing mechanism** is often the best pattern here. The event or trigger queues the request, and a separate process (like a Job Queue) attempts the external call, handling retries and logging failures without impacting the user or the original transaction.
+As discussed in our post on [Events and Subscribers](/my-cv/blog/bc-events-subscribers), using a **queuing mechanism** is often the best pattern here. The event or trigger queues the request, and a separate process (like a Job Queue) attempts the external call, handling retries and logging failures without impacting the user or the original transaction.
 
 ## Managing Large Data Payloads
 
@@ -128,7 +128,7 @@ Techniques for large payloads:
 * **Pagination:** If the external API supports it, retrieve data in smaller chunks using pagination parameters.
 * **Streaming:** For sending large request bodies, consider if the API or `HttpClient` supports streaming the data rather than loading the entire payload into memory at once.
 * **Compression:** Use compression (like GZIP) if supported by both ends to reduce the amount of data transferred over the network.
-* **Background Processing:** As with other large data operations ([---INTERNAL_LINK_TO_DATA_POST---](#)), offload the processing of large responses or the sending of large requests to a background session or Job Queue.
+* **Background Processing:** As with other large data operations ([Data Operations and Transactions](/my-cv/blog/bc-al-data-transactions)), offload the processing of large responses or the sending of large requests to a background session or Job Queue.
 * **Process Data Iteratively:** When receiving large responses, process the data within the response body iteratively rather than loading the entire JSON or XML into AL variables if possible. Use `JsonToken` or XML stream readers.
 
 ## Navigating Authentication Complexities (OAuth 2.0)
@@ -295,7 +295,7 @@ External APIs evolve. New versions are released, endpoints change, or data struc
 
 * **Specify API Version:** Always specify the API version you are targeting in your requests (often in the URL or headers). This prevents unexpected breaks when the external service releases a new version you're not ready for.
 * **Defensive Data Handling:** When processing JSON or XML responses, handle potential missing fields or unexpected data types gracefully. Check if elements exist before trying to access their values. Use `JsonToken.ReadValue()` with type checking or `JsonValue.IsType()` to validate data.
-* **Wrapper Codeunits:** As discussed with base app interactions ([our post on Interface Thinking in AL](/blog/bc-al-interfaces)), wrap external API calls in your own service codeunits or interfaces. If the external API changes, you update only your wrapper codeunit, not every place that called the API.
+* **Wrapper Codeunits:** As discussed with base app interactions ([our post on Interface Thinking in AL](/my-cv/blog/bc-al-interfaces)), wrap external API calls in your own service codeunits or interfaces. If the external API changes, you update only your wrapper codeunit, not every place that called the API.
 
 **The Secret:** Treat external APIs like external contracts. Pin to specific versions, validate data received, and use wrapper codeunits to insulate your core logic from external changes.
 

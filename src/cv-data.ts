@@ -488,7 +488,7 @@ export const projectsData: Project[] = [
         en: "Built this interactive CV/Portfolio using React, TypeScript, Tailwind CSS, and daisyUI, deployed via Vercel.",
         pt: "Construí este CV/Portfólio interativo usando React, TypeScript, Tailwind CSS e daisyUI, implementado via Vercel."
     },
-    logo: 'react-logo.png', // Example
+    logo: 'react-logo.jpg', // Example
     url: '#' // Placeholder URL to your actual CV site later
   },
   // Add more projects as needed

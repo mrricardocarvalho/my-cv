@@ -23,8 +23,8 @@ function JobEntry(props: JobEntryProps) {
       responsibilities
     } = props;
 
-  // Construct logo path (relative to public folder)
-  const logoPath = logo ? `${BASE_URL}/images/logos/${logo}` : null; // Handle missing logo
+  // Construct logo path from public/images/logos directory
+  const logoPath = logo ? `${BASE_URL}images/logos/${logo}` : null; // Handle missing logo
 
   // Helper function for rendering responsibilities remains the same
   const renderResponsibility = (textObj: { en: string; pt: string }) => {
