@@ -1,5 +1,5 @@
-// Import contact data and potentially labels
-import { contactInfo, labels } from '../cv-data'; // Labels might not be needed if only icons
+import { contactInfo } from '../data/contact';
+import { labels } from '../data/labels';
 
 const titles = {
     en: "Dynamics BC/NAV Engineer & Developer",

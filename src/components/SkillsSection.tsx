@@ -1,12 +1,9 @@
 // This component is now designed to render *within* the Sidebar
 // Import necessary data and types
-import {
-    technicalSkills,
-    languages,
-    labels, // Keep labels import
-    SkillCategory,
-    Language as LanguageType
-} from '../cv-data';
+import { technicalSkills } from '../data/skills';
+import { languages } from '../data/languages';
+import { labels } from '../data/labels';
+import { SkillCategory, Language as LanguageType } from '../types/cv';
 
 // Define props interface - only needs language now
 interface SkillsSectionProps {

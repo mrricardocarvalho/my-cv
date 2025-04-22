@@ -1,5 +1,4 @@
-// Import the full EducationItem type definition
-import { EducationItem as EducationItemType } from '../cv-data';
+import { EducationItem as EducationItemType } from '../types/cv';
 
 // Define props interface extending EducationItemType, adding language
 interface EducationEntryProps {

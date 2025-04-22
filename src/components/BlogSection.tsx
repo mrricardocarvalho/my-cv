@@ -1,7 +1,8 @@
 import React, { Suspense } from 'react';
 // Lazy load BlogPostEntry
 const BlogPostEntry = React.lazy(() => import('./BlogPostEntry'));
-import { blogPostsData, labels } from '../cv-data';
+import { blogPostsData } from '../data/blogPosts';
+import { labels } from '../data/labels';
 
 // Define props interface
 interface BlogSectionProps {

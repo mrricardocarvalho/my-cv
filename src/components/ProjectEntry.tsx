@@ -1,4 +1,4 @@
-import { Project as ProjectType } from '../cv-data';
+import { Project as ProjectType } from '../types/cv';
 import OptimizedImage from './OptimizedImage';
 
 // Define props interface extending ProjectType, adding language

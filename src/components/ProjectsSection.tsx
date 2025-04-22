@@ -1,6 +1,7 @@
 // Import the entry component and data/labels
 import ProjectEntry from './ProjectEntry';
-import { projectsData, labels } from '../cv-data';
+import { projectsData } from '../data/projects';
+import { labels } from '../data/labels';
 
 // Define props interface
 interface ProjectsSectionProps {

@@ -1,4 +1,6 @@
-import { BlogPost as BlogPostType, labels } from '../cv-data';
+import { BlogPost as BlogPostType } from '../types/cv';
+import { labels } from '../data/labels';
+
 import { Link } from 'react-router-dom'; // Ensure Link is imported
 
 interface BlogPostEntryProps {

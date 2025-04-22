@@ -1,5 +1,6 @@
 // Import the specific data needed and the labels
-import { summaryText, labels } from '../cv-data';
+import { summaryText } from '../data/summary';
+import { labels } from '../data/labels';
 
 // Define props interface (remains the same)
 interface SummarySectionProps {

@@ -1,7 +1,8 @@
 // Import the refactored EducationEntry component
 import EducationEntry from './EducationEntry';
 // Import the data and labels
-import { educationHistory, labels } from '../cv-data';
+import { educationHistory } from '../data/education';
+import { labels } from '../data/labels';
 
 // Define props interface (remains the same)
 interface EducationSectionProps {

@@ -1,6 +1,6 @@
 // src/components/JobEntry.tsx
 import React from 'react';
-import { Job as JobType } from '../cv-data';
+import { Job as JobType } from '../types/cv';
 import OptimizedImage from './OptimizedImage';
 
 // Define props interface extending JobType, adding language

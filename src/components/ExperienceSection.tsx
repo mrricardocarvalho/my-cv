@@ -1,7 +1,8 @@
 // Import the JobEntry component (now styled with Tailwind)
 import JobEntry from './JobEntry';
 // Import the data and labels
-import { professionalExperience, labels } from '../cv-data';
+import { professionalExperience } from '../data/experience';
+import { labels } from '../data/labels';
 
 // Define props interface (remains the same)
 interface ExperienceSectionProps {

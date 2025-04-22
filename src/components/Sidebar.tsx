@@ -1,9 +1,7 @@
-import {
-    contactInfo,
-    labels,
-    summaryText,
-    keyTechnicalSkills,
-} from '../cv-data';
+import { contactInfo } from '../data/contact';
+import { labels } from '../data/labels';
+import { summaryText } from '../data/summary';
+import { keyTechnicalSkills } from '../data/skills';
 import OptimizedImage from './OptimizedImage';
 import { useState } from 'react';
 

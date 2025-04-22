@@ -1,5 +1,5 @@
-// Import necessary data and labels
-import { professionalCompetenciesData, labels } from '../cv-data';
+import { professionalCompetenciesData } from '../data/competencies';
+import { labels } from '../data/labels';
 
 // Define props interface
 interface CompetenciesSectionProps {
