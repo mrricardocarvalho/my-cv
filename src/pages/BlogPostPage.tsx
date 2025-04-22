@@ -8,6 +8,7 @@ import { useErrorHandler } from '../utils/useErrorHandler';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { NetworkErrorState, NotFoundErrorState, GenericErrorState } from '../components/ErrorStates';
 import OptimizedImage from '../components/OptimizedImage';
+import { Helmet } from 'react-helmet-async';
 
 // Lazy load markdown files
 const allMarkdownPosts = import.meta.glob('/src/blog/posts/*.md', { 
@@ -127,56 +128,83 @@ function BlogPostContent({ currentLanguage }: BlogPostPageProps) {
     if (error?.type === 'NOT_FOUND') return <NotFoundErrorState />;
     if (error) return <GenericErrorState error={error} onRetry={() => window.location.reload()} />;
 
+    // Prepare SEO tags and JSON-LD
+    const title = postMetadata ? postMetadata.title[currentLanguage] + ' | Ricardo Carvalho Blog' : 'Blog Post | Ricardo Carvalho Blog';
+    const description = postMetadata ? postMetadata.excerpt[currentLanguage] : 'Blog post by Ricardo Carvalho.';
+    const jsonLd = postMetadata ? {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        'headline': postMetadata.title[currentLanguage],
+        'datePublished': postMetadata.date,
+        'author': {
+            '@type': 'Person',
+            'name': 'Ricardo Carvalho',
+            'url': 'https://mrricardocarvalho.github.io/my-cv/'
+        },
+        'mainEntityOfPage': {
+            '@type': 'WebPage',
+            '@id': `https://mrricardocarvalho.github.io/my-cv/blog/${postId}`
+        },
+        'description': postMetadata.excerpt[currentLanguage]
+    } : null;
+
     return (
-        <div className="max-w-3xl mx-auto">
-            <article>
-                <Link to="/blog" className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-6">
-                    <i className="fas fa-arrow-left mr-2"></i>
-                    {labels.blog[currentLanguage]}
-                </Link>
+        <>
+            <Helmet>
+                <title>{title}</title>
+                <meta name="description" content={description} />
+                {jsonLd && <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>}
+            </Helmet>
+            <div className="max-w-3xl mx-auto">
+                <article>
+                    <Link to="/blog" className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-6">
+                        <i className="fas fa-arrow-left mr-2"></i>
+                        {labels.blog[currentLanguage]}
+                    </Link>
 
-                {postTitle && (
-                    <header className="mb-8">
-                        <h1 className="text-3xl font-bold text-gray-900 mb-2">{postTitle}</h1>
-                        {postDate && <time className="text-gray-600">{postDate}</time>}
-                    </header>
-                )}
-
-                <div className="prose prose-lg max-w-none">
-                    {postContent && (
-                        <ReactMarkdown components={{
-                            h1: ({node, ...props}) => <h1 className="text-gray-800" {...props} />,
-                            h2: ({node, ...props}) => <h2 className="text-gray-800" {...props} />,
-                            p: ({node, ...props}) => <p className="text-gray-600" {...props} />,
-                            a: ({node, ...props}) => (
-                                <a 
-                                    className="text-blue-600 hover:text-blue-800" 
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    {...props} 
-                                />
-                            ),
-                            img: ({node, ...props}) => (
-                                <OptimizedImage
-                                    {...props}
-                                    className="rounded-lg max-w-full h-auto my-4"
-                                    fallback={props.alt || 'Image'}
-                                    onLoadError={(error: string) => {
-                                        console.error(`Failed to load blog post image (${props.alt}):`, error);
-                                    }}
-                                />
-                            ),
-                            code: ({node, ...props}) => <code className="text-pink-600 bg-gray-50 px-1 py-0.5 rounded" {...props} />,
-                            pre: ({node, ...props}) => (
-                                <pre className="bg-gray-50 text-gray-800 p-4 rounded-lg overflow-x-auto" {...props} />
-                            )
-                        }}>
-                            {postContent}
-                        </ReactMarkdown>
+                    {postTitle && (
+                        <header className="mb-8">
+                            <h1 className="text-3xl font-bold text-gray-900 mb-2">{postTitle}</h1>
+                            {postDate && <time className="text-gray-600">{postDate}</time>}
+                        </header>
                     )}
-                </div>
-            </article>
-        </div>
+
+                    <div className="prose prose-lg max-w-none">
+                        {postContent && (
+                            <ReactMarkdown components={{
+                                h1: ({node, ...props}) => <h1 className="text-gray-800" {...props} />,
+                                h2: ({node, ...props}) => <h2 className="text-gray-800" {...props} />,
+                                p: ({node, ...props}) => <p className="text-gray-600" {...props} />,
+                                a: ({node, ...props}) => (
+                                    <a 
+                                        className="text-blue-600 hover:text-blue-800" 
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        {...props} 
+                                    />
+                                ),
+                                img: ({node, ...props}) => (
+                                    <OptimizedImage
+                                        {...props}
+                                        className="rounded-lg max-w-full h-auto my-4"
+                                        fallback={props.alt || 'Image'}
+                                        onLoadError={(error: string) => {
+                                            console.error(`Failed to load blog post image (${props.alt}):`, error);
+                                        }}
+                                    />
+                                ),
+                                code: ({node, ...props}) => <code className="text-pink-600 bg-gray-50 px-1 py-0.5 rounded" {...props} />,
+                                pre: ({node, ...props}) => (
+                                    <pre className="bg-gray-50 text-gray-800 p-4 rounded-lg overflow-x-auto" {...props} />
+                                )
+                            }}>
+                                {postContent}
+                            </ReactMarkdown>
+                        )}
+                    </div>
+                </article>
+            </div>
+        </>
     );
 }
 

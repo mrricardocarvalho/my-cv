@@ -7,6 +7,7 @@ import { useErrorHandler } from '../utils/useErrorHandler';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { SectionWrapper } from '../components/SectionWrapper';
 import { NetworkErrorState } from '../components/ErrorStates';
+import { Helmet } from 'react-helmet-async';
 
 // Loading state components
 const SectionLoadingState = () => (
@@ -25,16 +26,39 @@ interface ResumePageProps {
 }
 
 function ResumePage({ currentLanguage }: ResumePageProps) {
+    const title = currentLanguage === 'en'
+        ? 'Resume | Ricardo Carvalho - D365 BC Developer'
+        : 'Currículo | Ricardo Carvalho - D365 BC Developer';
+    const description = currentLanguage === 'en'
+        ? 'Experienced Dynamics 365 Business Central Developer. View Ricardo Carvalho’s resume, skills, and professional experience.'
+        : 'Desenvolvedor experiente em Dynamics 365 Business Central. Veja o currículo, competências e experiência profissional de Ricardo Carvalho.';
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        'name': 'Ricardo Carvalho',
+        'jobTitle': 'D365 BC Developer',
+        'url': 'https://mrricardocarvalho.github.io/my-cv/',
+        'sameAs': [
+            'https://www.linkedin.com/in/ricardocarvalhodev/'
+        ]
+    };
     return (
-        <ErrorBoundary
-            fallback={
-                <div className="max-w-3xl mx-auto">
-                    <NetworkErrorState onRetry={() => window.location.reload()} />
-                </div>
-            }
-        >
-            <ResumeContent currentLanguage={currentLanguage} />
-        </ErrorBoundary>
+        <>
+            <Helmet>
+                <title>{title}</title>
+                <meta name="description" content={description} />
+                <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+            </Helmet>
+            <ErrorBoundary
+                fallback={
+                    <div className="max-w-3xl mx-auto">
+                        <NetworkErrorState onRetry={() => window.location.reload()} />
+                    </div>
+                }
+            >
+                <ResumeContent currentLanguage={currentLanguage} />
+            </ErrorBoundary>
+        </>
     );
 }
 

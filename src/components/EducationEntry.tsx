@@ -31,8 +31,11 @@ function EducationEntry(props: EducationEntryProps) {
               className="w-full h-full object-contain rounded-full border border-gray-200 p-0.5"
             />
           ) : (
-            // Fallback placeholder using first letter of institution
-            <div className="w-full h-full rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-500 border border-gray-200">
+            <div
+              className="w-full h-full rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-700 border border-gray-200"
+              role="img"
+              aria-label={`${institution} logo placeholder`}
+            >
               {institution.substring(0, 1)}
             </div>
           )}

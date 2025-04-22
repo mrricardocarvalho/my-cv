@@ -49,12 +49,23 @@ function JobEntry(props: JobEntryProps) {
               src={logoPath}
               alt={`${company} logo`}
               className="w-full h-full object-contain rounded-full border border-gray-200 p-0.5"
-              fallback={company.substring(0, 1)}
+              fallback={
+                <div
+                  className="w-full h-full rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-700 border border-gray-200"
+                  role="img"
+                  aria-label={`${company} logo placeholder`}
+                >
+                  {company.substring(0, 1)}
+                </div>
+              }
             />
           ) : (
-            // Fallback placeholder if no logo
-            <div className="w-full h-full rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-500 border border-gray-200">
-              {company.substring(0, 1)} {/* Initial letter */}
+            <div
+              className="w-full h-full rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-700 border border-gray-200"
+              role="img"
+              aria-label={`${company} logo placeholder`}
+            >
+              {company.substring(0, 1)}
             </div>
           )}
         </div>

@@ -4,6 +4,7 @@ import BlogSection from '../components/BlogSection';
 import { useErrorHandler } from '../utils/useErrorHandler';
 import { AppError } from '../utils/errorHandlers';
 import { NetworkErrorState, GenericErrorState } from '../components/ErrorStates';
+import { Helmet } from 'react-helmet-async';
 
 // Loading state component
 const LoadingState = () => (
@@ -24,6 +25,24 @@ interface BlogListPageProps {
 }
 
 function BlogListPage({ currentLanguage }: BlogListPageProps) {
+    const title = currentLanguage === 'en'
+        ? 'Blog | Ricardo Carvalho - D365 BC Developer'
+        : 'Blog | Ricardo Carvalho - D365 BC Developer';
+    const description = currentLanguage === 'en'
+        ? 'Read articles and blog posts by Ricardo Carvalho about Dynamics 365 Business Central, AL development, and ERP best practices.'
+        : 'Leia artigos e posts de Ricardo Carvalho sobre Dynamics 365 Business Central, desenvolvimento AL e melhores práticas de ERP.';
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'Blog',
+        'name': 'Ricardo Carvalho Blog',
+        'url': 'https://mrricardocarvalho.github.io/my-cv/',
+        'author': {
+            '@type': 'Person',
+            'name': 'Ricardo Carvalho',
+            'url': 'https://mrricardocarvalho.github.io/my-cv/'
+        }
+    };
+
     const { error, isLoading, executeWithErrorHandling } = useErrorHandler({
         onError: (err: Error | AppError) => {
             console.error('Error loading blog posts:', err);
@@ -78,9 +97,16 @@ function BlogListPage({ currentLanguage }: BlogListPageProps) {
     }
 
     return (
-        <div className="p-6">
-            <BlogSection currentLanguage={currentLanguage} />
-        </div>
+        <>
+            <Helmet>
+                <title>{title}</title>
+                <meta name="description" content={description} />
+                <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+            </Helmet>
+            <div className="p-6">
+                <BlogSection currentLanguage={currentLanguage} />
+            </div>
+        </>
     );
 }
 

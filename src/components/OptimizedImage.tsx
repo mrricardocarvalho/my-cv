@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-    fallback?: string;
+    fallback?: React.ReactNode;
     onLoadError?: (error: string) => void;
 }
 

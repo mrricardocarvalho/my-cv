@@ -21,7 +21,15 @@ function ProjectEntry(props: ProjectEntryProps) {
                         src={`${BASE_URL}images/logos/${logo}`}
                         alt={`${name[currentLanguage]} logo`}
                         className="w-12 h-12 rounded-md object-cover mr-4 bg-gray-50"
-                        fallback={name[currentLanguage].charAt(0)}
+                        fallback={
+                            <div
+                                className="w-full h-full rounded-md bg-gray-200 flex items-center justify-center text-xs text-gray-700 border border-gray-200"
+                                role="img"
+                                aria-label={`${name[currentLanguage]} logo placeholder`}
+                            >
+                                {name[currentLanguage].charAt(0)}
+                            </div>
+                        }
                         onLoadError={(error) => {
                             console.error(`Failed to load project logo for ${name[currentLanguage]}:`, error);
                         }}
@@ -32,11 +40,11 @@ function ProjectEntry(props: ProjectEntryProps) {
                     <div className="flex items-center mb-2">
                         <h3 className="text-lg font-semibold text-gray-900">
                             {url ? (
-                                <a 
+                                <a
                                     href={url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="hover:text-blue-600 transition-colors duration-200"
+                                    className="hover:text-blue-600 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                                 >
                                     {name[currentLanguage]}
                                 </a>
@@ -45,7 +53,7 @@ function ProjectEntry(props: ProjectEntryProps) {
                             )}
                         </h3>
                         {type && (
-                            <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full font-medium ml-2 flex-shrink-0">
+                            <span className="text-xs bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full font-medium ml-2 flex-shrink-0">
                                 {type[currentLanguage]}
                             </span>
                         )}

@@ -4,6 +4,7 @@ import ProjectsSection from '../components/ProjectsSection';
 import { useErrorHandler } from '../utils/useErrorHandler';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { GenericErrorState, NetworkErrorState } from '../components/ErrorStates';
+import { Helmet } from 'react-helmet-async';
 
 // Loading state component
 const LoadingState = () => (
@@ -31,16 +32,39 @@ interface ProjectsPageProps {
 }
 
 function ProjectsPage({ currentLanguage }: ProjectsPageProps) {
+    const title = currentLanguage === 'en'
+        ? 'Projects | Ricardo Carvalho - D365 BC Developer'
+        : 'Projetos | Ricardo Carvalho - D365 BC Developer';
+    const description = currentLanguage === 'en'
+        ? 'Explore projects by Ricardo Carvalho, an experienced Dynamics 365 Business Central Developer.'
+        : 'Explore projetos de Ricardo Carvalho, desenvolvedor experiente em Dynamics 365 Business Central.';
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        'name': 'Ricardo Carvalho',
+        'url': 'https://mrricardocarvalho.github.io/my-cv/',
+        'logo': 'https://mrricardocarvalho.github.io/my-cv/profile.jpg',
+        'sameAs': [
+            'https://www.linkedin.com/in/ricardocarvalhodev/'
+        ]
+    };
     return (
-        <ErrorBoundary
-            fallback={
-                <div className="max-w-3xl mx-auto">
-                    <NetworkErrorState onRetry={() => window.location.reload()} />
-                </div>
-            }
-        >
-            <ProjectsContent currentLanguage={currentLanguage} />
-        </ErrorBoundary>
+        <>
+            <Helmet>
+                <title>{title}</title>
+                <meta name="description" content={description} />
+                <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+            </Helmet>
+            <ErrorBoundary
+                fallback={
+                    <div className="max-w-3xl mx-auto">
+                        <NetworkErrorState onRetry={() => window.location.reload()} />
+                    </div>
+                }
+            >
+                <ProjectsContent currentLanguage={currentLanguage} />
+            </ErrorBoundary>
+        </>
     );
 }
 
