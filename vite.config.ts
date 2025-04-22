@@ -1,12 +1,21 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc' // Or @vitejs/plugin-react if you use that
+import react from '@vitejs/plugin-react-swc'
+import { visualizer } from 'rollup-plugin-visualizer'; 
 
-// https://vitejs.dev/config/
+const isAnalyze = process.env.ANALYZE === 'true';
+
 export default defineConfig({
-  // Configure the base path for deployment
   base: '/my-cv/',
-  plugins: [react()],
+  plugins: [
+    react(),
+    isAnalyze && visualizer({
+      open: true,
+      filename: 'bundle-report.html',
+      gzipSize: true,
+      brotliSize: true,
+    })
+  ].filter(Boolean),
   build: {
-    outDir: 'docs' // <<< CHANGE output directory to 'docs'
-  }  
+    outDir: 'docs'
+  }
 })

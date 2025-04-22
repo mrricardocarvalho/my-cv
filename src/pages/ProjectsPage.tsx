@@ -4,7 +4,6 @@ import ProjectsSection from '../components/ProjectsSection';
 import { useErrorHandler } from '../utils/useErrorHandler';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { GenericErrorState, NetworkErrorState } from '../components/ErrorStates';
-import { Helmet } from 'react-helmet-async';
 
 // Loading state component
 const LoadingState = () => (
@@ -48,13 +47,25 @@ function ProjectsPage({ currentLanguage }: ProjectsPageProps) {
             'https://www.linkedin.com/in/ricardocarvalhodev/'
         ]
     };
+    useEffect(() => {
+        document.title = title;
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.setAttribute('content', description);
+        let script = document.getElementById('projects-jsonld') as HTMLScriptElement | null;
+        if (!script) {
+            script = document.createElement('script') as HTMLScriptElement;
+            script.type = 'application/ld+json';
+            script.id = 'projects-jsonld';
+            document.head.appendChild(script);
+        }
+        script.textContent = JSON.stringify(jsonLd);
+        return () => {
+            if (script && script.parentNode) script.parentNode.removeChild(script);
+        };
+    }, [title, description, jsonLd]);
+
     return (
         <>
-            <Helmet>
-                <title>{title}</title>
-                <meta name="description" content={description} />
-                <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-            </Helmet>
             <ErrorBoundary
                 fallback={
                     <div className="max-w-3xl mx-auto">

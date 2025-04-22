@@ -8,7 +8,6 @@ import { useErrorHandler } from '../utils/useErrorHandler';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { NetworkErrorState, NotFoundErrorState, GenericErrorState } from '../components/ErrorStates';
 import OptimizedImage from '../components/OptimizedImage';
-import { Helmet } from 'react-helmet-async';
 
 // Lazy load markdown files
 const allMarkdownPosts = import.meta.glob('/src/blog/posts/*.md', { 
@@ -123,88 +122,90 @@ function BlogPostContent({ currentLanguage }: BlogPostPageProps) {
         loadPost();
     }, [postId, currentLanguage, postMetadata, executeWithErrorHandling]);
 
+    // Add useEffect for document head management
+    useEffect(() => {
+        // You may want to set a dynamic title/description based on the post, but here is a generic fallback:
+        document.title = 'Blog Post | Ricardo Carvalho - D365 BC Developer';
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.setAttribute('content', 'Read a blog post by Ricardo Carvalho about Dynamics 365 Business Central, AL development, and ERP best practices.');
+        let script = document.getElementById('blogpost-jsonld') as HTMLScriptElement | null;
+        if (!script) {
+            script = document.createElement('script') as HTMLScriptElement;
+            script.type = 'application/ld+json';
+            script.id = 'blogpost-jsonld';
+            document.head.appendChild(script);
+        }
+        script.textContent = JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            'headline': document.title,
+            'author': {
+                '@type': 'Person',
+                'name': 'Ricardo Carvalho',
+                'url': 'https://mrricardocarvalho.github.io/my-cv/'
+            },
+            'url': window.location.href
+        });
+        return () => {
+            if (script && script.parentNode) script.parentNode.removeChild(script);
+        };
+    }, []);
+
     if (isLoading) return <LoadingState />;
     if (error?.type === 'NETWORK_ERROR') return <NetworkErrorState onRetry={() => window.location.reload()} />;
     if (error?.type === 'NOT_FOUND') return <NotFoundErrorState />;
     if (error) return <GenericErrorState error={error} onRetry={() => window.location.reload()} />;
 
-    // Prepare SEO tags and JSON-LD
-    const title = postMetadata ? postMetadata.title[currentLanguage] + ' | Ricardo Carvalho Blog' : 'Blog Post | Ricardo Carvalho Blog';
-    const description = postMetadata ? postMetadata.excerpt[currentLanguage] : 'Blog post by Ricardo Carvalho.';
-    const jsonLd = postMetadata ? {
-        '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        'headline': postMetadata.title[currentLanguage],
-        'datePublished': postMetadata.date,
-        'author': {
-            '@type': 'Person',
-            'name': 'Ricardo Carvalho',
-            'url': 'https://mrricardocarvalho.github.io/my-cv/'
-        },
-        'mainEntityOfPage': {
-            '@type': 'WebPage',
-            '@id': `https://mrricardocarvalho.github.io/my-cv/blog/${postId}`
-        },
-        'description': postMetadata.excerpt[currentLanguage]
-    } : null;
-
     return (
-        <>
-            <Helmet>
-                <title>{title}</title>
-                <meta name="description" content={description} />
-                {jsonLd && <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>}
-            </Helmet>
-            <div className="max-w-3xl mx-auto">
-                <article>
-                    <Link to="/blog" className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-6">
-                        <i className="fas fa-arrow-left mr-2"></i>
-                        {labels.blog[currentLanguage]}
-                    </Link>
+        <div className="max-w-3xl mx-auto">
+            <article>
+                <Link to="/blog" className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-6">
+                    <i className="fas fa-arrow-left mr-2"></i>
+                    {labels.blog[currentLanguage]}
+                </Link>
 
-                    {postTitle && (
-                        <header className="mb-8">
-                            <h1 className="text-3xl font-bold text-gray-900 mb-2">{postTitle}</h1>
-                            {postDate && <time className="text-gray-600">{postDate}</time>}
-                        </header>
+                {postTitle && (
+                    <header className="mb-8">
+                        <h1 className="text-3xl font-bold text-gray-900 mb-2">{postTitle}</h1>
+                        {postDate && <time className="text-gray-600">{postDate}</time>}
+                    </header>
+                )}
+
+                <div className="prose prose-lg max-w-none">
+                    {postContent && (
+                        <ReactMarkdown components={{
+                            h1: ({node, ...props}) => <h1 className="text-gray-800" {...props} />,
+                            h2: ({node, ...props}) => <h2 className="text-gray-800" {...props} />,
+                            p: ({node, ...props}) => <p className="text-gray-600" {...props} />,
+                            a: ({node, ...props}) => (
+                                <a 
+                                    className="text-blue-600 hover:text-blue-800" 
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    {...props} 
+                                />
+                            ),
+                            img: ({node, ...props}) => (
+                                <OptimizedImage
+                                    {...props}
+                                    className="rounded-lg max-w-full h-auto my-4"
+                                    fallback={props.alt || 'Image'}
+                                    onLoadError={(error: string) => {
+                                        console.error(`Failed to load blog post image (${props.alt}):`, error);
+                                    }}
+                                />
+                            ),
+                            code: ({node, ...props}) => <code className="text-pink-600 bg-gray-50 px-1 py-0.5 rounded" {...props} />,
+                            pre: ({node, ...props}) => (
+                                <pre className="bg-gray-50 text-gray-800 p-4 rounded-lg overflow-x-auto" {...props} />
+                            )
+                        }}>
+                            {postContent}
+                        </ReactMarkdown>
                     )}
-
-                    <div className="prose prose-lg max-w-none">
-                        {postContent && (
-                            <ReactMarkdown components={{
-                                h1: ({node, ...props}) => <h1 className="text-gray-800" {...props} />,
-                                h2: ({node, ...props}) => <h2 className="text-gray-800" {...props} />,
-                                p: ({node, ...props}) => <p className="text-gray-600" {...props} />,
-                                a: ({node, ...props}) => (
-                                    <a 
-                                        className="text-blue-600 hover:text-blue-800" 
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        {...props} 
-                                    />
-                                ),
-                                img: ({node, ...props}) => (
-                                    <OptimizedImage
-                                        {...props}
-                                        className="rounded-lg max-w-full h-auto my-4"
-                                        fallback={props.alt || 'Image'}
-                                        onLoadError={(error: string) => {
-                                            console.error(`Failed to load blog post image (${props.alt}):`, error);
-                                        }}
-                                    />
-                                ),
-                                code: ({node, ...props}) => <code className="text-pink-600 bg-gray-50 px-1 py-0.5 rounded" {...props} />,
-                                pre: ({node, ...props}) => (
-                                    <pre className="bg-gray-50 text-gray-800 p-4 rounded-lg overflow-x-auto" {...props} />
-                                )
-                            }}>
-                                {postContent}
-                            </ReactMarkdown>
-                        )}
-                    </div>
-                </article>
-            </div>
-        </>
+                </div>
+            </article>
+        </div>
     );
 }
 

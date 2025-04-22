@@ -4,7 +4,6 @@ import BlogSection from '../components/BlogSection';
 import { useErrorHandler } from '../utils/useErrorHandler';
 import { AppError } from '../utils/errorHandlers';
 import { NetworkErrorState, GenericErrorState } from '../components/ErrorStates';
-import { Helmet } from 'react-helmet-async';
 
 // Loading state component
 const LoadingState = () => (
@@ -42,6 +41,22 @@ function BlogListPage({ currentLanguage }: BlogListPageProps) {
             'url': 'https://mrricardocarvalho.github.io/my-cv/'
         }
     };
+    useEffect(() => {
+        document.title = title;
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.setAttribute('content', description);
+        let script = document.getElementById('bloglist-jsonld') as HTMLScriptElement | null;
+        if (!script) {
+            script = document.createElement('script') as HTMLScriptElement;
+            script.type = 'application/ld+json';
+            script.id = 'bloglist-jsonld';
+            document.head.appendChild(script);
+        }
+        script.textContent = JSON.stringify(jsonLd);
+        return () => {
+            if (script && script.parentNode) script.parentNode.removeChild(script);
+        };
+    }, [title, description, jsonLd]);
 
     const { error, isLoading, executeWithErrorHandling } = useErrorHandler({
         onError: (err: Error | AppError) => {
@@ -97,16 +112,9 @@ function BlogListPage({ currentLanguage }: BlogListPageProps) {
     }
 
     return (
-        <>
-            <Helmet>
-                <title>{title}</title>
-                <meta name="description" content={description} />
-                <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-            </Helmet>
-            <div className="p-6">
-                <BlogSection currentLanguage={currentLanguage} />
-            </div>
-        </>
+        <div className="p-6">
+            <BlogSection currentLanguage={currentLanguage} />
+        </div>
     );
 }
 

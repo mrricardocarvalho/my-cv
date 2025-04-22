@@ -7,7 +7,7 @@ import { useErrorHandler } from '../utils/useErrorHandler';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { SectionWrapper } from '../components/SectionWrapper';
 import { NetworkErrorState } from '../components/ErrorStates';
-import { Helmet } from 'react-helmet-async';
+
 
 // Loading state components
 const SectionLoadingState = () => (
@@ -42,13 +42,31 @@ function ResumePage({ currentLanguage }: ResumePageProps) {
             'https://www.linkedin.com/in/ricardocarvalhodev/'
         ]
     };
+
+    useEffect(() => {
+        document.title = title;
+        // Optionally set meta description
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) {
+            metaDesc.setAttribute('content', description);
+        }
+        // Optionally inject JSON-LD (schema.org)
+        let script = document.getElementById('resume-jsonld') as HTMLScriptElement | null;
+        if (!script) {
+            script = document.createElement('script') as HTMLScriptElement;
+            script.type = 'application/ld+json';
+            script.id = 'resume-jsonld';
+            document.head.appendChild(script);
+        }
+        script.textContent = JSON.stringify(jsonLd);
+        return () => {
+            if (script && script.parentNode) script.parentNode.removeChild(script);
+        };
+    }, [title, description, jsonLd]);
+
     return (
         <>
-            <Helmet>
-                <title>{title}</title>
-                <meta name="description" content={description} />
-                <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-            </Helmet>
+            {/* Helmet removed for React 19 compatibility. Document title, meta, and JSON-LD are set via useEffect. */}
             <ErrorBoundary
                 fallback={
                     <div className="max-w-3xl mx-auto">
