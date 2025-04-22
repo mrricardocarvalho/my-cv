@@ -1,7 +1,9 @@
 // src/pages/BlogListPage.tsx
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import BlogSection from '../components/BlogSection';
-import { handleHttpError, withRetry } from '../utils/errorHandlers';
+import { useErrorHandler } from '../utils/useErrorHandler';
+import { AppError } from '../utils/errorHandlers';
+import { NetworkErrorState, GenericErrorState } from '../components/ErrorStates';
 
 // Loading state component
 const LoadingState = () => (
@@ -17,59 +19,62 @@ const LoadingState = () => (
     </div>
 );
 
-// Error state component
-const ErrorState = ({ onRetry }: { onRetry: () => void }) => (
-    <div className="text-center py-12">
-        <div className="text-red-500 text-xl mb-4">
-            <i className="fas fa-exclamation-triangle"></i>
-        </div>
-        <h3 className="text-lg font-semibold text-gray-800 mb-2">Unable to load blog posts</h3>
-        <p className="text-gray-600 mb-4">There was a problem loading the blog posts.</p>
-        <button
-            onClick={onRetry}
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
-        >
-            <i className="fas fa-redo mr-2"></i>
-            Try Again
-        </button>
-    </div>
-);
-
 interface BlogListPageProps {
     currentLanguage: 'en' | 'pt';
 }
 
 function BlogListPage({ currentLanguage }: BlogListPageProps) {
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<Error | null>(null);
+    const { error, isLoading, executeWithErrorHandling } = useErrorHandler({
+        onError: (err: Error | AppError) => {
+            console.error('Error loading blog posts:', err);
+        },
+        retryAttempts: 3,
+        componentName: 'BlogListPage'
+    });
 
     const loadBlogPosts = async () => {
-        setIsLoading(true);
-        setError(null);
+        await executeWithErrorHandling(async () => {
+            // Check network connection
+            if (!navigator.onLine) {
+                throw new AppError('NETWORK_ERROR', 'No internet connection');
+            }
 
-        try {
-            await withRetry(async () => {
-                // Simulate an API call or data fetching
-                await new Promise(resolve => setTimeout(resolve, 500));
-            });
-            setIsLoading(false);
-        } catch (err: any) {
-            const appError = handleHttpError(err);
-            setError(appError);
-            setIsLoading(false);
-        }
+            // Simulate loading time and potential network issues
+            await Promise.race([
+                new Promise(resolve => setTimeout(resolve, 500)),
+                new Promise((_, reject) => 
+                    setTimeout(() => reject(new AppError('TIMEOUT', 'Request timed out')), 10000)
+                )
+            ]);
+        });
     };
 
     useEffect(() => {
         loadBlogPosts();
-    }, [currentLanguage]);
+    }, [currentLanguage, executeWithErrorHandling]);
+
+    if (error?.type === 'NETWORK_ERROR') {
+        return (
+            <div className="p-6">
+                <NetworkErrorState onRetry={loadBlogPosts} />
+            </div>
+        );
+    }
 
     if (error) {
-        return <ErrorState onRetry={loadBlogPosts} />;
+        return (
+            <div className="p-6">
+                <GenericErrorState error={error} onRetry={loadBlogPosts} />
+            </div>
+        );
     }
 
     if (isLoading) {
-        return <LoadingState />;
+        return (
+            <div className="p-6">
+                <LoadingState />
+            </div>
+        );
     }
 
     return (

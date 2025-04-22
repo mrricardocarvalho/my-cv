@@ -5,6 +5,7 @@ import {
     keyTechnicalSkills,
 } from '../cv-data';
 import OptimizedImage from './OptimizedImage';
+import { useState } from 'react';
 
 // Define props for language and toggle handler
 interface SidebarProps {
@@ -24,29 +25,32 @@ const BASE_URL = import.meta.env.BASE_URL;
 
 function Sidebar(props: SidebarProps) {
     const { currentLanguage, onToggleLanguage } = props;
+    const [hasBackgroundError, setHasBackgroundError] = useState(false);
+
+    const handleImageError = (error: string, type: 'background' | 'profile') => {
+        if (type === 'background') {
+            setHasBackgroundError(true);
+        }
+        console.error(`Failed to load ${type} image:`, error);
+    };
 
     return (
-        // Main Sidebar container: Rounded corners, shadow, white background
         <aside className="bg-white rounded-lg shadow-lg sticky top-8 overflow-hidden">
-
-            {/* --- START: Profile Header Section --- */}
-            {/* Container for background image */}
-            <div className="relative"> {/* Removed mb-6, spacing handled by padding below */}
-                {/* Background Image */}
+            <div className="relative">
                 <OptimizedImage
                     src={`${BASE_URL}background.jpg`}
                     alt="Header background"
-                    className="w-full h-32 object-cover"
+                    className={`w-full h-32 object-cover ${hasBackgroundError ? 'bg-gradient-to-r from-blue-100 to-blue-200' : ''}`}
                     fallback="Background"
+                    onLoadError={(error) => handleImageError(error, 'background')}
                 />
-                {/* Profile Image Overlay */}
                 <div className="absolute bottom-0 left-4 transform translate-y-1/2">
-                     {/* Simple white border directly on image */}
                     <OptimizedImage
                         src={`${BASE_URL}profile.png`}
                         alt="Ricardo Carvalho"
                         className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-md"
                         fallback="RC"
+                        onLoadError={(error) => handleImageError(error, 'profile')}
                     />
                 </div>
             </div>

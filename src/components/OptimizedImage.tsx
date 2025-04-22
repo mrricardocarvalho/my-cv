@@ -2,9 +2,10 @@ import { useState } from 'react';
 
 interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
     fallback?: string;
+    onLoadError?: (error: string) => void;
 }
 
-function OptimizedImage({ src, alt, className, fallback, ...props }: OptimizedImageProps) {
+function OptimizedImage({ src, alt, className, fallback, onLoadError, ...props }: OptimizedImageProps) {
     const [error, setError] = useState<string | null>(null);
     const [retryCount, setRetryCount] = useState(0);
     const maxRetries = 3;
@@ -19,6 +20,7 @@ function OptimizedImage({ src, alt, className, fallback, ...props }: OptimizedIm
             setError('RETRYING');
         } else {
             setError('FAILED');
+            onLoadError?.('FAILED');
         }
     };
 
@@ -33,7 +35,8 @@ function OptimizedImage({ src, alt, className, fallback, ...props }: OptimizedIm
                 <span className="text-gray-500 mb-2">{fallback}</span>
                 <button 
                     onClick={handleRetry}
-                    className="text-xs text-blue-600 hover:text-blue-800"
+                    className="text-xs text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md px-2 py-1"
+                    aria-label="Retry loading image"
                 >
                     <i className="fas fa-redo mr-1"></i>
                     Retry

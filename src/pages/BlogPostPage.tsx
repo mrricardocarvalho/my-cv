@@ -7,6 +7,7 @@ import { AppError } from '../utils/errorHandlers';
 import { useErrorHandler } from '../utils/useErrorHandler';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { NetworkErrorState, NotFoundErrorState, GenericErrorState } from '../components/ErrorStates';
+import OptimizedImage from '../components/OptimizedImage';
 
 // Lazy load markdown files
 const allMarkdownPosts = import.meta.glob('/src/blog/posts/*.md', { 
@@ -72,6 +73,7 @@ function BlogPostContent({ currentLanguage }: BlogPostPageProps) {
                     throw new AppError('NOT_FOUND', 'Post not found');
                 }
 
+                // Try to load from cache first
                 const cacheKey = `${postId}-${currentLanguage}`;
                 const cachedContent = getCachedPost(cacheKey);
                 
@@ -82,6 +84,11 @@ function BlogPostContent({ currentLanguage }: BlogPostPageProps) {
                     return;
                 }
 
+                // Check network connection
+                if (!navigator.onLine) {
+                    throw new AppError('NETWORK_ERROR', 'No internet connection');
+                }
+
                 const fileName = `/src/blog/posts/${postId}.${currentLanguage}.md`;
                 const importFn = allMarkdownPosts[fileName];
 
@@ -89,11 +96,26 @@ function BlogPostContent({ currentLanguage }: BlogPostPageProps) {
                     throw new AppError('NOT_FOUND', 'Blog post file not found');
                 }
 
-                const content = await importFn() as string;
-                cachePost(cacheKey, content);
-                setPostContent(content);
-                setPostTitle(postMetadata.title[currentLanguage]);
-                setPostDate(postMetadata.date);
+                try {
+                    const result = await Promise.race([
+                        importFn() as Promise<string>,
+                        new Promise((_, reject) => 
+                            setTimeout(() => reject(new AppError('TIMEOUT', 'Request timed out')), 10000)
+                        )
+                    ]);
+
+                    // Cast the result to string since we know the import returns markdown content
+                    const content = result as string;
+
+                    // Cache the content for offline access
+                    cachePost(cacheKey, content);
+                    setPostContent(content);
+                    setPostTitle(postMetadata.title[currentLanguage]);
+                    setPostDate(postMetadata.date);
+                } catch (err) {
+                    if (err instanceof AppError) throw err;
+                    throw new AppError('NETWORK_ERROR', 'Failed to load blog post');
+                }
             });
         };
 
@@ -126,9 +148,28 @@ function BlogPostContent({ currentLanguage }: BlogPostPageProps) {
                             h1: ({node, ...props}) => <h1 className="text-gray-800" {...props} />,
                             h2: ({node, ...props}) => <h2 className="text-gray-800" {...props} />,
                             p: ({node, ...props}) => <p className="text-gray-600" {...props} />,
-                            a: ({node, ...props}) => <a className="text-blue-600 hover:text-blue-800" {...props} />,
-                            code: ({node, ...props}) => <code className="text-pink-600" {...props} />,
-                            pre: ({node, ...props}) => <pre className="bg-gray-100 text-gray-800" {...props} />
+                            a: ({node, ...props}) => (
+                                <a 
+                                    className="text-blue-600 hover:text-blue-800" 
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    {...props} 
+                                />
+                            ),
+                            img: ({node, ...props}) => (
+                                <OptimizedImage
+                                    {...props}
+                                    className="rounded-lg max-w-full h-auto my-4"
+                                    fallback={props.alt || 'Image'}
+                                    onLoadError={(error: string) => {
+                                        console.error(`Failed to load blog post image (${props.alt}):`, error);
+                                    }}
+                                />
+                            ),
+                            code: ({node, ...props}) => <code className="text-pink-600 bg-gray-50 px-1 py-0.5 rounded" {...props} />,
+                            pre: ({node, ...props}) => (
+                                <pre className="bg-gray-50 text-gray-800 p-4 rounded-lg overflow-x-auto" {...props} />
+                            )
                         }}>
                             {postContent}
                         </ReactMarkdown>

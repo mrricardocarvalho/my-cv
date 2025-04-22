@@ -7,7 +7,7 @@ interface ErrorContext {
     additionalInfo?: Record<string, unknown>;
 }
 
-class ErrorReporter {
+export class ErrorReporter {
     private static instance: ErrorReporter;
     private errors: Array<{ error: AppError; context: ErrorContext }> = [];
     private readonly maxErrors = 50;
