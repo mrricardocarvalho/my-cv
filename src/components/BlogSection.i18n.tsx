@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import React, { Suspense } from 'react';
-const BlogPostEntry = React.lazy(() => import('./BlogPostEntry'));
+const BlogPostEntry = React.lazy(() => import('./BlogPostEntry.i18n'));
 import { blogPostsData } from '../data/blogPosts';
 
 function BlogSection() {
@@ -13,7 +13,7 @@ function BlogSection() {
         {t('blog')}
       </h2>
       <div>
-        <Suspense fallback={<div className="text-gray-400 py-4">Loading blog posts...</div>}>
+        <Suspense fallback={<div className="text-gray-400 py-4">{t('loadingBlogPosts', 'Loading blog posts...')}</div>}>
           {blogPostsData.map((post) => (
             <BlogPostEntry
               key={post.id}
@@ -22,7 +22,7 @@ function BlogSection() {
           ))}
         </Suspense>
         {blogPostsData.length === 0 && (
-          <p className="text-sm text-gray-500 italic py-4">No blog posts listed yet.</p>
+          <p className="text-sm text-gray-500 italic py-4">{t('noBlogPosts', 'No blog posts listed yet.')}</p>
         )}
       </div>
     </section>

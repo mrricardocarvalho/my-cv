@@ -4,6 +4,7 @@ import BlogSection from '../components/BlogSection';
 import { useErrorHandler } from '../utils/useErrorHandler';
 import { AppError } from '../utils/errorHandlers';
 import { NetworkErrorState, GenericErrorState } from '../components/ErrorStates';
+import { useTranslation } from 'react-i18next';
 
 // Loading state component
 const LoadingState = () => (
@@ -19,15 +20,13 @@ const LoadingState = () => (
     </div>
 );
 
-interface BlogListPageProps {
-    currentLanguage: 'en' | 'pt';
-}
-
-function BlogListPage({ currentLanguage }: BlogListPageProps) {
-    const title = currentLanguage === 'en'
+function BlogListPage() {
+    const { i18n } = useTranslation();
+    const lang = i18n.language as 'en' | 'pt';
+    const title = lang === 'en'
         ? 'Blog | Ricardo Carvalho - D365 BC Developer'
         : 'Blog | Ricardo Carvalho - D365 BC Developer';
-    const description = currentLanguage === 'en'
+    const description = lang === 'en'
         ? 'Read articles and blog posts by Ricardo Carvalho about Dynamics 365 Business Central, AL development, and ERP best practices.'
         : 'Leia artigos e posts de Ricardo Carvalho sobre Dynamics 365 Business Central, desenvolvimento AL e melhores práticas de ERP.';
     const jsonLd = {
@@ -85,7 +84,7 @@ function BlogListPage({ currentLanguage }: BlogListPageProps) {
 
     useEffect(() => {
         loadBlogPosts();
-    }, [currentLanguage, executeWithErrorHandling]);
+    }, [executeWithErrorHandling]);
 
     if (error?.type === 'NETWORK_ERROR') {
         return (
@@ -113,7 +112,7 @@ function BlogListPage({ currentLanguage }: BlogListPageProps) {
 
     return (
         <div className="p-6">
-            <BlogSection currentLanguage={currentLanguage} />
+            <BlogSection />
         </div>
     );
 }

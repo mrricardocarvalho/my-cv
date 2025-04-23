@@ -7,6 +7,7 @@ import { useErrorHandler } from '../utils/useErrorHandler';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { SectionWrapper } from '../components/SectionWrapper';
 import { NetworkErrorState } from '../components/ErrorStates';
+import { useTranslation } from 'react-i18next';
 
 
 // Loading state components
@@ -21,15 +22,13 @@ const SectionLoadingState = () => (
     </div>
 );
 
-interface ResumePageProps {
-    currentLanguage: 'en' | 'pt';
-}
-
-function ResumePage({ currentLanguage }: ResumePageProps) {
-    const title = currentLanguage === 'en'
+function ResumePage() {
+    const { i18n } = useTranslation();
+    const lang = i18n.language as 'en' | 'pt';
+    const title = lang === 'en'
         ? 'Resume | Ricardo Carvalho - D365 BC Developer'
         : 'Currículo | Ricardo Carvalho - D365 BC Developer';
-    const description = currentLanguage === 'en'
+    const description = lang === 'en'
         ? 'Experienced Dynamics 365 Business Central Developer. View Ricardo Carvalho’s resume, skills, and professional experience.'
         : 'Desenvolvedor experiente em Dynamics 365 Business Central. Veja o currículo, competências e experiência profissional de Ricardo Carvalho.';
     const jsonLd = {
@@ -42,15 +41,12 @@ function ResumePage({ currentLanguage }: ResumePageProps) {
             'https://www.linkedin.com/in/ricardocarvalhodev/'
         ]
     };
-
     useEffect(() => {
         document.title = title;
-        // Optionally set meta description
         const metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) {
             metaDesc.setAttribute('content', description);
         }
-        // Optionally inject JSON-LD (schema.org)
         let script = document.getElementById('resume-jsonld') as HTMLScriptElement | null;
         if (!script) {
             script = document.createElement('script') as HTMLScriptElement;
@@ -63,10 +59,8 @@ function ResumePage({ currentLanguage }: ResumePageProps) {
             if (script && script.parentNode) script.parentNode.removeChild(script);
         };
     }, [title, description, jsonLd]);
-
     return (
         <>
-            {/* Helmet removed for React 19 compatibility. Document title, meta, and JSON-LD are set via useEffect. */}
             <ErrorBoundary
                 fallback={
                     <div className="max-w-3xl mx-auto">
@@ -74,39 +68,32 @@ function ResumePage({ currentLanguage }: ResumePageProps) {
                     </div>
                 }
             >
-                <ResumeContent currentLanguage={currentLanguage} />
+                <ResumeContent />
             </ErrorBoundary>
         </>
     );
 }
 
-function ResumeContent({ currentLanguage }: ResumePageProps) {
+function ResumeContent() {
     const experience = useErrorHandler({ retryAttempts: 2 });
     const education = useErrorHandler({ retryAttempts: 2 });
     const competencies = useErrorHandler({ retryAttempts: 2 });
-
     useEffect(() => {
         const loadSections = async () => {
-            // Load all sections in parallel
             await Promise.all([
                 experience.executeWithErrorHandling(async () => {
-                    // Simulate loading time for experience section
                     await new Promise(resolve => setTimeout(resolve, 300));
                 }),
                 education.executeWithErrorHandling(async () => {
-                    // Simulate loading time for education section
                     await new Promise(resolve => setTimeout(resolve, 200));
                 }),
                 competencies.executeWithErrorHandling(async () => {
-                    // Simulate loading time for competencies section
                     await new Promise(resolve => setTimeout(resolve, 100));
                 })
             ]);
         };
-
         loadSections();
     }, [experience.executeWithErrorHandling, education.executeWithErrorHandling, competencies.executeWithErrorHandling]);
-
     return (
         <div className="p-6 space-y-12">
             <SectionWrapper
@@ -114,23 +101,21 @@ function ResumeContent({ currentLanguage }: ResumePageProps) {
                 error={experience.error}
                 LoadingComponent={SectionLoadingState}
             >
-                <ExperienceSection currentLanguage={currentLanguage} />
+                <ExperienceSection />
             </SectionWrapper>
-
             <SectionWrapper
                 isLoading={education.isLoading}
                 error={education.error}
                 LoadingComponent={SectionLoadingState}
             >
-                <EducationSection currentLanguage={currentLanguage} />
+                <EducationSection />
             </SectionWrapper>
-
             <SectionWrapper
                 isLoading={competencies.isLoading}
                 error={competencies.error}
                 LoadingComponent={SectionLoadingState}
             >
-                <CompetenciesSection currentLanguage={currentLanguage} />
+                <CompetenciesSection />
             </SectionWrapper>
         </div>
     );

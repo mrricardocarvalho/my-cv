@@ -1,17 +1,19 @@
+import { useTranslation } from 'react-i18next';
 import { EducationItem as EducationItemType } from '../types/cv';
 
 // Define props interface extending EducationItemType, adding language
 interface EducationEntryProps {
-    item: EducationItemType; // Pass the whole item object
-    currentLanguage: 'en' | 'pt';
+    item: EducationItemType;
 }
 
 // Access the base path Vite is configured with
 const BASE_URL = import.meta.env.BASE_URL;
 
 function EducationEntry(props: EducationEntryProps) {
-  const { item, currentLanguage } = props;
-  const { degree, institution, location, date, logo } = item; // Destructure item
+  const { item } = props;
+  const { degree, institution, location, date, logo } = item;
+  const { i18n } = useTranslation();
+  const lang = i18n.language as 'en' | 'pt';
 
   // Construct logo path
   const logoPath = logo ? `${BASE_URL}/images/logos/${logo}` : null;
@@ -46,7 +48,7 @@ function EducationEntry(props: EducationEntryProps) {
           {/* Top Row: Degree/Certification Name */}
           {/* Slightly larger font size than job title maybe? Or keep consistent. */}
           <h3 className="text-base font-semibold text-gray-800 mb-1">
-            {degree[currentLanguage]}
+            {degree[lang]}
           </h3>
 
           {/* Middle Row: Institution Info with Icons */}

@@ -4,6 +4,7 @@ import { projectsData } from '../data/projects';
 
 function ProjectsSection() {
   const { t } = useTranslation();
+
   return (
     <section className="mb-8">
       <h2 className="text-2xl font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200 flex items-center">
@@ -18,7 +19,7 @@ function ProjectsSection() {
            />
         ))}
          {projectsData.length === 0 && (
-            <p className="text-sm text-gray-500 italic py-4">No projects listed yet.</p>
+            <p className="text-sm text-gray-500 italic py-4">{t('noProjects', 'No projects listed yet.')}</p>
          )}
       </div>
     </section>

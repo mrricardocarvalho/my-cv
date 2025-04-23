@@ -4,6 +4,7 @@ import ProjectsSection from '../components/ProjectsSection';
 import { useErrorHandler } from '../utils/useErrorHandler';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { GenericErrorState, NetworkErrorState } from '../components/ErrorStates';
+import { useTranslation } from 'react-i18next';
 
 // Loading state component
 const LoadingState = () => (
@@ -26,15 +27,13 @@ const LoadingState = () => (
     </div>
 );
 
-interface ProjectsPageProps {
-    currentLanguage: 'en' | 'pt';
-}
-
-function ProjectsPage({ currentLanguage }: ProjectsPageProps) {
-    const title = currentLanguage === 'en'
+function ProjectsPage() {
+    const { i18n } = useTranslation();
+    const lang = i18n.language as 'en' | 'pt';
+    const title = lang === 'en'
         ? 'Projects | Ricardo Carvalho - D365 BC Developer'
         : 'Projetos | Ricardo Carvalho - D365 BC Developer';
-    const description = currentLanguage === 'en'
+    const description = lang === 'en'
         ? 'Explore projects by Ricardo Carvalho, an experienced Dynamics 365 Business Central Developer.'
         : 'Explore projetos de Ricardo Carvalho, desenvolvedor experiente em Dynamics 365 Business Central.';
     const jsonLd = {
@@ -73,13 +72,13 @@ function ProjectsPage({ currentLanguage }: ProjectsPageProps) {
                     </div>
                 }
             >
-                <ProjectsContent currentLanguage={currentLanguage} />
+                <ProjectsContent />
             </ErrorBoundary>
         </>
     );
 }
 
-function ProjectsContent({ currentLanguage }: ProjectsPageProps) {
+function ProjectsContent() {
     const { error, isLoading, executeWithErrorHandling } = useErrorHandler({
         onError: (err) => {
             console.error('Error loading projects:', err);
@@ -107,7 +106,7 @@ function ProjectsContent({ currentLanguage }: ProjectsPageProps) {
 
     return (
         <div className="p-6">
-            <ProjectsSection currentLanguage={currentLanguage} />
+            <ProjectsSection />
         </div>
     );
 }

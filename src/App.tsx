@@ -1,10 +1,11 @@
 // src/App.tsx
-import { useState, Suspense, lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import { Routes, Route, useLocation, Link } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
+import Sidebar from './components/Sidebar.i18n';
 import Footer from './components/Footer';
 import { mainNavItems } from './cv-data';
 import ErrorBoundary from './components/ErrorBoundary';
+import i18n from './i18n';
 
 // Lazy load pages
 const ResumePage = lazy(() => import('./pages/ResumePage'));
@@ -20,13 +21,8 @@ const LoadingSpinner = () => (
 );
 
 function App() {
-  const [language, setLanguage] = useState<'en' | 'pt'>('en');
   const { pathname } = useLocation();
   const activePath = pathname === '/' ? '/resume' : pathname;
-
-  const handleLanguageToggle = () => {
-    setLanguage(prev => prev === 'en' ? 'pt' : 'en');
-  };
 
   return (
     <ErrorBoundary fallback={
@@ -48,11 +44,7 @@ function App() {
         <div className="container mx-auto max-w-7xl lg:flex py-8 px-4 sm:px-6 lg:px-8">
           <div className="lg:w-1/3 lg:pr-8 mb-8 lg:mb-0">
             <ErrorBoundary>
-              <Sidebar
-                currentLanguage={language}
-                onToggleLanguage={handleLanguageToggle}
-                activePath={activePath}
-              />
+              <Sidebar />
             </ErrorBoundary>
           </div>
           <div className="lg:w-2/3">
@@ -71,38 +63,37 @@ function App() {
                       }
                       aria-current={activePath === item.href ? 'page' : undefined}
                     >
-                      {item.label[language]}
+                      {item.label[i18n.language as 'en' | 'pt']}
                     </Link>
                   ))}
                 </nav>
               </div>
-
               <div className="p-6">
                 <Suspense fallback={<LoadingSpinner />}>
                   <Routes>
                     <Route path="/" element={
                       <ErrorBoundary>
-                        <ResumePage currentLanguage={language} />
+                        <ResumePage />
                       </ErrorBoundary>
                     } />
                     <Route path="/resume" element={
                       <ErrorBoundary>
-                        <ResumePage currentLanguage={language} />
+                        <ResumePage />
                       </ErrorBoundary>
                     } />
                     <Route path="/projects" element={
                       <ErrorBoundary>
-                        <ProjectsPage currentLanguage={language} />
+                        <ProjectsPage />
                       </ErrorBoundary>
                     } />
                     <Route path="/blog" element={
                       <ErrorBoundary>
-                        <BlogListPage currentLanguage={language} />
+                        <BlogListPage />
                       </ErrorBoundary>
                     } />
                     <Route path="/blog/:postId" element={
                       <ErrorBoundary>
-                        <BlogPostPage currentLanguage={language} />
+                        <BlogPostPage />
                       </ErrorBoundary>
                     } />
                   </Routes>

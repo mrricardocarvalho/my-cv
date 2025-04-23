@@ -1,39 +1,22 @@
+import { useTranslation } from 'react-i18next';
 import { professionalCompetenciesData } from '../data/competencies';
-import { labels } from '../data/labels';
 
-// Define props interface
-interface CompetenciesSectionProps {
-    currentLanguage: 'en' | 'pt';
-}
-
-function CompetenciesSection(props: CompetenciesSectionProps) {
-    const { currentLanguage } = props;
-
+function CompetenciesSection() {
+    const { i18n, t } = useTranslation();
+    const lang = i18n.language as 'en' | 'pt';
     return (
-        // Use a standard HTML section tag
-        // Add bottom margin (optional, adjust if needed depending on footer spacing)
         <section className="mb-8">
-
-            {/* Section Heading - Styled consistently */}
             <h2 className="text-2xl font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200 flex items-center">
-                 {/* Font Awesome Icon */}
                 <i className="fas fa-star fa-fw text-blue-600 mr-3"></i>
-                {/* Use the label for the subheading */}
-                {labels.professionalCompetenciesSubheading[currentLanguage]}
+                {t('professionalCompetenciesSubheading')}
             </h2>
-
-            {/* Container for the badges */}
-            <div className="flex flex-wrap gap-2"> {/* gap-2 provides spacing */}
-                {/* Map through competency data */}
+            <div className="flex flex-wrap gap-2">
                 {professionalCompetenciesData.map(comp => (
-                     // Render badge for each competency
-                     // Using the simpler gray style consistent with skills badges in sidebar
-                     <span key={comp.en} className="text-sm bg-gray-200 text-gray-700 px-3 py-1 rounded-md"> {/* Slightly larger padding than skills */}
-                         {comp[currentLanguage]}
+                     <span key={comp.en} className="text-sm bg-gray-200 text-gray-700 px-3 py-1 rounded-md">
+                         {comp[lang]}
                      </span>
                 ))}
             </div>
-
         </section>
     );
 }

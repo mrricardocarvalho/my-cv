@@ -8,6 +8,7 @@ import { useErrorHandler } from '../utils/useErrorHandler';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { NetworkErrorState, NotFoundErrorState, GenericErrorState } from '../components/ErrorStates';
 import OptimizedImage from '../components/OptimizedImage';
+import { useTranslation } from 'react-i18next';
 
 // Lazy load markdown files
 const allMarkdownPosts = import.meta.glob('/src/blog/posts/*.md', { 
@@ -28,11 +29,7 @@ const LoadingState = () => (
     </div>
 );
 
-interface BlogPostPageProps {
-    currentLanguage: 'en' | 'pt';
-}
-
-function BlogPostPage({ currentLanguage }: BlogPostPageProps) {
+function BlogPostPage() {
     return (
         <ErrorBoundary
             fallback={
@@ -41,12 +38,14 @@ function BlogPostPage({ currentLanguage }: BlogPostPageProps) {
                 </div>
             }
         >
-            <BlogPostContent currentLanguage={currentLanguage} />
+            <BlogPostContent />
         </ErrorBoundary>
     );
 }
 
-function BlogPostContent({ currentLanguage }: BlogPostPageProps) {
+function BlogPostContent() {
+    const { i18n } = useTranslation();
+    const lang = i18n.language as 'en' | 'pt';
     const { postId } = useParams<{ postId: string }>();
     const postMetadata = blogPostsData.find(p => p.id === postId);
 
@@ -62,7 +61,7 @@ function BlogPostContent({ currentLanguage }: BlogPostPageProps) {
         componentName: 'BlogPostContent',
         context: {
             postId,
-            language: currentLanguage
+            language: lang
         }
     });
 
@@ -74,12 +73,12 @@ function BlogPostContent({ currentLanguage }: BlogPostPageProps) {
                 }
 
                 // Try to load from cache first
-                const cacheKey = `${postId}-${currentLanguage}`;
+                const cacheKey = `${postId}-${lang}`;
                 const cachedContent = getCachedPost(cacheKey);
                 
                 if (cachedContent) {
                     setPostContent(cachedContent);
-                    setPostTitle(postMetadata.title[currentLanguage]);
+                    setPostTitle(postMetadata.title[lang]);
                     setPostDate(postMetadata.date);
                     return;
                 }
@@ -89,7 +88,7 @@ function BlogPostContent({ currentLanguage }: BlogPostPageProps) {
                     throw new AppError('NETWORK_ERROR', 'No internet connection');
                 }
 
-                const fileName = `/src/blog/posts/${postId}.${currentLanguage}.md`;
+                const fileName = `/src/blog/posts/${postId}.${lang}.md`;
                 const importFn = allMarkdownPosts[fileName];
 
                 if (!importFn) {
@@ -110,7 +109,7 @@ function BlogPostContent({ currentLanguage }: BlogPostPageProps) {
                     // Cache the content for offline access
                     cachePost(cacheKey, content);
                     setPostContent(content);
-                    setPostTitle(postMetadata.title[currentLanguage]);
+                    setPostTitle(postMetadata.title[lang]);
                     setPostDate(postMetadata.date);
                 } catch (err) {
                     if (err instanceof AppError) throw err;
@@ -120,7 +119,7 @@ function BlogPostContent({ currentLanguage }: BlogPostPageProps) {
         };
 
         loadPost();
-    }, [postId, currentLanguage, postMetadata, executeWithErrorHandling]);
+    }, [postId, lang, postMetadata, executeWithErrorHandling]);
 
     // Add useEffect for document head management
     useEffect(() => {
@@ -161,7 +160,7 @@ function BlogPostContent({ currentLanguage }: BlogPostPageProps) {
             <article>
                 <Link to="/blog" className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-6">
                     <i className="fas fa-arrow-left mr-2"></i>
-                    {labels.blog[currentLanguage]}
+                    {labels.blog[lang]}
                 </Link>
 
                 {postTitle && (

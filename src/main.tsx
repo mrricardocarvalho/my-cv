@@ -1,4 +1,4 @@
-// src/main.tsx - UPDATED
+import './i18n';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 // Import BrowserRouter
