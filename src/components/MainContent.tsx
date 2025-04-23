@@ -1,5 +1,5 @@
 // src/components/MainContent.tsx
-import { useState } from 'react'; // Import useState
+import { useEffect, useState } from 'react';
 // We keep section imports here for now, but they won't be conditionally rendered by this component anymore after routing is added
 import SummarySection from './SummarySection';
 import ExperienceSection from './ExperienceSection';
@@ -19,7 +19,10 @@ function MainContent(props: MainContentProps) {
     const { currentLanguage } = props;
     // --- START: Local state for active section (TEMPORARY - will be replaced by routing) ---
     const [activeSection, setActiveSection] = useState('resume');
-
+    const [fadeIn, setFadeIn] = useState(false);
+    useEffect(() => {
+        setFadeIn(true);
+    }, []);
     const handleNavClick = (sectionId: string) => {
         setActiveSection(sectionId);
         console.log("Navigating to (local state):", sectionId);
@@ -27,9 +30,7 @@ function MainContent(props: MainContentProps) {
     // --- END: Local state ---
 
     return (
-        // Main content container styling: White background, padding (REMOVED default p-6), rounded, shadow.
-        // Added 'relative' for positioning context if needed.
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden relative">
+        <div className={`bg-white rounded-lg shadow-lg overflow-hidden relative transition-opacity duration-700 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
             {/* --- START: Sticky Navigation Bar --- */}
             {/* Sticky positioning relative to nearest scroll ancestor. */}
             {/* Background, border for separation, padding for the outer sticky container */}

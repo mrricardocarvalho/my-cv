@@ -1,10 +1,33 @@
 import { useTranslation } from 'react-i18next';
-import React, { Suspense } from 'react';
+import React, { Suspense, useMemo, useState } from 'react';
 const BlogPostEntry = React.lazy(() => import('./BlogPostEntry.i18n'));
 import { blogPostsData } from '../data/blogPosts';
 
 function BlogSection() {
   const { t } = useTranslation();
+  const [selectedTag, setSelectedTag] = useState<string|null>(null);
+
+  // Sort posts by date descending
+  const sortedPosts = useMemo(() =>
+    [...blogPostsData].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
+    []
+  );
+
+  // Collect all unique tags
+  const allTags = useMemo(() =>
+    Array.from(new Set(blogPostsData.flatMap(post => post.tags || []))),
+    []
+  );
+
+  // Filter by tag if selected
+  const filteredPosts = useMemo(() =>
+    selectedTag ? sortedPosts.filter(post => post.tags?.includes(selectedTag)) : sortedPosts,
+    [selectedTag, sortedPosts]
+  );
+
+  // Find featured post
+  const featured = sortedPosts.find(post => post.featured);
+  const restPosts = featured ? filteredPosts.filter(post => post.id !== featured.id) : filteredPosts;
 
   return (
     <section className="mb-8">
@@ -12,16 +35,45 @@ function BlogSection() {
         <i className="fas fa-newspaper fa-fw text-blue-600 mr-3"></i>
         {t('blog')}
       </h2>
+      {/* Tag filter UI */}
+      {allTags.length > 0 && (
+        <div className="mb-4 flex flex-wrap gap-2">
+          <button
+            className={`px-3 py-1 rounded-full text-xs font-medium border ${selectedTag === null ? 'bg-blue-100 text-blue-700 border-blue-200' : 'bg-gray-100 text-gray-700 border-gray-200'} transition`}
+            onClick={() => setSelectedTag(null)}
+          >
+            {t('all', 'All')}
+          </button>
+          {allTags.map(tag => (
+            <button
+              key={tag}
+              className={`px-3 py-1 rounded-full text-xs font-medium border ${selectedTag === tag ? 'bg-blue-100 text-blue-700 border-blue-200' : 'bg-gray-100 text-gray-700 border-gray-200'} transition`}
+              onClick={() => setSelectedTag(tag)}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+      )}
+      {/* Featured post */}
+      {featured && (!selectedTag || featured.tags?.includes(selectedTag)) && (
+        <div className="mb-8">
+          <Suspense fallback={<div className="text-gray-400 py-4">{t('loadingBlogPosts', 'Loading blog posts...')}</div>}>
+            <BlogPostEntry post={featured} featured />
+          </Suspense>
+        </div>
+      )}
+      {/* Other posts */}
       <div>
         <Suspense fallback={<div className="text-gray-400 py-4">{t('loadingBlogPosts', 'Loading blog posts...')}</div>}>
-          {blogPostsData.map((post) => (
+          {restPosts.map((post) => (
             <BlogPostEntry
               key={post.id}
               post={post}
             />
           ))}
         </Suspense>
-        {blogPostsData.length === 0 && (
+        {filteredPosts.length === 0 && (
           <p className="text-sm text-gray-500 italic py-4">{t('noBlogPosts', 'No blog posts listed yet.')}</p>
         )}
       </div>

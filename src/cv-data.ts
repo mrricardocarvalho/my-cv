@@ -50,6 +50,8 @@ export interface Project {
   summary: TranslatableString; // Brief description of the project/your role
   logo?: string; // Optional logo filename
   url?: string; // Optional link to live project or repo
+  tags?: string[]; // New: tags/categories for filtering
+  featured?: boolean; // New: mark as featured
   // Optional: Add technologies used array if desired
   // technologies?: string[];
 }
@@ -61,6 +63,9 @@ export interface BlogPost {
   title: TranslatableString;
   excerpt: TranslatableString;
   url: string; // URL for navigation/linking
+  tags?: string[]; // New: tags/categories for filtering
+  readingTime?: number; // New: estimated reading time in minutes
+  featured?: boolean; // New: mark as featured
 }
 
 // src/cv-data.ts
@@ -475,8 +480,10 @@ export const projectsData: Project[] = [
         en: "Led the development and customization of Dynamics 365 Business Central for a manufacturing client, focusing on inventory management and production order enhancements. Integrated with third-party logistics provider via custom API.",
         pt: "Liderei o desenvolvimento e personalização do Dynamics 365 Business Central para um cliente industrial, com foco na gestão de inventário e melhorias nas ordens de produção. Integrado com fornecedor logístico externo via API personalizada."
     },
-    logo: 'client-x-logo.png', // Example
-    url: '#' // Placeholder URL
+    logo: 'client-x-logo.png',
+    url: '#',
+    tags: ['ERP', 'Business Central', 'API', 'Manufacturing'],
+    featured: true
   },
   {
     id: 'proj2',
@@ -488,15 +495,16 @@ export const projectsData: Project[] = [
         en: "Built this interactive CV/Portfolio using React, TypeScript, Tailwind CSS, and daisyUI, deployed via Vercel.",
         pt: "Construí este CV/Portfólio interativo usando React, TypeScript, Tailwind CSS e daisyUI, implementado via Vercel."
     },
-    logo: 'react-logo.jpg', // Example
-    url: '#' // Placeholder URL to your actual CV site later
+    logo: 'react-logo.jpg',
+    url: '#',
+    tags: ['React', 'TypeScript', 'Tailwind', 'Portfolio'],
+    featured: false
   },
   // Add more projects as needed
 ];
 
 // Array for Blog Post Data (Add your actual posts or placeholders)
 export const blogPostsData: BlogPost[] = [
-  // --- START: NEW BLOG POST 1 ---
   {
     id: 'getting-started-al-dev',
     date: "April 1, 2025",
@@ -509,9 +517,10 @@ export const blogPostsData: BlogPost[] = [
         pt: "Desbloqueie o poder da personalização no Dynamics 365 Business Central. Uma introdução à linguagem AL, ao ambiente de desenvolvimento (VS Code) e aos conceitos-chave para construir a sua primeira extensão."
     },
     url: '/blog/getting-started-al-dev',
+    tags: ['AL', 'Beginner', 'Business Central'],
+    readingTime: 6,
+    featured: false
   },
-  // --- END: NEW BLOG POST 1 ---
-
   // --- START: NEW BLOG POST 2 ---
   {
     id: 'bc-events-subscribers',
@@ -525,6 +534,9 @@ export const blogPostsData: BlogPost[] = [
         pt: "Vá além das extensões básicas. Aprenda a usar a arquitetura orientada a eventos do Business Central com Publicadores e Subscritores para criar personalizações limpas, fáceis de manter e seguras para atualizações."
     },
     url: '/blog/bc-events-subscribers',
+    tags: ['AL', 'Events', 'Business Central'],
+    readingTime: 5,
+    featured: false
   },
   // --- END: NEW BLOG POST 2 ---
   // --- START: NEW BLOG POST 3 - BC Performance Killers ---
@@ -540,6 +552,9 @@ export const blogPostsData: BlogPost[] = [
       pt: "Mergulhe nas formas não óbvias como o seu código AL interage com a base de dados para encontrar estrangulamentos de desempenho ocultos – de junções implícitas a problemas de bloqueio e dominar o Profiler."
     },
     url: '/blog/bc-al-performance-killers',
+    tags: ['AL', 'Performance', 'Optimization'],
+    readingTime: 7,
+    featured: false
   },
   // --- END: NEW BLOG POST 3 - BC Performance Killers ---
   // --- START: NEW BLOG POST 4 - BC AL Interfaces ---
@@ -555,6 +570,9 @@ export const blogPostsData: BlogPost[] = [
       pt: "Explore como adotar uma mentalidade de 'interface-first' em AL leva a extensões do Business Central mais modulares, testáveis e fáceis de manter, resilientes à mudança."
     },
     url: '/blog/bc-al-interfaces',
+    tags: ['AL', 'Interfaces', 'Business Central'],
+    readingTime: 6,
+    featured: false
   },
   // --- END: NEW BLOG POST 4 - BC AL Interfaces ---
   // --- START: NEW BLOG POST 5 - BC AL Upgrade Gauntlet ---
@@ -570,6 +588,9 @@ export const blogPostsData: BlogPost[] = [
       pt: "Aprenda as estratégias para conceber e testar as suas extensões do Business Central para garantir atualizações suaves e previsíveis ao longo do ciclo de atualizações contínuas do BC."
     },
     url: '/blog/bc-al-upgrade-gauntlet',
+    tags: ['AL', 'Upgrades', 'Business Central'],
+    readingTime: 5,
+    featured: false
   },
   // --- END: NEW BLOG POST 5 - BC AL Upgrade Gauntlet ---
   // --- START: NEW BLOG POST 5 - BC AL Advanced Debugging ---
@@ -585,6 +606,9 @@ export const blogPostsData: BlogPost[] = [
       pt: "Breakpoints são apenas o começo. Aprenda técnicas avançadas de debugging em AL como breakpoints condicionais, logpoints e análise profunda da call stack para diagnosticar e corrigir problemas complexos mais rapidamente."
     },
     url: '/blog/bc-al-advanced-debugging',
+    tags: ['AL', 'Debugging', 'Techniques'],
+    readingTime: 8,
+    featured: false
   },
   // --- END: NEW BLOG POST 5 - BC AL Advanced Debugging ---
   // --- START: NEW BLOG POST 6 - BC AL Advanced Debugging ---
@@ -600,6 +624,9 @@ export const blogPostsData: BlogPost[] = [
       pt: "Breakpoints são apenas o começo. Aprenda técnicas avançadas de debugging em AL como breakpoints condicionais, logpoints e análise profunda da call stack para diagnosticar e corrigir problemas complexos mais rapidamente."
     },
     url: '/blog/bc-al-advanced-debugging',
+    tags: ['AL', 'Debugging', 'Techniques'],
+    readingTime: 8,
+    featured: false
   },
   // --- END: NEW BLOG POST 6 - BC AL Advanced Debugging ---
   // --- START: NEW BLOG POST 7 - BC AL Data & Transactions ---
@@ -615,6 +642,9 @@ export const blogPostsData: BlogPost[] = [
       pt: "Navegue pelas complexidades das transações AL, compreenda as implicações do COMMIT e aprenda padrões para lidar com grandes volumes de dados e garantir consistência de dados no Business Central."
     },
     url: '/blog/bc-al-data-transactions',
+    tags: ['AL', 'Transactions', 'Data Operations'],
+    readingTime: 7,
+    featured: false
   },
   // --- END: NEW BLOG POST 7 - BC AL Data & Transactions ---
   // --- START: NEW BLOG POST 8 - BC AL Advanced Integrations ---
@@ -630,6 +660,9 @@ export const blogPostsData: BlogPost[] = [
       pt: "Domine padrões avançados de integração AL: trate erros, gire grandes payloads, navegue autenticação (OAuth) e garanta resiliência ao conectar BC a APIs externas.",
     },
     url: '/blog/bc-al-advanced-integrations',
+    tags: ['AL', 'Integrations', 'API'],
+    readingTime: 6,
+    featured: false
   },
   // --- END: NEW BLOG POST 8 - BC AL Advanced Integrations ---
 ];

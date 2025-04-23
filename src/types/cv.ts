@@ -47,6 +47,8 @@ export interface Project {
   summary: TranslatableString;
   logo?: string;
   url?: string;
+  tags?: string[];
+  featured?: boolean;
 }
 
 export interface BlogPost {
@@ -55,4 +57,7 @@ export interface BlogPost {
   title: TranslatableString;
   excerpt: TranslatableString;
   url: string;
+  tags?: string[];
+  readingTime?: number;
+  featured?: boolean;
 }
