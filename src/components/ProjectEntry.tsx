@@ -17,12 +17,12 @@ function ProjectEntry(props: ProjectEntryProps) {
 
     return (
         <div className="mb-8 last:mb-0">
-            <div className="flex items-start">
+            <div className="flex items-start bg-white/80 rounded-lg shadow-sm border border-gray-100 p-4 transition-transform duration-200 hover:shadow-lg hover:-translate-y-1 focus-within:shadow-lg focus-within:-translate-y-1">
                 {logo && (
                     <OptimizedImage
                         src={`${BASE_URL}images/logos/${logo}`}
                         alt={`${name[lang]} logo`}
-                        className="w-12 h-12 rounded-md object-cover mr-4 bg-gray-50"
+                        className="w-12 h-12 rounded-md object-cover mr-4 bg-gray-50 border border-gray-200"
                         fallback={
                             <div
                                 className="w-full h-full rounded-md bg-gray-200 flex items-center justify-center text-xs text-gray-700 border border-gray-200"

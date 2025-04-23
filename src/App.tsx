@@ -41,21 +41,21 @@ function App() {
       </div>
     }>
       <div className="min-h-screen bg-gray-100">
-        <div className="container mx-auto max-w-7xl lg:flex py-8 px-4 sm:px-6 lg:px-8">
-          <div className="lg:w-1/3 lg:pr-8 mb-8 lg:mb-0">
+        <div className="container mx-auto max-w-7xl flex flex-col lg:flex-row py-8 px-2 sm:px-4 md:px-6 lg:px-8 gap-8">
+          <div className="w-full lg:w-1/3 lg:pr-8 mb-8 lg:mb-0">
             <ErrorBoundary>
               <Sidebar />
             </ErrorBoundary>
           </div>
-          <div className="lg:w-2/3">
+          <div className="w-full lg:w-2/3">
             <div className="bg-white rounded-lg shadow-lg relative">
-              <div className="sticky top-0 z-40 bg-white border-b border-gray-200 px-6 py-3">
-                <nav className="flex items-center justify-around bg-gray-100 rounded-lg p-1">
+              <div className="sticky top-0 z-40 bg-white border-b border-gray-200 px-4 sm:px-6 py-3">
+                <nav className="flex flex-wrap items-center justify-around bg-gray-100 rounded-lg p-1 gap-2">
                   {mainNavItems.map(item => (
                     <Link
                       key={item.id}
                       to={item.href}
-                      className={`flex-1 px-3 py-1.5 rounded-md text-sm font-medium text-center transition-colors duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-500
+                      className={`flex-1 px-2 sm:px-3 py-1.5 rounded-md text-sm font-medium text-center transition-colors duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-500
                           ${activePath === item.href
                             ? 'bg-white text-gray-900 shadow-sm font-semibold'
                             : 'text-gray-500 hover:text-gray-800'
@@ -68,7 +68,7 @@ function App() {
                   ))}
                 </nav>
               </div>
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 <Suspense fallback={<LoadingSpinner />}>
                   <Routes>
                     <Route path="/" element={

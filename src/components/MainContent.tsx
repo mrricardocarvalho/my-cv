@@ -5,8 +5,8 @@ import SummarySection from './SummarySection';
 import ExperienceSection from './ExperienceSection';
 import EducationSection from './EducationSection';
 import CompetenciesSection from './CompetenciesSection';
-import ProjectsSection from './ProjectsSection'; // Assume created
-import BlogSection from './BlogSection';       // Assume created
+import ProjectsSection from './ProjectsSection.i18n';
+import BlogSection from './BlogSection.i18n';
 // Import nav data and labels
 import { mainNavItems } from '../data/nav'; // Adjust import if data is defined locally
 
@@ -30,7 +30,6 @@ function MainContent(props: MainContentProps) {
         // Main content container styling: White background, padding (REMOVED default p-6), rounded, shadow.
         // Added 'relative' for positioning context if needed.
         <div className="bg-white rounded-lg shadow-lg overflow-hidden relative">
-
             {/* --- START: Sticky Navigation Bar --- */}
             {/* Sticky positioning relative to nearest scroll ancestor. */}
             {/* Background, border for separation, padding for the outer sticky container */}
@@ -60,15 +59,13 @@ function MainContent(props: MainContentProps) {
 
             {/* --- START: Content Area Below Nav --- */}
             {/* Add padding here for the content itself */}
-            <div className="p-6">
-                {/* TEMPORARY: Render ALL sections just to test layout and scrolling */}
-                {/* We will replace this with <Outlet /> from React Router later */}
-                <SummarySection currentLanguage={currentLanguage} />
-                <ExperienceSection currentLanguage={currentLanguage} />
-                <EducationSection currentLanguage={currentLanguage} />
-                <CompetenciesSection currentLanguage={currentLanguage} />
-                <ProjectsSection currentLanguage={currentLanguage} />
-                <BlogSection currentLanguage={currentLanguage} />
+            <div className="p-2 sm:p-4 md:p-6">
+                <SummarySection />
+                <ExperienceSection />
+                <EducationSection />
+                <CompetenciesSection />
+                <ProjectsSection />
+                <BlogSection />
                 {/* Add dummy content if needed */}
                 {/* <div className="h-screen bg-red-100">Scroll Test Space 1</div> */}
                 {/* <div className="h-screen bg-blue-100">Scroll Test Space 2</div> */}

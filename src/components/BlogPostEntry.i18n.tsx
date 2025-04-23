@@ -12,7 +12,7 @@ function BlogPostEntry({ post }: BlogPostEntryProps) {
   const { date, title, excerpt, url } = post;
 
   return (
-    <article className="mb-6 pb-6 border-b border-gray-100 last:border-b-0 last:pb-0 last:mb-0">
+    <article className="mb-6 pb-6 border-b border-gray-100 last:border-b-0 last:pb-0 last:mb-0 bg-white/80 rounded-lg shadow-sm border border-gray-100 p-4 transition-transform duration-200 hover:shadow-lg hover:-translate-y-1 focus-within:shadow-lg focus-within:-translate-y-1">
         <p className="text-xs text-gray-500 mb-1">{date}</p>
         <h3 className="text-base font-semibold text-gray-800 mb-2 transition-colors">
             <Link

@@ -25,7 +25,7 @@ function Sidebar() {
     };
 
     return (
-        <aside className="bg-white rounded-lg shadow-lg sticky top-8 overflow-hidden">
+        <aside className="bg-white rounded-lg shadow-lg sticky top-8 overflow-hidden w-full max-w-md mx-auto mb-6 lg:mb-0 lg:w-auto">
             <div className="relative">
                 <OptimizedImage
                     src={`${BASE_URL}background.jpg`}
