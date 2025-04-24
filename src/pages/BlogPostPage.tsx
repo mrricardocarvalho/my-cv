@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown, { Components, ExtraProps } from 'react-markdown';
+import { ComponentPropsWithoutRef } from 'react';
 import { blogPostsData, labels } from '../cv-data';
 import { getCachedPost, cachePost } from '../utils/cache';
 import { AppError } from '../utils/errorHandlers';
@@ -11,10 +12,10 @@ import OptimizedImage from '../components/OptimizedImage';
 import { useTranslation } from 'react-i18next';
 
 // Lazy load markdown files
-const allMarkdownPosts = import.meta.glob('/src/blog/posts/*.md', { 
-    query: '?raw',
-    eager: false
-});
+const allMarkdownPosts: Record<string, string> = import.meta.glob('../blog/posts/*.{en,pt}.md', { 
+    as: 'raw',
+    eager: true
+}) as Record<string, string>;
 
 // Loading state component
 const LoadingState = () => (
@@ -88,24 +89,17 @@ function BlogPostContent() {
                     throw new AppError('NETWORK_ERROR', 'No internet connection');
                 }
 
-                const fileName = `/src/blog/posts/${postId}.${lang}.md`;
+                const fileName = `../blog/posts/${postId}.${lang}.md`;
                 const importFn = allMarkdownPosts[fileName];
 
                 if (!importFn) {
-                    throw new AppError('NOT_FOUND', 'Blog post file not found');
+                    console.error('Available posts:', Object.keys(allMarkdownPosts));
+                    throw new AppError('NOT_FOUND', `Blog post file not found: ${fileName}`);
                 }
 
                 try {
-                    const result = await Promise.race([
-                        importFn() as Promise<string>,
-                        new Promise((_, reject) => 
-                            setTimeout(() => reject(new AppError('TIMEOUT', 'Request timed out')), 10000)
-                        )
-                    ]);
-
-                    // Cast the result to string since we know the import returns markdown content
-                    const content = result as string;
-
+                    const content = importFn;
+                    
                     // Cache the content for offline access
                     cachePost(cacheKey, content);
                     setPostContent(content);
@@ -155,6 +149,51 @@ function BlogPostContent() {
     if (error?.type === 'NOT_FOUND') return <NotFoundErrorState />;
     if (error) return <GenericErrorState error={error} onRetry={() => window.location.reload()} />;
 
+    const markdownComponents: Components = {
+        h1: function MarkdownH1({ node, className, children, ...props }: ComponentPropsWithoutRef<'h1'> & ExtraProps) {
+            return <h1 className={`text-3xl font-bold text-gray-900 mb-4 ${className || ''}`} {...props}>{children}</h1>;
+        },
+        h2: function MarkdownH2({ node, className, children, ...props }: ComponentPropsWithoutRef<'h2'> & ExtraProps) {
+            return <h2 className={`text-2xl font-semibold text-gray-800 mb-3 ${className || ''}`} {...props}>{children}</h2>;
+        },
+        p: function MarkdownP({ node, className, children, ...props }: ComponentPropsWithoutRef<'p'> & ExtraProps) {
+            return <p className={`text-gray-600 mb-4 ${className || ''}`} {...props}>{children}</p>;
+        },
+        a: function MarkdownA({ node, href, className, children, ...props }: ComponentPropsWithoutRef<'a'> & ExtraProps) {
+            return (
+                <a 
+                    href={href}
+                    className={`text-blue-600 hover:text-blue-800 ${className || ''}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    {...props}
+                >
+                    {children}
+                </a>
+            );
+        },
+        img: function MarkdownImg({ node, src, alt, className, ...props }: ComponentPropsWithoutRef<'img'> & ExtraProps) {
+            return (
+                <OptimizedImage
+                    src={src || ''}
+                    alt={alt || ''}
+                    className={`rounded-lg max-w-full h-auto my-4 ${className || ''}`}
+                    fallback={alt || 'Image'}
+                    onLoadError={(error: string) => {
+                        console.error(`Failed to load blog post image (${alt}):`, error);
+                    }}
+                    {...props}
+                />
+            );
+        },
+        code: function MarkdownCode({ node, className, children, ...props }: ComponentPropsWithoutRef<'code'> & ExtraProps) {
+            return <code className={`text-pink-600 bg-gray-50 px-1 py-0.5 rounded ${className || ''}`} {...props}>{children}</code>;
+        },
+        pre: function MarkdownPre({ node, className, children, ...props }: ComponentPropsWithoutRef<'pre'> & ExtraProps) {
+            return <pre className={`bg-gray-50 text-gray-800 p-4 rounded-lg overflow-x-auto ${className || ''}`} {...props}>{children}</pre>;
+        }
+    };
+
     return (
         <div className="max-w-3xl mx-auto">
             <article>
@@ -172,35 +211,11 @@ function BlogPostContent() {
 
                 <div className="prose prose-lg max-w-none">
                     {postContent && (
-                        <ReactMarkdown components={{
-                            h1: ({node, ...props}) => <h1 className="text-gray-800" {...props} />,
-                            h2: ({node, ...props}) => <h2 className="text-gray-800" {...props} />,
-                            p: ({node, ...props}) => <p className="text-gray-600" {...props} />,
-                            a: ({node, ...props}) => (
-                                <a 
-                                    className="text-blue-600 hover:text-blue-800" 
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    {...props} 
-                                />
-                            ),
-                            img: ({node, ...props}) => (
-                                <OptimizedImage
-                                    {...props}
-                                    className="rounded-lg max-w-full h-auto my-4"
-                                    fallback={props.alt || 'Image'}
-                                    onLoadError={(error: string) => {
-                                        console.error(`Failed to load blog post image (${props.alt}):`, error);
-                                    }}
-                                />
-                            ),
-                            code: ({node, ...props}) => <code className="text-pink-600 bg-gray-50 px-1 py-0.5 rounded" {...props} />,
-                            pre: ({node, ...props}) => (
-                                <pre className="bg-gray-50 text-gray-800 p-4 rounded-lg overflow-x-auto" {...props} />
-                            )
-                        }}>
-                            {postContent}
-                        </ReactMarkdown>
+                        <div className="markdown-content">
+                            <ReactMarkdown components={markdownComponents}>
+                                {postContent}
+                            </ReactMarkdown>
+                        </div>
                     )}
                 </div>
             </article>

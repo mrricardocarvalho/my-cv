@@ -7,27 +7,27 @@ function BlogSection() {
   const { t } = useTranslation();
   const [selectedTag, setSelectedTag] = useState<string|null>(null);
 
-  // Sort posts by date descending
-  const sortedPosts = useMemo(() =>
-    [...blogPostsData].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
-    []
-  );
-
-  // Collect all unique tags
-  const allTags = useMemo(() =>
-    Array.from(new Set(blogPostsData.flatMap(post => post.tags || []))),
-    []
-  );
-
   // Filter by tag if selected
   const filteredPosts = useMemo(() =>
-    selectedTag ? sortedPosts.filter(post => post.tags?.includes(selectedTag)) : sortedPosts,
-    [selectedTag, sortedPosts]
+    selectedTag ? blogPostsData.filter(post => post.tags?.includes(selectedTag)) : blogPostsData,
+    [selectedTag]
+  );
+
+  // Sort filtered posts by date descending (most recent first)
+  const sortedPosts = useMemo(() =>
+    [...filteredPosts].sort((a, b) => Date.parse(b.date) - Date.parse(a.date)),
+    [filteredPosts]
   );
 
   // Find featured post
   const featured = sortedPosts.find(post => post.featured);
-  const restPosts = featured ? filteredPosts.filter(post => post.id !== featured.id) : filteredPosts;
+  const restPosts = featured ? sortedPosts.filter(post => post.id !== featured.id) : sortedPosts;
+
+  // Collect all unique tags from filtered posts
+  const allTags = useMemo(() =>
+    Array.from(new Set(filteredPosts.flatMap(post => post.tags || []))),
+    [filteredPosts]
+  );
 
   return (
     <section className="mb-8">
