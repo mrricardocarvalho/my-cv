@@ -4,13 +4,13 @@ import { summaryText } from '../data/summary';
 import { keyTechnicalSkills } from '../data/skills';
 import OptimizedImage from './OptimizedImage';
 import { useState } from 'react';
+import backgroundImageUrl from '../assets/background.jpg';
+import profileImageUrl from '../assets/profile.png';
 
 const titles = {
     en: "Senior D365 BC Developer",
     pt: "Developer Sénior D365 BC"
 };
-
-const BASE_URL = import.meta.env.BASE_URL;
 
 function Sidebar() {
     const { t, i18n } = useTranslation();
@@ -28,7 +28,7 @@ function Sidebar() {
         <aside className="bg-white rounded-lg shadow-lg sticky top-8 overflow-hidden w-full max-w-md mx-auto mb-6 lg:mb-0 lg:w-auto">
             <div className="relative">
                 <OptimizedImage
-                    src={`${BASE_URL}background.jpg`}
+                    src={backgroundImageUrl}
                     alt="Header background"
                     className={`w-full h-32 object-cover ${hasBackgroundError ? 'bg-gradient-to-r from-blue-100 to-blue-200' : ''}`}
                     fallback="Background"
@@ -36,7 +36,7 @@ function Sidebar() {
                 />
                 <div className="absolute bottom-0 left-4 transform translate-y-1/2">
                     <OptimizedImage
-                        src={`${BASE_URL}profile.png`}
+                        src={profileImageUrl}
                         alt="Ricardo Carvalho"
                         className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-md"
                         fallback="RC"

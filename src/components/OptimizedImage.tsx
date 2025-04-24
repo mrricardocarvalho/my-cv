@@ -3,22 +3,16 @@ import { useState } from 'react';
 interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
     fallback?: React.ReactNode;
     onLoadError?: (error: string) => void;
-    // Optionally allow explicit webpSrc override
-    webpSrc?: string;
 }
 
-function getWebpSrc(src?: string) {
-    if (!src) return undefined;
-    // Only replace .png/.jpg/.jpeg at the end
-    return src.replace(/\.(png|jpe?g)$/i, '.webp');
-}
-
-function OptimizedImage({ src, alt, className, fallback, onLoadError, webpSrc, ...props }: OptimizedImageProps) {
+function OptimizedImage({ src, alt, className, fallback, onLoadError, ...props }: OptimizedImageProps) {
     const [error, setError] = useState<string | null>(null);
     const [retryCount, setRetryCount] = useState(0);
     const maxRetries = 3;
 
-    const handleError = () => {
+    const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+        console.log('Image load error:', { src, error: e });
+        
         if (retryCount < maxRetries) {
             setTimeout(() => {
                 setRetryCount(prev => prev + 1);
@@ -60,23 +54,15 @@ function OptimizedImage({ src, alt, className, fallback, onLoadError, webpSrc, .
         );
     }
 
-    // Use provided webpSrc or auto-generate from src
-    const webp = webpSrc || getWebpSrc(src);
-
     return (
-        <picture>
-            {webp && (
-                <source srcSet={webp} type="image/webp" />
-            )}
-            <img
-                src={src}
-                alt={alt}
-                className={className}
-                loading="lazy"
-                onError={handleError}
-                {...props}
-            />
-        </picture>
+        <img
+            src={src}
+            alt={alt}
+            className={className}
+            loading="lazy"
+            onError={handleError}
+            {...props}
+        />
     );
 }
 

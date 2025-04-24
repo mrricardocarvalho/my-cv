@@ -17,6 +17,12 @@ export default defineConfig({
     })
   ].filter(Boolean),
   build: {
-    outDir: 'docs'
+    outDir: 'docs',
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name]-[hash][extname]'
+      }
+    }
   }
 })

@@ -14,6 +14,9 @@ export const blogPostsData: BlogPost[] = [
       pt: 'Domine padrões avançados de integração AL: trate erros, gire grandes payloads, navegue autenticação (OAuth) e garanta resiliência ao conectar BC a APIs externas.',
     },
     url: '/blog/bc-al-advanced-integrations',
+    tags: ['AL', 'Integrations', 'API'],
+    readingTime: 6,
+    featured: false
   },
   {
     id: 'bc-al-data-transactions',
@@ -27,6 +30,9 @@ export const blogPostsData: BlogPost[] = [
       pt: 'Navegue pelas complexidades das transações AL, compreenda as implicações do COMMIT e aprenda padrões para lidar com grandes volumes de dados e garantir consistência de dados no Business Central.',
     },
     url: '/blog/bc-al-data-transactions',
+    tags: ['AL', 'Transactions', 'Data Operations'],
+    readingTime: 7,
+    featured: false
   },
   {
     id: 'bc-al-advanced-debugging',
@@ -40,6 +46,9 @@ export const blogPostsData: BlogPost[] = [
       pt: 'Breakpoints são apenas o começo. Aprenda técnicas avançadas de debugging em AL como breakpoints condicionais, logpoints e análise profunda da call stack para diagnosticar e corrigir problemas complexos mais rapidamente.',
     },
     url: '/blog/bc-al-advanced-debugging',
+    tags: ['AL', 'Debugging', 'Techniques'],
+    readingTime: 8,
+    featured: false
   },
   {
     id: 'bc-al-upgrade-gauntlet',
@@ -53,6 +62,9 @@ export const blogPostsData: BlogPost[] = [
       pt: "Aprenda as estratégias para conceber e testar as suas extensões do Business Central para garantir atualizações suaves e previsíveis ao longo do ciclo de atualizações contínuas do BC.",
     },
     url: '/blog/bc-al-upgrade-gauntlet',
+    tags: ['AL', 'Upgrades', 'Business Central'],
+    readingTime: 5,
+    featured: false
   },
   {
     id: 'bc-al-interfaces',
@@ -66,6 +78,9 @@ export const blogPostsData: BlogPost[] = [
       pt: "Explore como adotar uma mentalidade de 'interface-first' em AL leva a extensões do Business Central mais modulares, testáveis e fáceis de manter, resilientes à mudança.",
     },
     url: '/blog/bc-al-interfaces',
+    tags: ['AL', 'Interfaces', 'Business Central'],
+    readingTime: 6,
+    featured: false
   },
   {
     id: 'bc-al-performance-killers',
@@ -79,6 +94,9 @@ export const blogPostsData: BlogPost[] = [
       pt: "Mergulhe nas formas não óbvias como o seu código AL interage com a base de dados para encontrar estrangulamentos de desempenho ocultos – de junções implícitas a problemas de bloqueio e dominar o Profiler.",
     },
     url: '/blog/bc-al-performance-killers',
+    tags: ['AL', 'Performance', 'Database'],
+    readingTime: 7,
+    featured: false
   },
   {
     id: 'bc-events-subscribers',
@@ -92,6 +110,9 @@ export const blogPostsData: BlogPost[] = [
       pt: "Vá além das extensões básicas. Aprenda a usar a arquitetura orientada a eventos do Business Central com Publicadores e Subscritores para criar personalizações limpas, fáceis de manter e seguras para atualizações.",
     },
     url: '/blog/bc-events-subscribers',
+    tags: ['AL', 'Events', 'Business Central'],
+    readingTime: 5,
+    featured: false
   },
   {
     id: 'getting-started-al-dev',
@@ -105,5 +126,8 @@ export const blogPostsData: BlogPost[] = [
       pt: 'Desbloqueie o poder da personalização no Dynamics 365 Business Central. Uma introdução à linguagem AL, ao ambiente de desenvolvimento (VS Code) e aos conceitos-chave para construir a sua primeira extensão.',
     },
     url: '/blog/getting-started-al-dev',
+    tags: ['AL', 'Beginner', 'Business Central'],
+    readingTime: 6,
+    featured: true
   },
 ];
