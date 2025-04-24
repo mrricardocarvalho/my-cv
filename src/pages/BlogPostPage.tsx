@@ -157,13 +157,13 @@ function BlogPostContent() {
             return <h2 className={`text-2xl font-semibold text-gray-800 mb-3 ${className || ''}`} {...props}>{children}</h2>;
         },
         p: function MarkdownP({ node, className, children, ...props }: ComponentPropsWithoutRef<'p'> & ExtraProps) {
-            return <p className={`text-gray-600 mb-4 ${className || ''}`} {...props}>{children}</p>;
+            return <p className={`text-gray-700 mb-4 ${className || ''}`} {...props}>{children}</p>;
         },
         a: function MarkdownA({ node, href, className, children, ...props }: ComponentPropsWithoutRef<'a'> & ExtraProps) {
             return (
                 <a 
                     href={href}
-                    className={`text-blue-600 hover:text-blue-800 ${className || ''}`}
+                    className={`text-blue-700 hover:text-blue-900 underline ${className || ''}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     {...props}
@@ -187,10 +187,10 @@ function BlogPostContent() {
             );
         },
         code: function MarkdownCode({ node, className, children, ...props }: ComponentPropsWithoutRef<'code'> & ExtraProps) {
-            return <code className={`text-pink-600 bg-gray-50 px-1 py-0.5 rounded ${className || ''}`} {...props}>{children}</code>;
+            return <code className={`text-pink-700 bg-gray-100 px-1.5 py-1 rounded ${className || ''}`} {...props}>{children}</code>;
         },
         pre: function MarkdownPre({ node, className, children, ...props }: ComponentPropsWithoutRef<'pre'> & ExtraProps) {
-            return <pre className={`bg-gray-50 text-gray-800 p-4 rounded-lg overflow-x-auto ${className || ''}`} {...props}>{children}</pre>;
+            return <pre className={`bg-gray-100 text-gray-900 p-4 rounded-lg overflow-x-auto border border-gray-200 ${className || ''}`} {...props}>{children}</pre>;
         }
     };
 

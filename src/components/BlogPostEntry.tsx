@@ -22,7 +22,7 @@ function BlogPostEntry({ post }: BlogPostEntryProps) {
                 {title[lang]}
             </Link>
         </h3>
-        <p className="text-sm text-gray-600 leading-relaxed mb-3">
+        <p className="text-sm text-gray-800 leading-relaxed mb-3">
             {excerpt[lang]}
         </p>
         <Link
