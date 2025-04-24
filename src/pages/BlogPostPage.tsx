@@ -151,28 +151,32 @@ function BlogPostContent() {
 
     const markdownComponents: Components = {
         h1: function MarkdownH1({ node, className, children, ...props }: ComponentPropsWithoutRef<'h1'> & ExtraProps) {
-            return <h1 className={`text-3xl font-bold text-gray-900 mb-4 ${className || ''}`} {...props}>{children}</h1>;
+            return <h1 className={`text-3xl font-bold text-gray-800 mb-4 ${className || ''}`} {...props}>{children}</h1>;
         },
         h2: function MarkdownH2({ node, className, children, ...props }: ComponentPropsWithoutRef<'h2'> & ExtraProps) {
-            return <h2 className={`text-2xl font-semibold text-gray-800 mb-3 ${className || ''}`} {...props}>{children}</h2>;
+            return <h2 className={`text-2xl font-semibold text-gray-700 mb-3 ${className || ''}`} {...props}>{children}</h2>;
         },
-        p: function MarkdownP({ node, className, children, ...props }: ComponentPropsWithoutRef<'p'> & ExtraProps) {
-            return <p className={`text-gray-700 mb-4 ${className || ''}`} {...props}>{children}</p>;
+        p: function MarkdownP({ node, className, children, ...props }) {
+            return <p className={`prose-code:font-mono text-gray-600 mb-4 leading-relaxed ${className || ''}`} {...props}>{children}</p>;
         },
-        a: function MarkdownA({ node, href, className, children, ...props }: ComponentPropsWithoutRef<'a'> & ExtraProps) {
+        strong: function MarkdownStrong({ node, className, children, ...props }) {
+            return <strong className={`text-gray-700 font-medium ${className || ''}`} {...props}>{children}</strong>;
+        },
+        em: function MarkdownEm({ node, className, children, ...props }) {
+            return <em className={`text-gray-600 ${className || ''}`} {...props}>{children}</em>;
+        },
+        a: function MarkdownA({ node, href, className, children, ...props }) {
             return (
                 <a 
                     href={href}
-                    className={`text-blue-700 hover:text-blue-900 underline ${className || ''}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    className={`text-blue-800 hover:text-blue-900 underline font-medium ${className || ''}`}
                     {...props}
                 >
                     {children}
                 </a>
             );
         },
-        img: function MarkdownImg({ node, src, alt, className, ...props }: ComponentPropsWithoutRef<'img'> & ExtraProps) {
+        img: function MarkdownImg({ node, src, alt, className, ...props }) {
             return (
                 <OptimizedImage
                     src={src || ''}
@@ -186,18 +190,24 @@ function BlogPostContent() {
                 />
             );
         },
-        code: function MarkdownCode({ node, className, children, ...props }: ComponentPropsWithoutRef<'code'> & ExtraProps) {
-            return <code className={`text-pink-700 bg-gray-100 px-1.5 py-1 rounded ${className || ''}`} {...props}>{children}</code>;
+        code: function MarkdownCode({ node, className, children, ...props }) {
+            return <code className={`text-blue-600 bg-blue-50 font-mono px-1.5 py-0.5 rounded-sm ${className || ''}`} {...props}>{children}</code>;
         },
-        pre: function MarkdownPre({ node, className, children, ...props }: ComponentPropsWithoutRef<'pre'> & ExtraProps) {
-            return <pre className={`bg-gray-100 text-gray-900 p-4 rounded-lg overflow-x-auto border border-gray-200 ${className || ''}`} {...props}>{children}</pre>;
+        pre: function MarkdownPre({ node, className, children, ...props }) {
+            return <pre className={`bg-slate-50 text-slate-700 p-4 rounded-lg overflow-x-auto border border-slate-200 ${className || ''}`} {...props}>{children}</pre>;
+        },
+        ul: function MarkdownUl({ node, className, children, ...props }) {
+            return <ul className={`list-disc list-outside pl-6 space-y-2 mb-4 text-gray-600 ${className || ''}`} {...props}>{children}</ul>;
+        },
+        li: function MarkdownLi({ node, className, children, ...props }) {
+            return <li className={`text-gray-900 ${className || ''}`} {...props}>{children}</li>;
         }
     };
 
     return (
         <div className="max-w-3xl mx-auto">
             <article>
-                <Link to="/blog" className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-6">
+                <Link to="/blog" className="inline-flex items-center text-blue-800 hover:text-blue-900 underline mb-6">
                     <i className="fas fa-arrow-left mr-2"></i>
                     {labels.blog[lang]}
                 </Link>
@@ -205,7 +215,7 @@ function BlogPostContent() {
                 {postTitle && (
                     <header className="mb-8">
                         <h1 className="text-3xl font-bold text-gray-900 mb-2">{postTitle}</h1>
-                        {postDate && <time className="text-gray-600">{postDate}</time>}
+                        {postDate && <time className="text-gray-800">{postDate}</time>}
                     </header>
                 )}
 
